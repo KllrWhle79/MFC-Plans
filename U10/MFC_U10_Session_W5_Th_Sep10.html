@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Week 5 · Session 9 · Sep 10 · Block 1 Finale & Tournament Send-Off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:44px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-gold{border-color:var(--gold);color:var(--gold)}
+.meta-pill.mp-final{border-color:var(--rose);color:var(--rose)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:30}
+.tl-wb{background:#3d3520;flex:15}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:14px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box+.wb-box{margin-top:10px}
+.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:11.5px;color:var(--muted);line-height:1.5}
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:11.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:10px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+/* tourn banner */
+.tourn-banner{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.4);border-radius:8px;padding:14px 18px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start}
+.tb-icon{font-size:28px;flex-shrink:0}
+.tb-body h4{font-family:var(--font-head);font-size:22px;color:var(--gold);letter-spacing:.04em;margin-bottom:4px}
+.tb-body p{font-size:12px;color:var(--muted);line-height:1.5}
+.tb-body p strong{color:var(--text)}
+/* closing ceremony box */
+.ceremony-box{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:16px 18px}
+.cer-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--violet);text-transform:uppercase;margin-bottom:10px}
+.cer-step{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.cer-num{font-family:var(--font-head);font-size:28px;color:var(--violet);opacity:.5;line-height:1;flex-shrink:0;width:24px}
+.cer-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.cer-body strong{color:var(--text)}
+/* tournament talk box */
+.talk-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.28);border-radius:8px;padding:14px 16px}
+.talk-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.talk-box ul{list-style:none;display:grid;gap:6px}
+.talk-box ul li{font-size:12.5px;color:var(--muted);padding-left:16px;position:relative;line-height:1.5}
+.talk-box ul li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+/* knockout grand final */
+.ko-grand{background:rgba(184,148,46,.14);border:2px solid rgba(184,148,46,.45);border-radius:8px;padding:16px 18px}
+.ko-grand-label{font-family:var(--font-head);font-size:20px;color:var(--gold);letter-spacing:.06em;margin-bottom:8px}
+.ko-grand p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.ko-grand p:last-child{margin-bottom:0}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+/* coach prep box */
+.prep-box{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.25);border-radius:6px;padding:14px 16px}
+.prep-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--rose);text-transform:uppercase;margin-bottom:8px}
+.prep-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:6px}
+.prep-box ul{list-style:none;display:grid;gap:4px}
+.prep-box ul li{font-size:12px;color:var(--muted);padding-left:14px;position:relative}
+.prep-box ul li::before{content:'·';position:absolute;left:0;color:var(--rose)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 1 · Session 9 · Week 5 Day 2 · Block 1 Finale</div>
+      <div class="sh-title">Week <span>5</span> · Thu<br>Block 1 Finale &amp; Tournament Send-Off</div>
+      <div class="sh-sub">Thursday, September 10, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">18 Players · All Together</div><br>
+      <div class="meta-pill mp-gold">OSI Champions Cup · Sep 11–13</div><br>
+      <div class="meta-pill mp-final">Last Whiteboard of the Season</div>
+    </div>
+  </div>
+
+  <div class="tourn-banner">
+    <div class="tb-icon">🏆</div>
+    <div class="tb-body">
+      <h4>Tournament Tomorrow — OSI Champions Cup · Flagstaff</h4>
+      <p><strong>~11–12 players travelling.</strong> This session closes Block 1 for all 18 players and sends the tournament group off properly. The closing ceremony and tournament talk happen after Knockout. Coaches must have prepared individual compliments for every player written in advance — not improvised. The non-attending players deserve the same celebration as those going to Flagstaff.</p>
+    </div>
+  </div>
+
+  <div class="prep-box" style="margin-bottom:24px">
+    <div class="prep-label">Coaches — Prepare Before This Session</div>
+    <p>For the closing ceremony to land, each coach needs one specific, observed, written compliment per player on their group of 6. Not "great attitude" — something actually witnessed. Examples:</p>
+    <ul>
+      <li>"Marcus — in Week 3, you were the first player to call 'checking!' without being reminded. You started a habit for the whole squad."</li>
+      <li>"Lincoln — your juggling went from 4 in Week 1 to 19 today. That's only possible if you've been practising at home."</li>
+      <li>"Hudson — every time you rotated as GK in Knockout, you stepped off your line. You were doing angle play before we even taught it."</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">Technical Stations</span><span class="tl-time">15–45</span></div>
+    <div class="tl-seg tl-wb"><span class="tl-label">Whiteboard</span><span class="tl-time">45–60</span></div>
+    <div class="tl-seg tl-ssg"><span class="tl-label">6v6 Full Match</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout + Ceremony</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Block 1 Final Records</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Opening Ritual — same every session through Dec 12</div>
+        <p>All 18. This is the final Block 1 juggling session. Every player tries for their all-time personal best. Any record broken today gets announced to the group. Coaches count alongside — be present and loud. The ritual continues in Block 2; this is just the end of its first chapter.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Write down every player's final Block 1 juggling number before the session ends. It's the baseline for Block 2 — and a metric you can use to celebrate specific growth at the start of next block. "Jackson, your Block 1 record was 11. Let's see where Block 2 takes it."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Street Football — No Coaching</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">All 18, free play, no structure, no coaching, no instruction. Players choose their game. All three coaches sit on the sideline and watch. This is an intentional gift — and a diagnostic. What they do without being told is what they've actually internalised.</p>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Resist everything. The temptation to organise, to suggest, to point out something — ignore it for 10 minutes. Watch for: players calling "checking!" on their own; players enforcing throw-in rules without a referee; players using the zone vocabulary ("I'm the winger!"). Every one of those is a Block 1 win. Write them down — they become Thursday's closing compliments if you haven't already sourced them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS — MAX BLOCK 1 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 45</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Block 1 Final Run — Same Drills, Positive Reps Only</span>
+      <span class="pc-dur">30 min · 10 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Same three stations for the last time in Block 1. No new concepts, no new pressure. The goal is confidence and enjoyment — coaches give only positive reinforcement this block. Players should leave feeling proud of what they've built over 9 sessions.</p>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Shield + Play Out</div>
+          <p>Ball mastery + shield. <strong style="color:#B8942E">All players: comfortable reps, coaches celebrate every clean moment. Exp: skill move to turn out if they want — no pressure.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Blue · Coach Brent · Station B — Receive, Turn, Pass</div>
+          <p>Paired first touch + turn. <strong style="color:#2DBFAD">Same as all week. "Checking!" call, receive cleanly, turn. If a player lands something they struggled with in Week 3 — name it for the group.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — Full Circuit</div>
+          <p>1v1 defending channel. <strong style="color:#8FA3B4">Same as all week. Hold shape, show outside, step in or tackle on heavy touch. Let players call their own level — no coach pressure today.</strong></p>
+        </div>
+      </div>
+
+      <div class="rotation-box">
+        <div class="rot-icon">ROTATION</div>
+        <div class="rot-body">Whistle every <strong>10 minutes</strong>. Keep the energy high — this is a celebration of Block 1 work, not a test. Coaches: positive reinforcement only in this block today.</div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The technical block is where your written compliments get confirmed or updated. A player who has been quiet all Block suddenly lands a perfect 1-touch turn? That's the compliment. Be present in a way you can't always afford to be when you're also coaching technique.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: WHITEBOARD — FINAL + PLAYER Q&A -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">45 – 60</span>
+      <div class="pc-dot dot-wb"></div>
+      <span class="pc-name">Final Whiteboard: Players Quiz the Coaches</span>
+      <span class="pc-dur">15 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">The last whiteboard session of the entire season. Flip the format — players ask questions or answer challenges. Then coaches announce the transition to Block 2 (play-based, no more whiteboards). Close with the tournament talk for the Gold team.</p>
+
+      <div class="wb-box">
+        <h5>Players Quiz the Coaches — Block 1 Rapid Fire (7 min)</h5>
+        <p>Coach Pete runs it. One rule: if a player can answer correctly before the coach finishes explaining, they score a point for their group. Keep it moving — one question every 30–40 seconds. Use these questions or generate your own:</p>
+        <ul>
+          <li>"What's a foul throw — show me the three rules?" (any player demonstrates)</li>
+          <li>"The striker doesn't have the ball — where do they go?" (drops to halfway)</li>
+          <li>"Defender is under pressure from a winger — what can our defender do?" (push up for backpass)</li>
+          <li>"Corner kick — the ball went over the goal line off a defender. Who takes it?" (attacker)</li>
+          <li>"GK picks up the ball — how long do they have?" (6 seconds)</li>
+          <li>"What does 'checking!' mean and when do you say it?" (before receiving)</li>
+          <li>"The CM — what do we call them and why?" (The Glue — connects defence to attack)</li>
+        </ul>
+      </div>
+
+      <div class="wb-box">
+        <h5>Block 2 Transition Announcement (3 min)</h5>
+        <p>"From the next session — no more whiteboards. Everything we do in Block 2 is through the game. That's how the best players in the world learn — not from lectures, but from playing. You've built the foundation. Block 2 is where you start using it."</p>
+        <p style="font-size:11.5px;color:var(--faint)">Leave space for questions. Players may be curious or even anxious about the change. Reassure: "You'll still learn — you'll just learn by playing. That's the best way."</p>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> When a new player answers a question correctly — especially a technical one — make the most of it. "Jackson, six weeks ago you didn't know what a throw-in was. Now you just explained the offside rule." That specific contrast is worth ten generic "great job" moments.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: 6v6 FULL MATCH -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">6v6 Full Match — Block 1 Grand Game</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">All 18 players in one game — two teams of 9, playing 6v6 with 3 rotating out. Coaches referee properly. All rules enforced. Players call their own restarts. This is the closest to a real match of Block 1 — coaches observe, almost never stop play.</p>
+
+      <div class="two-col">
+        <ul class="drill-list">
+          <li><strong>Format:</strong> 9v9 squad, 6v6 on pitch at a time, 3 subs per team rotating every 3 minutes</li>
+          <li>All rules: throw-ins, corners, goal kicks, free kicks, offside, penalties</li>
+          <li>Players call restarts before coaches — coaches only intervene if wrong</li>
+          <li>GKs rotate every 5 minutes — all players experience GK at some point</li>
+          <li>Coaches do not stop play to coach — one sentence maximum if needed, then play resumes</li>
+          <li><strong>Observe:</strong> who holds their positional zone, who calls "checking!", who defends back to the build-out line as a winger, who drops as striker when we don't have the ball</li>
+          <li>Score doesn't matter — coaches don't keep score. Players can if they want.</li>
+        </ul>
+        <div class="diagram-wrap">
+          <div class="diagram-label">6v6 Grand Game · 2-3-1 Shape Reference</div>
+          <svg viewBox="0 0 560 380" role="img"><title>6v6 full match formation reference showing 2-3-1 with positional zones</title><desc>Full U10 pitch showing the 2-3-1 formation with GK, 2 defenders, CM the glue in the centre, two wingers wide, and striker in the attacking third who drops to halfway.</desc>
+            <rect x="0" y="0" width="560" height="380" fill="#2a6b1a"/>
+            <rect x="0" y="0"   width="560" height="48" fill="#2f7a1f"/>
+            <rect x="0" y="96"  width="560" height="48" fill="#2f7a1f"/>
+            <rect x="0" y="192" width="560" height="48" fill="#2f7a1f"/>
+            <rect x="0" y="288" width="560" height="48" fill="#2f7a1f"/>
+            <rect x="24" y="18" width="512" height="344" fill="none" stroke="white" stroke-width="2.5"/>
+            <line x1="280" y1="18" x2="280" y2="362" stroke="white" stroke-width="2"/>
+            <circle cx="280" cy="190" r="46" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="280" cy="190" r="4" fill="white"/>
+            <!-- build-out lines -->
+            <line x1="168" y1="18" x2="168" y2="362" stroke="white" stroke-width="2" stroke-dasharray="10 6"/>
+            <line x1="392" y1="18" x2="392" y2="362" stroke="white" stroke-width="2" stroke-dasharray="10 6"/>
+            <!-- penalty areas -->
+            <rect x="24" y="116" width="88" height="148" fill="none" stroke="white" stroke-width="2"/>
+            <rect x="24" y="148" width="32" height="84" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="84" cy="190" r="3" fill="white"/>
+            <rect x="448" y="116" width="88" height="148" fill="none" stroke="white" stroke-width="2"/>
+            <rect x="504" y="148" width="32" height="84" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="476" cy="190" r="3" fill="white"/>
+            <!-- goals -->
+            <rect x="6" y="163" width="19" height="54" fill="#1d4a10" stroke="white" stroke-width="2"/>
+            <line x1="24" y1="163" x2="24" y2="217" stroke="white" stroke-width="3"/>
+            <rect x="535" y="163" width="19" height="54" fill="#1d4a10" stroke="white" stroke-width="2"/>
+            <line x1="536" y1="163" x2="536" y2="217" stroke="white" stroke-width="3"/>
+            <!-- corner arcs -->
+            <path d="M24 18  q10 0 10 10" fill="none" stroke="white" stroke-width="1.5"/>
+            <path d="M536 18 q-10 0 -10 10" fill="none" stroke="white" stroke-width="1.5"/>
+            <path d="M24 362 q10 0 10 -10" fill="none" stroke="white" stroke-width="1.5"/>
+            <path d="M536 362 q-10 0 -10 -10" fill="none" stroke="white" stroke-width="1.5"/>
+            <!-- our team — 2-3-1 (attacking right) -->
+            <!-- GK -->
+            <circle cx="44" cy="190" r="16" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="2.5"/>
+            <text x="44" y="186" text-anchor="middle" font-size="10" fill="#2DBFAD" font-weight="700" font-family="Arial,sans-serif">GK</text>
+            <text x="44" y="198" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="Arial,sans-serif">COMMANDER</text>
+            <!-- DEF ×2 -->
+            <circle cx="110" cy="148" r="15" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2"/>
+            <text x="110" y="144" text-anchor="middle" font-size="10" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+            <text x="110" y="156" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+            <circle cx="110" cy="232" r="15" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2"/>
+            <text x="110" y="228" text-anchor="middle" font-size="10" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+            <text x="110" y="240" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+            <!-- def backpass support arrow -->
+            <defs>
+              <marker id="f5a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5B8DD9" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="f5b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="f5c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <path d="M110 132 Q60 95 30 72" fill="none" stroke="#5B8DD9" stroke-width="1" stroke-dasharray="5 3" opacity=".5" marker-end="url(#f5a)"/>
+            <text x="54" y="88" font-size="7" fill="#5B8DD9" font-family="IBM Plex Mono,monospace" opacity=".7">backpass</text>
+            <!-- WIN top -->
+            <circle cx="228" cy="100" r="15" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
+            <text x="228" y="96" text-anchor="middle" font-size="10" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+            <text x="228" y="108" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+            <!-- winger drive arrow -->
+            <path d="M242 95 Q310 50 390 35" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-dasharray="6 3" opacity=".55" marker-end="url(#f5b)"/>
+            <text x="318" y="42" font-size="7" fill="#8B5CF6" font-family="IBM Plex Mono,monospace" opacity=".7">drive + cross</text>
+            <!-- CM -->
+            <circle cx="228" cy="190" r="15" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2.5"/>
+            <text x="228" y="186" text-anchor="middle" font-size="10" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">CM</text>
+            <text x="228" y="198" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">THE GLUE</text>
+            <!-- WIN bottom -->
+            <circle cx="228" cy="280" r="15" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
+            <text x="228" y="276" text-anchor="middle" font-size="10" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+            <text x="228" y="288" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+            <path d="M242 285 Q310 330 390 345" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-dasharray="6 3" opacity=".55" marker-end="url(#f5b)"/>
+            <!-- STRIKER -->
+            <circle cx="420" cy="190" r="15" fill="#1B3A5C" stroke="#E8607A" stroke-width="2.5"/>
+            <text x="420" y="186" text-anchor="middle" font-size="10" fill="#E8607A" font-weight="700" font-family="Arial,sans-serif">ST</text>
+            <text x="420" y="198" text-anchor="middle" font-size="7" fill="#E8607A" font-family="Arial,sans-serif">STRIKER</text>
+            <!-- striker drop to halfway -->
+            <path d="M404 190 L292 190" fill="none" stroke="#E8607A" stroke-width="1" stroke-dasharray="4 3" opacity=".45" marker-end="url(#f5c)"/>
+            <text x="346" y="184" font-size="7" fill="#E8607A" font-family="IBM Plex Mono,monospace" opacity=".7">drops if no ball</text>
+            <!-- BUILD-OUT labels -->
+            <text x="168" y="10" text-anchor="middle" font-size="8" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+            <text x="392" y="10" text-anchor="middle" font-size="8" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> This is a diagnostic game as much as it is a celebration. Take mental notes on who holds their position naturally, who presses intelligently, who communicates. These observations inform your Block 2 positional decisions. You don't need to say anything during the game — just watch. The game is the teacher now.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: KNOCKOUT + CLOSING CEREMONY + TOURNAMENT TALK -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Block 1 Grand Knockout · Closing Ceremony · Tournament Send-Off</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+
+      <div class="ko-grand">
+        <div class="ko-grand-label">Grand Knockout — Block 1 Final</div>
+        <p>All 18. Standard penalty Knockout. Coach Pete announces each player's name as they step up — full name, no rushing. GK uses angle play (set the stance, step off the line). Eliminated players lead the crowd chant. Run to a winner. 5 minutes maximum.</p>
+        <p style="font-size:12px;color:var(--faint)">Winner gets 5 seconds of pure crowd noise from all 18. Then gather everyone.</p>
+      </div>
+
+      <div class="ceremony-box">
+        <div class="cer-label">Block 1 Closing Ceremony — All 18 Gathered · ~4 minutes</div>
+
+        <div class="cer-step">
+          <div class="cer-num">1</div>
+          <div class="cer-body"><strong>Individual compliments — every player, every coach.</strong> Each coach delivers their 6 prepared compliments out loud. Specific, observed, one sentence. Players stay quiet while a teammate is recognised. No applause until all 18 are done — then one collective cheer.</div>
+        </div>
+
+        <div class="cer-step">
+          <div class="cer-num">2</div>
+          <div class="cer-body"><strong>Block 2 transition.</strong> "Block 2 starts Tuesday. No more whiteboards. Everything from here is through the game. You built the foundation — now you use it."</div>
+        </div>
+
+        <div class="cer-step">
+          <div class="cer-num">3</div>
+          <div class="cer-body"><strong>Tournament send-off (Gold players only, but said in front of everyone).</strong> See the talk box below. Non-attending players are acknowledged directly: "For those not going to Flagstaff — Block 2 starts for you on Tuesday, and we'll be back with stories. You're part of this team either way."</div>
+        </div>
+      </div>
+
+      <div class="talk-box">
+        <div class="talk-label">Pre-Tournament Talk — OSI Champions Cup · Flagstaff · Sep 11–13</div>
+        <ul>
+          <li><strong>What to expect:</strong> multiple games across the weekend, potentially against teams you've never seen. That's the fun — you don't know what's coming, and neither do they.</li>
+          <li><strong>Represent the club:</strong> MFC stands for something. Win or lose, the way you play and carry yourselves matters more than the result. Be the team other coaches point to.</li>
+          <li><strong>Use what you know:</strong> "Checking!" before you receive. Striker drops to halfway when we don't have the ball. Wingers stay wide and track back. GK steps off the line. You've done this for 5 weeks. It's yours.</li>
+          <li><strong>Hotels and travel:</strong> rest when you can, eat well, stay together as a team off the pitch. Tournaments are won in the evenings as much as on the field.</li>
+          <li><strong>Results:</strong> coaches care about effort and identity. A 3–0 loss where you played our way is better than a 3–0 win where you didn't. Play MFC soccer.</li>
+          <li><strong>Have fun:</strong> this is why you play. Flagstaff in September is beautiful. Enjoy every minute of it.</li>
+        </ul>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The closing ceremony only works if the compliments are specific and prepared. Generic praise is instantly forgotten. A specific, observed compliment — especially one that connects to growth over the whole block — will be remembered for the season. Write them tonight if you haven't already. Coach Pete, Coach Brent, Coach David — 6 each. That's 18 sentences that matter.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 1 Finale · Week 5 Session 2 · Thu Sep 10, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>

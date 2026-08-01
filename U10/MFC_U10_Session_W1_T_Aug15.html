@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Session 2 · Aug 15 · Positions &amp; First Technical Block</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--navy2:#243f5e;--gold:#B8942E;--gold-lt:#F5E6C0;
+  --teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--surf3:#243241;
+  --text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;
+  --border:#243241;
+  --font-head:'Bebas Neue',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* ── layout ── */
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+
+/* ── header ── */
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:52px;line-height:.9;color:var(--text);letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+
+/* ── timeline bar ── */
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:15}
+.tl-wb{background:#3d3520;flex:20}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-tech{background:#1e3045;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+
+/* ── phase cards ── */
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:#8B5CF6}.dot-knock{background:var(--gold)}
+.pc-name{font-size:14px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+
+/* ── content elements ── */
+.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+
+/* ── groups ── */
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+/* ── scale ── */
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:11.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+
+/* ── knockout ── */
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ── SVG diagrams ── */
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+
+/* ── pitch field base ── */
+.field-bg{fill:#1e3d14;opacity:.9}
+.field-line{stroke:#3a6b28;stroke-width:1;fill:none;opacity:.5}
+
+/* ── two-col ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ── footer ── */
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+
+/* ── heat warning ── */
+.heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.hw-icon{font-size:18px;flex-shrink:0}
+.hw-body{font-size:12px;color:var(--muted);line-height:1.5}
+.hw-body strong{color:var(--heat)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 1 · Session 2 of 9</div>
+      <div class="sh-title">Session <span>2</span><br>Positions &amp; First Technical</div>
+      <div class="sh-sub">Saturday, August 15, 2026 · 70 minutes · Royal Palm Park · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">18 Players · 3 Groups of 6</div><br>
+      <div class="meta-pill">Single Session</div><br>
+      <div class="meta-pill mp-heat">⚠ Phoenix Heat Protocol</div>
+    </div>
+  </div>
+
+  <!-- HEAT WARNING -->
+  <div class="heat-warn">
+    <div class="hw-icon">☀️</div>
+    <div class="hw-body"><strong>Phoenix Heat Protocol active.</strong> Water break mandatory every 15–18 minutes. Whiteboard in shade is structured cool-down — not filler. Keep intensity low. Never skip a water break. If a player looks red-faced or slows down, rest them immediately.</div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up</span><span class="tl-time">5–20</span></div>
+    <div class="tl-seg tl-wb"><span class="tl-label">Whiteboard + Water</span><span class="tl-time">20–40</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">Technical Stations</span><span class="tl-time">40–60</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">60–70</span></div>
+  </div>
+
+  <!-- PHASE 1: JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Opening Ritual — same every session through Dec 12</div>
+        <p>All 18 juggling individually as they arrive. Try to beat the Session 1 record. Coaches know every player's number from last week — call it out as they arrive. Thighs and feet both count. Latecomers join without disruption.</p>
+      </div>
+
+<div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> By Session 2 every player has a juggling number from last week. Call it out as they arrive: "Marcus, you had 4 last week — let's see if we can get to 5." Players who improved between sessions have been practising at home. Name that publicly — it signals to the whole squad that home practice matters.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 20</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Freeze Dribble + Toe-Tap Challenge</span>
+      <span class="pc-dur">15 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">All 18 together. Goal: smiles and names. Keep it silly. Every player touches a ball every 20 seconds.</p>
+
+      <div class="two-col">
+        <div>
+          <ul class="drill-list">
+            <li>Name circle: each player says name + favourite food (ball = microphone, passed around)</li>
+            <li>Free dribble in 25×25m grid — no instructions, just explore with the ball</li>
+            <li>Ball tag: touch someone else's ball → they do 3 toe taps, then rejoin</li>
+          </ul>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Ball Tag · 25×25m grid</div>
+          <svg viewBox="0 0 260 180" role="img"><title>Ball tag warm-up drill</title><desc>18 players spread across a 25 by 25 metre grid, each dribbling their own ball and trying to touch others' balls</desc>
+            <rect x="0" y="0" width="260" height="180" rx="4" class="field-bg"/>
+            <rect x="8" y="8" width="244" height="164" rx="3" class="field-line" stroke-dasharray="5 4"/>
+            <!-- players scattered -->
+            <circle cx="35" cy="35" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="35" cy="35" r="4" fill="#B8942E"/>
+            <circle cx="80" cy="55" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="80" cy="55" r="4" fill="#B8942E"/>
+            <circle cx="130" cy="30" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="130" cy="30" r="4" fill="#B8942E"/>
+            <circle cx="200" cy="40" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="200" cy="40" r="4" fill="#2DBFAD"/>
+            <circle cx="230" cy="70" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="230" cy="70" r="4" fill="#2DBFAD"/>
+            <circle cx="50" cy="90" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="50" cy="90" r="4" fill="#2DBFAD"/>
+            <circle cx="100" cy="80" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="100" cy="80" r="4" fill="#E8E4DB"/>
+            <circle cx="155" cy="90" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="155" cy="90" r="4" fill="#E8E4DB"/>
+            <circle cx="210" cy="110" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="210" cy="110" r="4" fill="#E8E4DB"/>
+            <circle cx="35" cy="140" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="35" cy="140" r="4" fill="#B8942E"/>
+            <circle cx="90" cy="148" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="90" cy="148" r="4" fill="#B8942E"/>
+            <circle cx="140" cy="145" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="140" cy="145" r="4" fill="#2DBFAD"/>
+            <circle cx="190" cy="155" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="190" cy="155" r="4" fill="#2DBFAD"/>
+            <circle cx="238" cy="140" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="238" cy="140" r="4" fill="#E8E4DB"/>
+            <!-- balls near feet -->
+            <circle cx="44" cy="42" r="3" fill="white" opacity=".7"/>
+            <circle cx="89" cy="62" r="3" fill="white" opacity=".7"/>
+            <circle cx="139" cy="37" r="3" fill="white" opacity=".7"/>
+            <circle cx="209" cy="47" r="3" fill="white" opacity=".7"/>
+            <circle cx="60" cy="97" r="3" fill="white" opacity=".7"/>
+            <!-- zone label -->
+            <text x="130" y="170" text-anchor="middle" font-size="9" fill="#3D5166" font-family="IBM Plex Mono,monospace">25 × 25 m · every player has their own ball</text>
+          </svg>
+        </div>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Learn every player's name today — use it in every single interaction. Crouch to their level. Smile constantly. Players are still learning each other — keep the energy warm and individual. Call every player by name in every interaction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: WHITEBOARD -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">20 – 40</span>
+      <div class="pc-dot dot-wb"></div>
+      <span class="pc-name">Whiteboard + Water Break: Positions &amp; the 2-3-1</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="wb-box">
+        <h5>Session 2 — Positions &amp; the 2-3-1</h5>
+        <p>Move to shaded area. Players sit, water in hand. Draw the pitch and label the key areas. Keep it to 3–4 concepts maximum. Ask questions — do not lecture.</p>
+        <ul>
+          <li>Ball over touchline → throw-in for the other team</li>
+          <li>Ball over goal line off a defender → corner kick for the attacking team</li>
+          <li>Ball over goal line off an attacker → goal kick for the defending team</li>
+          <li>Hands: only the goalkeeper, only inside the penalty area</li>
+        </ul>
+      </div>
+
+      <!-- Pitch diagram -->
+      <div class="diagram-wrap">
+        <div class="diagram-label">2-3-1 Formation — Positions on the U10 Pitch</div>
+        <svg viewBox="0 0 560 360" role="img" xmlns="http://www.w3.org/2000/svg"><title>2-3-1 formation on U10 pitch with all position labels</title><desc>Top-down U10 pitch with build-out lines showing the 2-3-1 formation. GK at left goal labelled Commander, 2 defenders labelled Protectors, CM labelled The Glue, 2 wingers, and striker labelled The Hunter in attacking third.</desc>
+          <rect x="0" y="0" width="560" height="360" fill="#2a6b1a"/>
+          <rect x="0" y="0"   width="560" height="45" fill="#2f7a1f"/>
+          <rect x="0" y="90"  width="560" height="45" fill="#2f7a1f"/>
+          <rect x="0" y="180" width="560" height="45" fill="#2f7a1f"/>
+          <rect x="0" y="270" width="560" height="45" fill="#2f7a1f"/>
+          <rect x="22" y="16" width="516" height="328" fill="none" stroke="white" stroke-width="2.5"/>
+          <line x1="280" y1="16" x2="280" y2="344" stroke="white" stroke-width="2"/>
+          <circle cx="280" cy="180" r="46" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="280" cy="180" r="4" fill="white"/>
+          <line x1="168" y1="16" x2="168" y2="344" stroke="white" stroke-width="2" stroke-dasharray="10 6"/>
+          <line x1="392" y1="16" x2="392" y2="344" stroke="white" stroke-width="2" stroke-dasharray="10 6"/>
+          <rect x="22" y="110" width="88" height="140" fill="none" stroke="white" stroke-width="2"/>
+          <rect x="22" y="142" width="32" height="76" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="82" cy="180" r="3" fill="white"/>
+          <rect x="5" y="156" width="18" height="48" fill="#1d4a10" stroke="white" stroke-width="2"/>
+          <rect x="450" y="110" width="88" height="140" fill="none" stroke="white" stroke-width="2"/>
+          <rect x="506" y="142" width="32" height="76" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="478" cy="180" r="3" fill="white"/>
+          <rect x="537" y="156" width="18" height="48" fill="#1d4a10" stroke="white" stroke-width="2"/>
+          <path d="M22 16 q10 0 10 10" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M538 16 q-10 0 -10 10" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M22 344 q10 0 10 -10" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M538 344 q-10 0 -10 -10" fill="none" stroke="white" stroke-width="1.5"/>
+          <!-- GK -->
+          <circle cx="44" cy="180" r="18" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="2.5"/>
+          <text x="44" y="176" text-anchor="middle" font-size="11" fill="#2DBFAD" font-weight="700" font-family="Arial,sans-serif">GK</text>
+          <text x="44" y="188" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="Arial,sans-serif">COMMANDER</text>
+          <!-- DEF x2 -->
+          <circle cx="118" cy="132" r="16" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2.5"/>
+          <text x="118" y="128" text-anchor="middle" font-size="11" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+          <text x="118" y="140" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+          <circle cx="118" cy="228" r="16" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2.5"/>
+          <text x="118" y="224" text-anchor="middle" font-size="11" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+          <text x="118" y="236" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+          <!-- CM (The Glue) -->
+          <circle cx="240" cy="180" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2.5"/>
+          <text x="240" y="176" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">CM</text>
+          <text x="240" y="188" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">THE GLUE</text>
+          <!-- Wingers x2 -->
+          <circle cx="240" cy="88" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
+          <text x="240" y="84" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+          <text x="240" y="96" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+          <circle cx="240" cy="272" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
+          <text x="240" y="268" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+          <text x="240" y="280" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+          <!-- Striker -->
+          <circle cx="420" cy="180" r="16" fill="#1B3A5C" stroke="#E8607A" stroke-width="2.5"/>
+          <text x="420" y="176" text-anchor="middle" font-size="11" fill="#E8607A" font-weight="700" font-family="Arial,sans-serif">ST</text>
+          <text x="420" y="188" text-anchor="middle" font-size="7" fill="#E8607A" font-family="Arial,sans-serif">THE HUNTER</text>
+          <!-- build-out line labels -->
+          <text x="168" y="350" text-anchor="middle" font-size="8" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <text x="392" y="350" text-anchor="middle" font-size="8" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+        </svg>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Ask questions, don't lecture. "Who knows what a throw-in is?" Let experienced players answer — it reinforces their knowledge and removes pressure from new ones. "Good thinking — close! Let me show you." Never make a player feel embarrassed for not knowing.</div>
+      </div>
+    </div>
+  </div>
+
+<!-- PHASE 4: TECHNICAL STATIONS — FIRST TIME -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">40 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Ball Comfort Circuit — First Introduction</span>
+      <span class="pc-dur">20 min · 6–7 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">First technical block of the season. Three stations — same drills that will run every session through Block 1, with scaling that steps up each week. Today: no pressure, no defenders, coach demonstrates every drill before players begin. The goal is simply to understand what each drill is asking. Groups rotate on the whistle every 6–7 minutes.</p>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Ball Mastery</div>
+          <p>Dribble freely in a small zone, then on the whistle: body over the ball, sole of the foot on top, stop it completely. Coach demonstrates once — a full walk-through — before players begin. <strong style="color:#B8942E">New players: walk pace, any foot. Exp: jog pace, keep the ball moving between whistles using sole rolls and inside-outside taps.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Blue · Coach Brent · Station B — First Touch</div>
+          <p>Paired drill: partner rolls the ball slowly to feet. Receiver stops it cleanly with the inside of their foot, then rolls it back. Coach demonstrates with a player before pairs begin. <strong style="color:#2DBFAD">New players: focus only on stopping the ball cleanly — no rush. Exp: receive and immediately turn away from partner in 2 touches.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — Dribble Slalom</div>
+          <p>Dribble through 6 cones in a line. Coach dribbles through first so players see the full path. <strong style="color:#8FA3B4">New players: walk pace, any foot, coach alongside on the first rep. Exp: jog pace, weak foot going through the cones, dominant foot returning.</strong></p>
+        </div>
+      </div>
+
+      <div class="rotation-box">
+        <div class="rot-icon">ROTATION</div>
+        <div class="rot-body">Whistle every <strong>6–7 minutes</strong>. Coach stays at their station; players come to them. No lines, no waiting — all three stations run simultaneously. These same drills return every session: today is about understanding them, not performing them.</div>
+      </div>
+
+      <div class="three-col">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Gold · Ball Mastery — Stop on Whistle</div>
+          <svg viewBox="0 0 200 140" role="img"><title>Ball mastery station A session 2</title><desc>Player dribbles freely then stops the ball with the sole of their foot on the coach's whistle. No defenders. Walk pace for new players, jog pace with skill moves for experienced.</desc>
+            <rect x="0" y="0" width="200" height="140" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs><marker id="bm1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+            <path d="M20 70 Q60 40 100 70 Q140 100 170 70" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5" marker-end="url(#bm1)"/>
+            <circle cx="20" cy="70" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="20" cy="70" r="5" fill="#2DBFAD"/>
+            <circle cx="28" cy="77" r="3" fill="white" opacity=".8"/>
+            <circle cx="170" cy="70" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="170" cy="70" r="5" fill="#2DBFAD"/>
+            <rect x="128" y="28" width="48" height="16" rx="3" fill="rgba(245,158,11,.15)" stroke="#F59E0B" stroke-width="1"/>
+            <text x="152" y="40" text-anchor="middle" font-size="8" fill="#F59E0B" font-family="IBM Plex Mono,monospace">WHISTLE</text>
+            <ellipse cx="170" cy="82" rx="10" ry="4" fill="#B8942E" opacity=".4"/>
+            <text x="100" y="118" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">dribble → sole stop on whistle</text>
+            <text x="100" y="130" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">no pressure · coach demos first</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Blue · First Touch — Stop &amp; Return</div>
+          <svg viewBox="0 0 200 140" role="img"><title>First touch station B session 2</title><desc>Paired drill. Partner rolls ball to feet, receiver stops it cleanly with inside foot, then rolls it back. No defenders. Focus on clean first touch only.</desc>
+            <rect x="0" y="0" width="200" height="140" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs><marker id="ft1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+            <marker id="ft2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+            <circle cx="30" cy="70" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="30" cy="70" r="4" fill="#B8942E"/>
+            <circle cx="160" cy="70" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="160" cy="70" r="4" fill="#2DBFAD"/>
+            <line x1="40" y1="70" x2="148" y2="70" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#ft1)"/>
+            <circle cx="95" cy="70" r="3" fill="white" opacity=".7"/>
+            <line x1="148" y1="76" x2="40" y2="76" stroke="#B8942E" stroke-width="1" stroke-dasharray="4 3" opacity=".4" marker-end="url(#ft2)"/>
+            <text x="160" y="92" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">inside foot</text>
+            <text x="100" y="118" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">roll → stop cleanly → return</text>
+            <text x="100" y="130" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">no pressure · any pace</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">White · Slalom — Walk Then Jog</div>
+          <svg viewBox="0 0 200 140" role="img"><title>Dribble slalom station C session 2</title><desc>Player dribbles through 6 cones in a line. Walk pace for new players, jog pace with weak foot for experienced. Coach demonstrates the full path first.</desc>
+            <rect x="0" y="0" width="200" height="140" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs><marker id="sl1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+            <circle cx="15" cy="70" r="5" fill="#B8942E"/>
+            <circle cx="42" cy="70" r="5" fill="#B8942E"/>
+            <circle cx="69" cy="70" r="5" fill="#B8942E"/>
+            <circle cx="96" cy="70" r="5" fill="#B8942E"/>
+            <circle cx="123" cy="70" r="5" fill="#B8942E"/>
+            <circle cx="150" cy="70" r="5" fill="#B8942E"/>
+            <path d="M8 100 Q15 42 42 84 Q69 118 96 42 Q110 20 125 68" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="5 3" opacity=".7" marker-end="url(#sl1)"/>
+            <circle cx="8" cy="100" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="8" cy="100" r="4" fill="#2DBFAD"/>
+            <text x="100" y="118" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">walk pace · any foot · coach demos first</text>
+            <text x="100" y="130" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">exp: jog · weak foot going</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="scale">
+        <div class="sc-col sc-new">
+          <div class="sc-label">New Players — first time seeing these drills</div>
+          <ul>
+            <li>Walk pace — no time pressure on any station</li>
+            <li>Coach demonstrates before every first rep</li>
+            <li>Goal: understand what the drill is asking, not to do it perfectly</li>
+            <li>Praise every attempt, however imperfect</li>
+          </ul>
+        </div>
+        <div class="sc-col sc-exp">
+          <div class="sc-label">Experienced — step up from the start</div>
+          <ul>
+            <li>Jog pace; weak foot preferred on slalom</li>
+            <li>Receive and turn away on Station B (2 touches)</li>
+            <li>Skill moves between sole stops on Station A</li>
+            <li>Help newer teammates understand each drill</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> These three drills return every session through Block 1. The only thing that changes is the scaling. Today is about familiarity — players should leave knowing what each station looks like and what it's asking. One clear demonstration per station is worth five minutes of verbal instruction. Celebrate every player who completes the drill, regardless of how it looks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 70</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Season Closing Ritual — runs every session through Dec 12</div>
+        <p>All 18 line up. Penalty-style — one shot each. Miss = out, score = survive. GK rotates every round. Eliminated players become the crowd and cheer loudly — no one sits in silence. New players may shoot from a closer mark; never draw attention to it. With 10 minutes today, run it all the way to a winner if energy allows. Multiple rounds — every player gets several shots. Run it all the way to a winner.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Announce Knockout the same way every single session — "Time for Knockout!" — so it becomes the signal that the session is about to end on a high. Consistency builds ritual. Ritual builds belonging.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 1 · Session 2 · Aug 15, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>

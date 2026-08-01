@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Week 4 · Session 6 · Sep 1 · Corner Kicks & Goal Kicks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:30}
+.tl-wb{background:#3d3520;flex:15}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:14px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+
+.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box+.wb-box{margin-top:10px}
+.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:11.5px;color:var(--muted);line-height:1.5}
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:11.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:10px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:12px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:10px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px}
+.hw-icon{font-size:18px;flex-shrink:0}
+.hw-body{font-size:12px;color:var(--muted);line-height:1.5}
+.hw-body strong{color:var(--heat)}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+/* corner scenario cards */
+.corner-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.corner-card{border-radius:6px;padding:10px 12px}
+.cc-corner{background:rgba(45,191,173,.1);border:1px solid rgba(45,191,173,.25)}
+.cc-goalkick{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.25)}
+.cc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.cc-corner .cc-label{color:var(--teal)}.cc-goalkick .cc-label{color:var(--gold)}
+.corner-card p{font-size:11.5px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 1 · Session 6 · Week 4 Day 1</div>
+      <div class="sh-title">Week <span>4</span> · Tue<br>Corner Kicks &amp; Goal Kicks</div>
+      <div class="sh-sub">Tuesday, September 1, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">18 Players · 3 Groups of 6</div><br>
+      <div class="meta-pill mp-wk">Week 4 of 5 · Block 1</div><br>
+      <div class="meta-pill mp-heat">☀ Heat Protocol Active</div>
+    </div>
+  </div>
+
+  <div class="heat-warn">
+    <div class="hw-icon">☀️</div>
+    <div class="hw-body"><strong>Heat Protocol continues.</strong> September 1 in Phoenix — still hot. Water breaks within each phase. The technical block runs 30 minutes so coaches should call brief water sips between rotations without shortening the drill time.</div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">WK 4</div>
+    <div class="su-body"><strong>Week 4 — same drills, modest step up:</strong> New players face their first light passive pressure at Stations A and B (a partner shadows but does not tackle). Station C continues the defending and shielding work from Week 3 Thursday — patience first, then step in. The rondo is in its third session — experienced players add a 2-touch limit.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">Technical Stations</span><span class="tl-time">15–45</span></div>
+    <div class="tl-seg tl-wb"><span class="tl-label">Whiteboard + Water</span><span class="tl-time">45–60</span></div>
+    <div class="tl-seg tl-ssg"><span class="tl-label">4v1 Rondo</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Opening Ritual — same every session through Dec 12</div>
+        <p>All 18 juggling individually as they arrive. Beat the record from last week. After 4 sessions, every player has a number — coaches should know it. Call them out when a record falls. Thighs and feet count for all players.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> By Week 4 you're starting to see a gap forming between those who've been practising at home and those who haven't. Never highlight the gap negatively. Instead: "Anyone who wants to improve fastest — 5 minutes of juggling before dinner every night. That's the secret."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Physical Contact Games — Lean, Run, Pull</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">No balls for the first 7 minutes. Physicality is the focus of this session — the warm-up primes players for body contact before it shows up in the technical block. Three drills, each one step up in contact. Keep the energy high and the tone fun — this isn't a fight, it's skill.</p>
+      <ul class="drill-list" style="margin-bottom:12px">
+        <li><strong>Back-to-back lean (2 min):</strong> pairs stand back-to-back, arms linked. On "Go!" both push back into each other and hold — 5 seconds. Feel the resistance. Switch to side-to-side lean: shoulder to shoulder, each player trying to hold their ground. Cue: "Low hips, bend your knees. Strength comes from your legs, not your shoulders."</li>
+        <li><strong>Run shoulder-to-shoulder (3 min):</strong> pairs run side by side along a 20m line — shoulders touching the whole way. On "Switch!" the outside player bumps the inside player off the line — light bump, stay upright. Inside player resists and holds the line. Switch roles. Progress: slight speed increase each rep. Cue: "Stay low. Your body wins, not your arms."</li>
+        <li><strong>Pull-away / hold-back (2 min):</strong> pairs face each other, both grip the same bib or belt loop (no wrists). On "Go!" one player tries to run away, the other tries to hold them back for 3 seconds. Then release and swap. Cue: "Low centre of gravity wins every time." Not about strength — about position.</li>
+        <li><strong>Final 3 min:</strong> free dribble — back to balls, shake out the legs, transition into the technical block mindset.</li>
+      </ul>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The boys will love this — but set the tone in the first 30 seconds. "This is a skill session, not a wrestling match. Low hips, legal contact, no shoving. The player who wins is the one with better technique — not the biggest one." Then let them go. If it gets too rough, reset with one sentence and continue. Physical contact in a structured context is exactly how to build comfort with it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 45</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Ball Comfort A+B · Defending Patience + Step-In Station C</span>
+      <span class="pc-dur">30 min · 10 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Same three stations for the third week running. Light passive pressure added at Stations A and B for new players. Station C builds on Week 3 Thursday — same 1v1 channel, same defending body shape, but now after holding shape the defender actively tries to win the ball. Still no formal tackle technique yet.</p>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A</div>
+          <p>Ball mastery + sole-roll stops. <strong style="color:#B8942E">New Wk4: passive partner leans in on the whistle — shielder holds position. Exp: named skill move (sole roll, step-over, or cut) before changing direction.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Blue · Coach Brent · Station B</div>
+          <p>Paired first touch + turn. <strong style="color:#2DBFAD">New Wk4: "checking!" call mandatory before every receive for all players. Exp: receive and turn in 2 touches, weak foot return pass.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — Defending Week 4</div>
+          <p>1v1 defending channel (same 6×8m setup as Thu Aug 27). Week 4 step-up: defender must now actively try to win the ball — no more patience-only. <strong style="color:#8FA3B4">New Wk4: hold shape for 1 second then press — show outside first. Exp: defender must force attacker to one specific side (coach calls it before each rep), then win the ball or force out of bounds. Attacker uses any skill move — sole roll, step-over, or cut.</strong></p>
+        </div>
+      </div>
+
+      <div class="wb-box" style="background:rgba(232,96,122,.06);border-color:rgba(232,96,122,.2)">
+        <h5 style="color:var(--rose)">Station C — Defending Step-Up (brief Coach David reminder)</h5>
+        <ul>
+          <li><strong>Same cues as last week:</strong> Sideways-on · Low · Arm's length · Show outside</li>
+          <li><strong>Week 4 addition:</strong> after holding shape for 1–2 seconds, step in when you see a heavy touch or the attacker's head go down. Patience sets up the win — don't step in before you see the opportunity.</li>
+          <li><strong>Watch for:</strong> players diving in immediately — redirect back to holding shape first.</li>
+        </ul>
+      </div>
+
+            <div class="rotation-box">
+        <div class="rot-icon">ROTATION</div>
+        <div class="rot-body">Whistle every <strong>10 minutes</strong>. Coach stays, players rotate. All three stations run simultaneously — no lines. Brief water sip at each rotation.</div>
+      </div>
+
+      <div class="three-col">
+        <!-- Shield + play out -->
+        <div class="diagram-wrap">
+          <div class="diagram-label">Gold · Shield → Play Out</div>
+          <svg viewBox="0 0 200 145" role="img"><title>Ball mastery shield and play out drill week 4</title><desc>Player shields ball from active defender for 5 seconds then plays out to a target player outside the zone.</desc>
+            <rect x="0" y="0" width="200" height="145" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs><marker id="s4a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+            <rect x="60" y="40" width="80" height="70" rx="4" fill="rgba(184,148,46,.08)" stroke="#B8942E" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="100" y="34" text-anchor="middle" font-size="8" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">SHIELD ZONE</text>
+            <circle cx="100" cy="75" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="75" r="5" fill="#2DBFAD"/>
+            <circle cx="108" cy="82" r="3" fill="white" opacity=".8"/>
+            <circle cx="118" cy="72" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="118" cy="72" r="4" fill="#E8607A"/>
+            <circle cx="170" cy="75" r="9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="170" cy="75" r="4" fill="#B8942E" opacity=".6"/>
+            <text x="170" y="94" text-anchor="middle" font-size="7" fill="#B8942E" font-family="IBM Plex Mono,monospace">TARGET</text>
+            <path d="M141 75 L158 75" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="4 2" opacity=".7" marker-end="url(#s4a1)"/>
+            <text x="100" y="132" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">shield 5s → escape → play out</text>
+          </svg>
+        </div>
+        <!-- 1-touch turn weak foot -->
+        <div class="diagram-wrap">
+          <div class="diagram-label">Blue · 1-Touch Turn</div>
+          <svg viewBox="0 0 200 145" role="img"><title>First touch 1-touch turn with active defender week 4</title><desc>Receiver calls checking, takes the ball in 1 touch with weak foot and immediately turns to play a pass to a named target. Active defender enters after the touch.</desc>
+            <rect x="0" y="0" width="200" height="145" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs>
+              <marker id="s4b1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="s4b2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <circle cx="20" cy="75" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="20" cy="75" r="4" fill="#B8942E"/>
+            <circle cx="110" cy="75" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="110" cy="75" r="4" fill="#2DBFAD"/>
+            <line x1="30" y1="75" x2="100" y2="75" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#s4b1)"/>
+            <circle cx="65" cy="75" r="3" fill="white" opacity=".7"/>
+            <rect x="88" y="57" width="44" height="14" rx="3" fill="rgba(45,191,173,.15)"/>
+            <text x="110" y="68" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">"checking!"</text>
+            <path d="M119 72 Q138 48 162 40" fill="none" stroke="#2DBFAD" stroke-width="1.5" opacity=".7" marker-end="url(#s4b2)"/>
+            <text x="155" y="36" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">1 touch</text>
+            <circle cx="130" cy="90" r="9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="130" cy="90" r="4" fill="#E8607A" opacity=".6"/>
+            <text x="100" y="132" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">check → 1-touch weak foot → turn</text>
+          </svg>
+        </div>
+        <!-- Defending channel week 4 -->
+        <div class="diagram-wrap">
+          <div class="diagram-label">White · 1v1 Defending — Week 4</div>
+          <svg viewBox="0 0 200 145" role="img"><title>1v1 defending channel week 4 with directional defending cue</title><desc>Same 6 by 8 metre channel as Week 3 Thursday. Defender holds shape for 1 second then steps in to win the ball. Experienced players must steer attacker to a coach-called side before winning the ball.</desc>
+            <rect x="0" y="0" width="200" height="145" rx="4" fill="#1e3d14" opacity=".85"/>
+            <!-- channel -->
+            <rect x="10" y="18" width="130" height="110" rx="3" fill="rgba(232,96,122,.06)" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="5 4" opacity=".7"/>
+            <!-- gate -->
+            <rect x="130" y="56" width="10" height="30" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2" opacity=".8"/>
+            <text x="148" y="73" font-size="7" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">GATE</text>
+            <defs>
+              <marker id="w4d1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="w4d2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- attacker with ball -->
+            <circle cx="32" cy="73" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="32" cy="73" r="5" fill="#2DBFAD"/>
+            <circle cx="43" cy="80" r="3" fill="white" opacity=".8"/>
+            <!-- attacker drive -->
+            <path d="M44 73 L80 73" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5" marker-end="url(#w4d1)"/>
+            <!-- defender sideways-on -->
+            <ellipse cx="100" cy="73" rx="8" ry="12" fill="#1B3A5C" stroke="#E8607A" stroke-width="1.8" transform="rotate(-18,100,73)"/>
+            <circle cx="100" cy="58" r="6" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="100" cy="58" r="3" fill="#E8607A"/>
+            <!-- show outside arrow -->
+            <path d="M104 66 Q118 38 128 22" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="4 3" opacity=".65" marker-end="url(#w4d2)"/>
+            <text x="135" y="20" font-size="7" fill="#E8607A" font-family="IBM Plex Mono,monospace">show outside</text>
+            <!-- step-in arrow -->
+            <path d="M90 73 L55 73" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="3 2" opacity=".5" marker-end="url(#w4d2)"/>
+            <text x="70" y="65" text-anchor="middle" font-size="7" fill="#E8607A" font-family="IBM Plex Mono,monospace">1s → step in</text>
+            <!-- exp directional label -->
+            <rect x="10" y="128" width="130" height="13" rx="2" fill="rgba(139,92,246,.12)"/>
+            <text x="75" y="138" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">exp: coach calls direction before rep</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="scale">
+        <div class="sc-col sc-new">
+          <div class="sc-label">New Players — light pressure, steady pace</div>
+          <ul>
+            <li>Passive lean at Station A — hold the shield position</li>
+            <li>"Checking!" call at Station B every receive</li>
+            <li>Station C: hold defending shape 2 seconds before stepping in</li>
+            <li>No need for named skill moves yet</li>
+          </ul>
+        </div>
+        <div class="sc-col sc-exp">
+          <div class="sc-label">Experienced — small additions</div>
+          <ul>
+            <li>Named skill move at Station A before direction change</li>
+            <li>"Checking!" mandatory, weak foot return at Station B</li>
+            <li>Station C: show outside first, then step in on heavy touch</li>
+            <li>2-touch in rondo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: WHITEBOARD -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">45 – 60</span>
+      <div class="pc-dot dot-wb"></div>
+      <span class="pc-name">Whiteboard + Water: Corner Kicks &amp; Goal Kicks</span>
+      <span class="pc-dur">15 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">15 minutes. Cover when each restart happens and basic delivery options. Connect to the U10 pitch diagram — the corner arc and goal area are already familiar from the Week 1 field diagram. Then practice 2–3 corners per side on the pitch immediately after.</p>
+
+      <div class="corner-grid">
+        <div class="corner-card cc-corner">
+          <div class="cc-label">↗ Corner Kick — when?</div>
+          <p>Ball goes over the goal line last touched by a <strong>defender</strong>. Attacker takes the kick from the corner arc on that side. Can score directly.</p>
+        </div>
+        <div class="corner-card cc-goalkick">
+          <div class="cc-label">⬦ Goal Kick — when?</div>
+          <p>Ball goes over the goal line last touched by an <strong>attacker</strong>. GK (or any defender) kicks from inside the 6-yard box. Must exit the penalty area before anyone touches it.</p>
+        </div>
+      </div>
+
+      <div class="wb-box">
+        <h5>Corner Kick Delivery — Two Options Only (5 min)</h5>
+        <ul>
+          <li><strong>Near-post run:</strong> one player attacks the near post — first contact wins. Simple, direct.</li>
+          <li><strong>Far-post arrival:</strong> ball played deeper, far-post player arrives late and meets it. Harder to defend.</li>
+          <li>Rule reminder: opponents must be 10 yards from the corner arc when the kick is taken</li>
+        </ul>
+      </div>
+
+      <!-- Corner kick diagram -->
+      <div class="diagram-wrap">
+        <div class="diagram-label">Corner Kick — Near Post vs Far Post Run</div>
+        <svg viewBox="0 0 400 200" role="img"><title>Corner kick delivery showing near post and far post run options</title><desc>Top-down view of the attacking penalty area. Corner kick is taken from the bottom-left corner arc. One player makes a near-post run, another arrives at the far post. Defenders shown in the box.</desc>
+          <rect x="0" y="0" width="400" height="200" rx="4" fill="#2a6b1a" opacity=".9"/>
+          <rect x="0" y="0" width="400" height="25" fill="#2f7a1f"/>
+          <rect x="0" y="50" width="400" height="25" fill="#2f7a1f"/>
+          <rect x="0" y="100" width="400" height="25" fill="#2f7a1f"/>
+          <rect x="0" y="150" width="400" height="25" fill="#2f7a1f"/>
+          <!-- penalty area -->
+          <rect x="8" y="8" width="392" height="184" fill="none" stroke="white" stroke-width="1.5"/>
+          <!-- 6-yard box -->
+          <rect x="8" y="68" width="60" height="64" fill="none" stroke="white" stroke-width="1.2"/>
+          <!-- goal -->
+          <rect x="8" y="80" width="12" height="40" fill="#1d4a10" stroke="white" stroke-width="2"/>
+          <line x1="8" y1="80" x2="8" y2="120" stroke="white" stroke-width="3"/>
+          <!-- corner arc bottom-left -->
+          <path d="M8 192 A12 12 0 0 0 20 180" fill="none" stroke="white" stroke-width="1.5"/>
+          <!-- corner taker -->
+          <circle cx="12" cy="192" r="9" fill="none" stroke="#2DBFAD" stroke-width="2"/><circle cx="12" cy="192" r="4" fill="#2DBFAD"/>
+          <text x="12" y="204" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">CK</text>
+          <defs>
+            <marker id="ck1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+            <marker id="ck2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            <marker id="ck3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round"/></marker>
+          </defs>
+          <!-- near-post run (gold) -->
+          <circle cx="150" cy="162" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="150" cy="162" r="4" fill="#B8942E"/>
+          <path d="M141 160 Q80 130 38 90" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="6 3" opacity=".7" marker-end="url(#ck1)"/>
+          <text x="130" y="178" font-size="8" fill="#B8942E" font-family="IBM Plex Mono,monospace">near post</text>
+          <!-- far-post run (rose) -->
+          <circle cx="200" cy="150" r="9" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="200" cy="150" r="4" fill="#E8607A"/>
+          <path d="M192 146 Q160 110 70 82" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="6 3" opacity=".7" marker-end="url(#ck2)"/>
+          <text x="185" y="166" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">far post</text>
+          <!-- ball flight arc -->
+          <path d="M20 186 Q100 60 44 85" fill="none" stroke="white" stroke-width="2" opacity=".6" marker-end="url(#ck3)"/>
+          <!-- defenders -->
+          <circle cx="60" cy="100" r="8" fill="none" stroke="#8FA3B4" stroke-width="1.5"/><circle cx="60" cy="100" r="3" fill="#8FA3B4"/>
+          <circle cx="80" cy="90" r="8" fill="none" stroke="#8FA3B4" stroke-width="1.5"/><circle cx="80" cy="90" r="3" fill="#8FA3B4"/>
+          <circle cx="70" cy="115" r="8" fill="none" stroke="#8FA3B4" stroke-width="1.5"/><circle cx="70" cy="115" r="3" fill="#8FA3B4"/>
+        </svg>
+      </div>
+
+      <div class="wb-box">
+        <h5>On-Pitch Practice (5 min)</h5>
+        <p>Take all 18 to the pitch immediately after drawing it. Three groups run 2–3 corners each from both sides. One coach delivers, two coaches watch positioning. Ask: "Corner or goal kick?" before each restart to reinforce recognition. End with 2 live corner kicks into a 3v3 scenario in the box.</p>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The single biggest win from this session is players correctly calling "corner!" or "goal kick!" in the rondo and SSG that follows. When it happens — name it. "Did you hear Marcus? He called it before I did. That's soccer IQ." That's the transfer you're looking for.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: RONDO -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">Rondo: 4v1 — Week 4 · 20 min</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Week 4 rondo: same 4v1 format, same 8×8m square. The format is now fully owned by the players — coaches should step back further and let it run. Final 5 minutes: fully player-run with no coach input.</p>
+
+      <div class="two-col">
+        <ul class="drill-list">
+          <li>4 outside players, 1 defender in the middle, 8×8m square</li>
+          <li>New players: "checking!" call mandatory before every receive — coaches affirm each one</li>
+          <li>Experienced players: 2-touch maximum, must shift position after every pass, name target before playing</li>
+          <li>Swap defender on interception or 8 consecutive passes</li>
+          <li>Rounds of 2–3 min, water sip between</li>
+          <li><strong>60–75 min: coached rounds</strong></li>
+          <li><strong>75–80 min: fully player-run — coaches do not speak</strong></li>
+        </ul>
+        <div class="diagram-wrap">
+          <div class="diagram-label">4v1 Rondo · Week 4 Focus</div>
+          <svg viewBox="0 0 260 230" role="img"><title>4v1 rondo week 4 with position shift and name target before passing</title><desc>4 players on outside corners of 8 by 8 metre square. Week 4: experienced players name their target before passing, shift position after every pass, and maintain 2-touch limit.</desc>
+            <rect x="0" y="0" width="260" height="230" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs>
+              <marker id="w4r1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="w4r2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="w4r3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-linecap="round"/></marker>
+            </defs>
+            <rect x="40" y="25" width="180" height="160" rx="3" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="5 4" opacity=".5"/>
+            <text x="130" y="16" text-anchor="middle" font-size="9" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">8 × 8 m · week 4</text>
+            <circle cx="40" cy="25" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="40" cy="25" r="6" fill="#2DBFAD"/>
+            <circle cx="220" cy="25" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="220" cy="25" r="6" fill="#2DBFAD"/>
+            <circle cx="40" cy="185" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="40" cy="185" r="6" fill="#2DBFAD"/>
+            <circle cx="220" cy="185" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="220" cy="185" r="6" fill="#2DBFAD"/>
+            <circle cx="130" cy="105" r="13" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="130" cy="105" r="6" fill="#E8607A"/>
+            <text x="130" y="124" text-anchor="middle" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEFENDER</text>
+            <!-- pass -->
+            <path d="M52 25 L208 25" fill="none" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity=".55" marker-end="url(#w4r1)"/>
+            <circle cx="55" cy="25" r="4" fill="white" opacity=".85"/>
+            <!-- position shift -->
+            <path d="M220 37 L220 173" fill="none" stroke="#B8942E" stroke-width="1" stroke-dasharray="3 2" opacity=".4" marker-end="url(#w4r3)"/>
+            <text x="238" y="105" font-size="7" fill="#B8942E" opacity=".8" font-family="IBM Plex Mono,monospace">shift!</text>
+            <!-- checking call -->
+            <rect x="225" y="162" width="32" height="14" rx="3" fill="rgba(45,191,173,.15)"/>
+            <text x="241" y="172" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">check!</text>
+            <!-- defender chase -->
+            <path d="M130 92 Q175 55 208 30" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="4 3" opacity=".45" marker-end="url(#w4r2)"/>
+            <!-- name target label -->
+            <rect x="15" y="100" width="20" height="14" rx="3" fill="rgba(184,148,46,.15)"/>
+            <text x="25" y="111" text-anchor="middle" font-size="6" fill="#B8942E" font-family="IBM Plex Mono,monospace">name!</text>
+            <rect x="20" y="200" width="220" height="18" rx="3" fill="rgba(184,148,46,.12)"/>
+            <text x="130" y="213" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">75–80 min: player-run · coaches silent</text>
+          </svg>
+        </div>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> By Week 4 players should feel comfortable with the station format. This week is about consolidating what they built in Week 3 — not adding a lot of new material. When you see a player "checking!" before receiving without being told, name it loudly. When you see a defender holding shape instead of diving in, name that too. These habits are the point.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Ritual — same every session</div>
+        <p>All 18. Penalty-style — miss = out. GK rotates every round. Eliminated players cheer loudly. Week 4: let the players set up and organise Knockout themselves — coaches only announce "Time for Knockout!" and then step back. Run all the way to a winner.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> After the final shot, gather all 18 for 60 seconds. One question: "What does a corner kick mean again?" Take quick-fire answers — they'll know. Reinforce: "Watch for it in the rondo on Thursday." Quick close, send them off on a high.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 1 · Week 4 Session 1 · Tue Sep 1, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Week 5 · Session 8 · Sep 8 · GK Role & Tournament Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.meta-pill.mp-tourn{border-color:var(--gold);color:var(--gold)}
+.meta-pill.mp-final{border-color:var(--rose);color:var(--rose)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:30}
+.tl-wb{background:#3d3520;flex:15}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:14px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box+.wb-box{margin-top:10px}
+.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:11.5px;color:var(--muted);line-height:1.5}
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:11.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:10px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.tourn-banner{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.4);border-radius:8px;padding:14px 18px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start}
+.tb-icon{font-size:28px;flex-shrink:0}
+.tb-body h4{font-family:var(--font-head);font-size:22px;color:var(--gold);letter-spacing:.04em;margin-bottom:4px}
+.tb-body p{font-size:12px;color:var(--muted);line-height:1.5}
+.tb-body p strong{color:var(--text)}
+.gk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gk-card{border-radius:6px;padding:10px 12px;background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.gk-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.gk-card p{font-size:11.5px;color:var(--muted);line-height:1.5}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 1 · Session 8 · Week 5 Day 1 · Final Block 1 Week</div>
+      <div class="sh-title">Week <span>5</span> · Tue<br>GK Role &amp; Tournament Prep</div>
+      <div class="sh-sub">Tuesday, September 8, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">18 Players · 3 Groups of 6</div><br>
+      <div class="meta-pill mp-tourn">⚽ OSI Champions Cup in 3 Days</div><br>
+      <div class="meta-pill mp-final">Final Block 1 Whiteboard</div>
+    </div>
+  </div>
+
+  <div class="tourn-banner">
+    <div class="tb-icon">🏆</div>
+    <div class="tb-body">
+      <h4>OSI Champions Cup · Sep 11–13 · Flagstaff</h4>
+      <p><strong>~11–12 players attending (Gold team).</strong> This session is the last training before the tournament. Keep the energy high and confidence-building. No new concepts today — consolidate and sharpen what they know. The SSG at the end should feel like a match. Thursday is the proper send-off.</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">Technical Stations</span><span class="tl-time">15–45</span></div>
+    <div class="tl-seg tl-wb"><span class="tl-label">Whiteboard + Water</span><span class="tl-time">45–60</span></div>
+    <div class="tl-seg tl-ssg"><span class="tl-label">SSG Full Rules</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Block 1 Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Opening Ritual — same every session through Dec 12</div>
+        <p>All 18 juggling as they arrive. Final Block 1 Tuesday juggling session. Coaches know every player's number by now — anyone who beats their all-time Block 1 record today gets a full-group announcement. Pairs count for each other.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> A player who has improved their juggling record over 5 weeks has done something real. Name the progress — not just the number. "Marcus started at 3 juggles in Week 1. He's at 14 today. That's what five weeks of practice looks like." Do this for every player you can this week.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: 5v2 Rondo Chain</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Upgraded from 4v1 — same principles, more players, more angles. Groups of 7: 5 outside, 2 defenders in the middle. "Checking!" call mandatory before every receive. Coaches observe without coaching — this is a reading exercise for all three coaches.</p>
+      <div class="two-col">
+        <ul class="drill-list">
+          <li>5 outside players on a 10×10m square (one player per side + one floater), 2 defenders pressing inside</li>
+          <li>"Checking!" mandatory for every receive — any player who skips it gifts the defenders a free press</li>
+          <li>Group target: beat 10 consecutive passes without losing possession</li>
+          <li>Swap both defenders when ball is won, or after 10 passes</li>
+          <li>Coaches: observe who creates the best angles, who talks — note it for positional decisions</li>
+        </ul>
+        <div class="diagram-wrap">
+          <div class="diagram-label">5v2 Rondo · 10×10m</div>
+          <svg viewBox="0 0 260 230" role="img"><title>5v2 rondo warm-up drill</title><desc>5 outside players on a 10 by 10 metre square with one floater maintain possession against 2 active defenders in the middle. Checking call mandatory before every receive.</desc>
+            <rect x="0" y="0" width="260" height="230" rx="4" fill="#1e3d14" opacity=".8"/>
+            <defs>
+              <marker id="r5a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="r5b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <rect x="35" y="20" width="190" height="180" rx="3" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="5 4" opacity=".5"/>
+            <text x="130" y="12" text-anchor="middle" font-size="9" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">10 × 10 m</text>
+            <!-- 4 corner players + floater -->
+            <circle cx="35" cy="20" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="35" cy="20" r="6" fill="#2DBFAD"/>
+            <circle cx="225" cy="20" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="225" cy="20" r="6" fill="#2DBFAD"/>
+            <circle cx="35" cy="200" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="35" cy="200" r="6" fill="#2DBFAD"/>
+            <circle cx="225" cy="200" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="225" cy="200" r="6" fill="#2DBFAD"/>
+            <!-- floater on right side -->
+            <circle cx="225" cy="110" r="12" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="225" cy="110" r="6" fill="#8B5CF6"/>
+            <text x="244" y="114" font-size="8" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">float</text>
+            <!-- 2 defenders -->
+            <circle cx="110" cy="90" r="13" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="110" cy="90" r="6" fill="#E8607A"/>
+            <circle cx="148" cy="130" r="13" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="148" cy="130" r="6" fill="#E8607A"/>
+            <!-- pass top-left to top-right -->
+            <path d="M47 20 L213 20" fill="none" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#r5a)"/>
+            <circle cx="50" cy="20" r="4" fill="white" opacity=".85"/>
+            <!-- checking call label -->
+            <rect x="196" y="4" width="27" height="13" rx="3" fill="rgba(45,191,173,.2)"/>
+            <text x="209" y="14" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">check!</text>
+            <!-- defender chase -->
+            <path d="M110 77 Q80 48 50 24" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="4 3" opacity=".45" marker-end="url(#r5b)"/>
+            <rect x="20" y="214" width="220" height="12" rx="3" fill="rgba(184,148,46,.12)"/>
+            <text x="130" y="223" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">target: 10 consecutive passes</text>
+          </svg>
+        </div>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The 5v2 is more complex than the 4v1 — players who've been paying attention to angles in the rondo will naturally do better. Don't coach during this; observe. Which players create space before the ball arrives? Which players receive and immediately look up? That's your tournament squad intelligence.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS — MAX BLOCK 1 SCALING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 45</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Block 1 Consolidation — Confident Reps</span>
+      <span class="pc-dur">30 min · 10 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Same three stations for the fifth week running. No new scaling today — the goal is confident, clean reps. Players should feel ownership of these drills by now. Coaches give positive reinforcement throughout. Tournament players (Gold team, Sep 11–13) need to leave this session feeling capable and ready.</p>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Shield + Play Out</div>
+          <p>Ball mastery + shield. <strong style="color:#B8942E">All players: comfortable reps at their own pace. New: passive lean at the whistle, hold shield. Exp: named skill move to turn out, play to target.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Blue · Coach Brent · Station B — Receive, Turn, Pass</div>
+          <p>Paired first touch + turn. <strong style="color:#2DBFAD">All players: "checking!" call before every receive. New: receive and turn in 2 touches. Exp: weak foot return, name the target before passing.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — Full Circuit</div>
+          <p>1v1 defending channel: hold shape, show outside, step in on heavy touch. <strong style="color:#8FA3B4">All players: same as Thursday Sep 3. Exp: standing tackle on a clear heavy touch, steer direction first.</strong></p>
+        </div>
+      </div>
+
+      <div class="rotation-box">
+        <div class="rot-icon">ROTATION</div>
+        <div class="rot-body">Whistle every <strong>10 minutes</strong>. Coach stays, players rotate. Brief water sip at each rotation — brief, not a break. Keep the energy moving.</div>
+      </div>
+
+      <div class="scale">
+        <div class="sc-col sc-new">
+          <div class="sc-label">New Players — confident reps</div>
+          <ul>
+            <li>Focus on doing each drill cleanly — you know the format now</li>
+            <li>"Checking!" before every receive at Station B</li>
+            <li>Station C: hold shape, then step in — no lunging</li>
+            <li>Coaches: only positive feedback today</li>
+          </ul>
+        </div>
+        <div class="sc-col sc-exp">
+          <div class="sc-label">Experienced — consolidate</div>
+          <ul>
+            <li>Named skill move at Station A</li>
+            <li>Weak foot + named target at Station B</li>
+            <li>Standing tackle with directional steer at Station C</li>
+            <li>No new pressure — clean execution is the goal</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The tournament is in three days. Today is a confidence session, not a testing session. Every player should leave this block feeling capable. Catch players doing things they've been working on since Week 2 — sole stops, "checking!" calls, defending shape. Name the growth: "Remember Session 2 when this was new? You don't even think about it now."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: WHITEBOARD — GK ROLE -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">45 – 60</span>
+      <div class="pc-dot dot-wb"></div>
+      <span class="pc-name">Whiteboard + Water: GK Role &amp; Box Rules</span>
+      <span class="pc-dur">15 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Second-to-last whiteboard of the season. GK connects everything — they've been practising the penalty spot in Knockout since Week 1 without knowing the rules behind it. Draw the penalty area, build on what they already know.</p>
+
+      <div class="gk-grid">
+        <div class="gk-card">
+          <div class="gk-label">GK Zone — Box Rules</div>
+          <p>Hands only inside the penalty area. Outside the box they're an outfield player. Build-out line rule: opposing players must retreat behind it when GK has the ball — gives GK time to distribute.</p>
+        </div>
+        <div class="gk-card">
+          <div class="gk-label">6-Second Rule</div>
+          <p>GK must release the ball within 6 seconds — but the countdown starts once opponents have moved behind the build-out line. Can't pick up a deliberate back-pass kicked by a teammate. If unsure — just roll or throw quickly.</p>
+        </div>
+        <div class="gk-card">
+          <div class="gk-label">Distribution</div>
+          <p>Two options: roll to feet (safest, shortest), throw to chest (medium distance). In U10: rolling to a nearby defender is almost always the right call. Build from the back.</p>
+        </div>
+        <div class="gk-card">
+          <div class="gk-label">Angle Play</div>
+          <p>GK steps off their line toward the ball to cut down the angle. The further off the line, the less of the goal an attacker can see. Connects directly to Knockout — they've been doing this as GK every session.</p>
+        </div>
+      </div>
+
+      <div class="wb-box">
+        <h5>Communication — The Commander (5 min)</h5>
+        <p>The GK runs the defence. Three calls only to teach today:</p>
+        <ul>
+          <li><strong>"Keeper!"</strong> — GK is coming for the ball, defenders get out of the way</li>
+          <li><strong>"Clear!"</strong> — GK can't come for it, defender must clear</li>
+          <li><strong>"Man on!"</strong> — warning to a teammate receiving the ball that a defender is close</li>
+        </ul>
+      </div>
+
+      <!-- GK angle diagram -->
+      <div class="diagram-wrap">
+        <div class="diagram-label">GK Angle Play — Cutting Down the Angle</div>
+        <svg viewBox="0 0 400 200" role="img"><title>GK angle play showing how stepping off the line cuts down the shooting angle</title><desc>Two scenarios side by side. Left: GK stays on goal line, wide angle for attacker. Right: GK steps off line toward the ball, angle is cut down. Dotted lines show the shooting cone in each case.</desc>
+          <rect x="0" y="0" width="400" height="200" rx="4" fill="#2a6b1a" opacity=".9"/>
+          <rect x="0" y="0" width="400" height="25" fill="#2f7a1f"/>
+          <rect x="0" y="50" width="400" height="25" fill="#2f7a1f"/>
+          <rect x="0" y="100" width="400" height="25" fill="#2f7a1f"/>
+          <rect x="0" y="150" width="400" height="25" fill="#2f7a1f"/>
+          <!-- divider -->
+          <line x1="200" y1="0" x2="200" y2="200" stroke="#3D5166" stroke-width="1" stroke-dasharray="4 4"/>
+          <!-- LEFT SCENARIO: GK on line -->
+          <text x="100" y="14" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">GK stays on line = wide angle</text>
+          <!-- left goal -->
+          <rect x="8" y="75" width="10" height="50" fill="#1d4a10" stroke="white" stroke-width="1.5"/>
+          <!-- left GK on line -->
+          <circle cx="18" cy="100" r="10" fill="none" stroke="#2DBFAD" stroke-width="2"/><circle cx="18" cy="100" r="5" fill="#2DBFAD"/>
+          <!-- attacker -->
+          <circle cx="160" cy="100" r="9" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="160" cy="100" r="4" fill="#E8607A"/>
+          <!-- wide shooting cone (bad for GK) -->
+          <path d="M160 100 L18 76" fill="none" stroke="#E8607A" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+          <path d="M160 100 L18 124" fill="none" stroke="#E8607A" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+          <path d="M18 76 L18 124" fill="none" stroke="#E8607A" stroke-width="1.5" opacity=".3"/>
+          <text x="95" y="88" text-anchor="middle" font-size="8" fill="#E8607A" opacity=".8" font-family="IBM Plex Mono,monospace">wide angle</text>
+          <!-- RIGHT SCENARIO: GK steps off line -->
+          <text x="300" y="14" text-anchor="middle" font-size="9" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">GK steps up = angle cut</text>
+          <!-- right goal -->
+          <rect x="208" y="75" width="10" height="50" fill="#1d4a10" stroke="white" stroke-width="1.5"/>
+          <!-- right GK stepped off line -->
+          <circle cx="258" cy="100" r="10" fill="none" stroke="#2DBFAD" stroke-width="2"/><circle cx="258" cy="100" r="5" fill="#2DBFAD"/>
+          <!-- attacker -->
+          <circle cx="360" cy="100" r="9" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="360" cy="100" r="4" fill="#E8607A"/>
+          <!-- narrow shooting cone (good for GK) -->
+          <path d="M360 100 L258 90" fill="none" stroke="#4CAF7D" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+          <path d="M360 100 L258 110" fill="none" stroke="#4CAF7D" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+          <path d="M258 90 L258 110" fill="none" stroke="#4CAF7D" stroke-width="2" opacity=".4"/>
+          <!-- step arrow -->
+          <defs><marker id="gk1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#4CAF7D" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <path d="M222 100 L245 100" fill="none" stroke="#4CAF7D" stroke-width="1.5" stroke-dasharray="3 2" opacity=".7" marker-end="url(#gk1)"/>
+          <text x="290" y="118" text-anchor="middle" font-size="8" fill="#4CAF7D" opacity=".8" font-family="IBM Plex Mono,monospace">narrow angle</text>
+        </svg>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Connect angle play back to Knockout — players have been rotating through GK for 7 sessions. "Every time you stepped up as GK in Knockout, you were doing angle play. You already know this." Then ask: "Who wants to be GK at the tournament?" You'll get hands up. That's your pre-tournament momentum.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: SSG — FULL RULES, MATCH CONDITIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: 3v3 Full Rules — Match Conditions</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">All rules enforced. Players call restarts before coaches. Coaches referee properly but stay quiet between restarts — let the game breathe. This should feel like a real match. Tournament players get used to pressure; non-attending players get the same quality session.</p>
+
+      <div class="two-col">
+        <ul class="drill-list">
+          <li>3 zones of 3v3 running simultaneously — one coach per zone</li>
+          <li>All restarts enforced: throw-ins, corners, goal kicks, free kicks, penalties</li>
+          <li>Offside enforced for the first time in SSG — coaches explain each call once only</li>
+          <li>Players call restarts first — coach confirms or corrects in one sentence, then restart immediately</li>
+          <li>GKs rotate every round — connects to whiteboard session they just had</li>
+          <li>GK communication calls mandatory: "Keeper!", "Away!", "Man on!" — coaches remind once then let players self-manage</li>
+          <li>Round length: 5 min per round, 30-sec water between</li>
+          <li><strong>Final round (75–80):</strong> mixed teams — coaches pick the mix deliberately to balance experience</li>
+        </ul>
+        <div class="diagram-wrap">
+          <div class="diagram-label">3v3 · Full Rules · GK in Each Zone</div>
+          <svg viewBox="0 0 260 200" role="img"><title>3v3 small-sided game with full rules GK in each zone</title><desc>Three 3v3 zones with small goals and a rotating GK in each zone. All restarts enforced including offside. Players call restarts before coaches confirm.</desc>
+            <rect x="0" y="0" width="260" height="200" rx="4" fill="#1e3d14" opacity=".8"/>
+            <!-- Zone A with GK -->
+            <rect x="8" y="6" width="244" height="56" rx="2" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6"/>
+            <rect x="8" y="16" width="7" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".7"/>
+            <rect x="245" y="16" width="7" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".7"/>
+            <!-- GK A -->
+            <circle cx="16" cy="25" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="16" cy="25" r="3" fill="#2DBFAD"/>
+            <text x="18" y="38" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">GK</text>
+            <text x="130" y="20" text-anchor="middle" font-size="8" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">GOLD · Coach Pete</text>
+            <circle cx="65" cy="38" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="65" cy="38" r="3" fill="#2DBFAD"/>
+            <circle cx="85" cy="28" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="85" cy="28" r="3" fill="#2DBFAD"/>
+            <circle cx="75" cy="52" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="75" cy="52" r="3" fill="#2DBFAD"/>
+            <circle cx="180" cy="32" r="6" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="180" cy="32" r="3" fill="#B8942E"/>
+            <circle cx="200" cy="48" r="6" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="200" cy="48" r="3" fill="#B8942E"/>
+            <circle cx="215" cy="32" r="6" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="215" cy="32" r="3" fill="#B8942E"/>
+            <!-- Zone B -->
+            <rect x="8" y="72" width="244" height="56" rx="2" fill="none" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6"/>
+            <rect x="8" y="82" width="7" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".7"/>
+            <rect x="245" y="82" width="7" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".7"/>
+            <circle cx="16" cy="91" r="6" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="16" cy="91" r="3" fill="#8B5CF6"/>
+            <text x="18" y="104" font-size="7" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">GK</text>
+            <text x="130" y="86" text-anchor="middle" font-size="8" fill="#2DBFAD" opacity=".7" font-family="IBM Plex Mono,monospace">BLUE · Coach Brent</text>
+            <circle cx="65" cy="103" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="65" cy="103" r="3" fill="#2DBFAD"/>
+            <circle cx="85" cy="93" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="85" cy="93" r="3" fill="#2DBFAD"/>
+            <circle cx="80" cy="116" r="6" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="80" cy="116" r="3" fill="#2DBFAD"/>
+            <circle cx="180" cy="96" r="6" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="180" cy="96" r="3" fill="#E8607A"/>
+            <circle cx="200" cy="112" r="6" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="200" cy="112" r="3" fill="#E8607A"/>
+            <circle cx="215" cy="96" r="6" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="215" cy="96" r="3" fill="#E8607A"/>
+            <!-- Zone C -->
+            <rect x="8" y="138" width="244" height="56" rx="2" fill="none" stroke="#8FA3B4" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6"/>
+            <rect x="8" y="148" width="7" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".7"/>
+            <rect x="245" y="148" width="7" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".7"/>
+            <circle cx="16" cy="157" r="6" fill="none" stroke="#4CAF7D" stroke-width="1.5"/><circle cx="16" cy="157" r="3" fill="#4CAF7D"/>
+            <text x="18" y="170" font-size="7" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">GK</text>
+            <text x="130" y="152" text-anchor="middle" font-size="8" fill="#8FA3B4" opacity=".7" font-family="IBM Plex Mono,monospace">WHITE · Coach David</text>
+            <circle cx="65" cy="168" r="6" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="65" cy="168" r="3" fill="#E8E4DB"/>
+            <circle cx="85" cy="158" r="6" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="85" cy="158" r="3" fill="#E8E4DB"/>
+            <circle cx="80" cy="182" r="6" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="80" cy="182" r="3" fill="#E8E4DB"/>
+            <circle cx="180" cy="162" r="6" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="180" cy="162" r="3" fill="#8B5CF6"/>
+            <circle cx="200" cy="178" r="6" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="200" cy="178" r="3" fill="#8B5CF6"/>
+            <circle cx="215" cy="160" r="6" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="215" cy="160" r="3" fill="#8B5CF6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Watch for three specific things today and note them for Thursday's closing ceremony: (1) which players call "checking!" unprompted, (2) which players correctly identify a restart before the coach, (3) which GKs step off their line. These are your observable Block 1 wins. You'll name them specifically on Thursday.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout — GK Angle Play Edition</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Ritual — same every session</div>
+        <p>All 18. Penalty-style. Week 5 addition: GK must step off the line before each shot (angle play from the whiteboard — put it into action immediately). Shooter may announce which side they're aiming before stepping up. Eliminated players cheer. Run to a winner.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Remind players before the first shot: "GK — step off your line. Remember the diagram." When a GK saves a shot because of angle play, stop for 3 seconds: "That's the diagram working." Then continue. Plant that seed — they'll be doing it in Flagstaff on Saturday.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 1 · Week 5 Session 1 · Tue Sep 8, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>

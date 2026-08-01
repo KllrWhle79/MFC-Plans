@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Week 3 · Session 5 · Aug 27 · Throw-Ins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:52px;line-height:.9;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.meta-pill.mp-new{border-color:var(--teal);color:var(--teal)}
+
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-wb{background:#3d3520;flex:15}
+.tl-tech{background:#1e3045;flex:30}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:14px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+
+.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box + .wb-box{margin-top:10px}
+.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:11.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:10px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px}
+.hw-icon{font-size:18px;flex-shrink:0}
+.hw-body{font-size:12px;color:var(--muted);line-height:1.5}
+.hw-body strong{color:var(--heat)}
+
+/* Offside scenario cards */
+.offside-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.ofs-card{border-radius:6px;padding:10px 12px}
+.ofs-ok{background:rgba(76,175,125,.1);border:1px solid rgba(76,175,125,.25)}
+.ofs-off{background:rgba(232,96,122,.1);border:1px solid rgba(232,96,122,.25)}
+.ofs-level{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.25)}
+.ofs-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.ofs-ok .ofs-label{color:#4CAF7D}.ofs-off .ofs-label{color:var(--rose)}.ofs-level .ofs-label{color:var(--gold)}
+.ofs-card p{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 1 · Session 5 of Season · Week 3 Day 2</div>
+      <div class="sh-title">Week <span>3</span> · Thu<br>Positional Zones</div>
+      <div class="sh-sub">Thursday, August 27, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">18 Players · 3 Groups of 6</div><br>
+      <div class="meta-pill mp-new">Second 90-Min Session</div><br>
+      <div class="meta-pill mp-heat">☀ Phoenix Heat Protocol</div>
+    </div>
+  </div>
+
+  <div class="heat-warn">
+    <div class="hw-icon">☀️</div>
+    <div class="hw-body"><strong>Heat Protocol still active.</strong> Second 90-minute session of the week. Players may be slightly fatigued from Tuesday. Keep intensity at the same level — do not add extra pressure today. Mandatory water every 15–18 minutes.</div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">Technical Stations</span><span class="tl-time">15–45</span></div>
+    <div class="tl-seg tl-wb"><span class="tl-label">Whiteboard + Water</span><span class="tl-time">45–60</span></div>
+    <div class="tl-seg tl-ssg"><span class="tl-label">Small-Sided</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Opening Ritual — same every session through Dec 12</div>
+        <p>All 18 juggling individually as they arrive. Beat the record from Tuesday. Thighs and feet count. Coaches circulate, count alongside, celebrate every personal best. Latecomers join without interruption.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> By session 4, some players are already developing a juggling personality — the kid who goes for height, the kid who sticks to 1, the one who uses both feet. Start naming these tendencies positively. "Marcus, you've got the most consistent low touch in the group. That's exactly right."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Head-Up Dribble + Colour Call</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">All 18 dribbling freely in the 25×25m grid. Coach holds up a number of fingers or a coloured card — players must call it out without stopping. Forces heads up. Directly connects to the scanning habit introduced Tuesday.</p>
+      <div class="two-col">
+        <ul class="drill-list">
+          <li>Players dribble freely — every player has their own ball</li>
+          <li>Coach holds up 1–5 fingers or coloured card: players shout the number or colour without stopping</li>
+          <li>Players who stop to look: 3 toe taps as a friendly reset, then back in</li>
+          <li>Progression: coach shows and immediately hides — players must have seen it while dribbling</li>
+          <li>Final 2 min: free passing in pairs — keep it simple, this is only the second session with rondo-style possession play</li>
+        </ul>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Head-Up Dribble · 25×25m</div>
+          <svg viewBox="0 0 260 190" role="img"><title>Head-up dribble colour call warm-up</title><desc>Players dribble freely in a grid while the coach holds up coloured cards or fingers. Players must call out the answer without stopping their dribble, forcing their heads up.</desc>
+            <rect x="0" y="0" width="260" height="190" rx="4" fill="#1e3d14" opacity=".8"/>
+            <rect x="8" y="8" width="244" height="174" rx="3" fill="none" stroke="#4a8a32" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <!-- players dribbling, heads up -->
+            <circle cx="40" cy="45" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="40" cy="45" r="4" fill="#B8942E"/>
+            <circle cx="90" cy="35" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="90" cy="35" r="4" fill="#B8942E"/>
+            <circle cx="150" cy="55" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="150" cy="55" r="4" fill="#2DBFAD"/>
+            <circle cx="210" cy="40" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="210" cy="40" r="4" fill="#2DBFAD"/>
+            <circle cx="240" cy="85" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="240" cy="85" r="4" fill="#2DBFAD"/>
+            <circle cx="60" cy="100" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="60" cy="100" r="4" fill="#E8E4DB"/>
+            <circle cx="120" cy="95" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="120" cy="95" r="4" fill="#E8E4DB"/>
+            <circle cx="180" cy="105" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="180" cy="105" r="4" fill="#B8942E"/>
+            <circle cx="40" cy="155" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="40" cy="155" r="4" fill="#2DBFAD"/>
+            <circle cx="100" cy="158" r="8" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="100" cy="158" r="4" fill="#E8E4DB"/>
+            <circle cx="160" cy="152" r="8" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="160" cy="152" r="4" fill="#B8942E"/>
+            <!-- balls -->
+            <circle cx="48" cy="53" r="3" fill="white" opacity=".7"/>
+            <circle cx="98" cy="43" r="3" fill="white" opacity=".7"/>
+            <circle cx="128" cy="102" r="3" fill="white" opacity=".7"/>
+            <!-- coach with sign -->
+            <rect x="105" y="2" width="50" height="20" rx="3" fill="rgba(184,148,46,.2)" stroke="#B8942E" stroke-width="1"/>
+            <text x="130" y="16" text-anchor="middle" font-size="10" fill="#B8942E" font-family="Inter,sans-serif" font-weight="600">✋ 3!</text>
+            <!-- speech bubbles from players -->
+            <text x="45" y="28" font-size="9" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">"THREE!"</text>
+            <text x="155" y="38" font-size="9" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">"THREE!"</text>
+            <text x="130" y="180" text-anchor="middle" font-size="9" fill="#3D5166" font-family="IBM Plex Mono,monospace">call it without stopping your dribble</text>
+          </svg>
+        </div>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> This is a direct continuation of the scanning habit from Tuesday. When a player calls the correct colour while maintaining their dribble, celebrate it: "Eyes up, ball under control — that is exactly what we're building." The habit transfers directly into the SSG that follows and into match play.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 45</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Ball Comfort A+B (Second Run) · Defending + Shielding Station C</span>
+      <span class="pc-dur">30 min · 10 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Stations A and B are a second run of Tuesday's drills — players should feel more at home with the format. Station C is new today: body position for shielding (attacker) and defending shape (defender). No tackling. The goal is getting comfortable with legal body contact — feeling it, not fighting it.</p>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A</div>
+          <p>Ball mastery: same as Tuesday. <strong style="color:#B8942E">New: more confident reps — coaches circulate and praise clean sole-stops. Exp: inside-outside taps between stops, shield body position on whistle.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Blue · Coach Brent · Station B</div>
+          <p>First touch: same as Tuesday. <strong style="color:#2DBFAD">New: aim for a cleaner stop than Tuesday. Exp: "checking!" call before every receive, return pass with weak foot.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — Defending + Shielding</div>
+          <p>Two roles, same 1v1 channel. First 5 min: attacker focuses on <strong>shielding</strong> — body between ball and defender, low hips, legal forearm out (elbow in, not a push), hold possession under pressure. Last 5 min: roles swap and focus shifts to <strong>defending body shape</strong> — sideways-on, low, patient. <strong style="color:#8FA3B4">New: feel the contact legally — this is the first physical station of the season. No tackling yet. Exp: defender actively applies pressure; shielder must hold for 5 full seconds before turning out.</strong></p>
+        </div>
+      </div>
+
+      <!-- Defending concepts box -->
+      <div class="wb-box" style="background:rgba(232,96,122,.06);border-color:rgba(232,96,122,.2)">
+        <h5 style="color:var(--rose)">Defending Concepts — Station C · Coach David Demo (2 min before first group)</h5>
+        <ul>
+          <li><strong>Body shape — sideways-on, not square:</strong> one foot forward, weight on the back foot. Standing square means slow first step in any direction. Sideways means you're already half-turned to recover.</li>
+          <li><strong>Low:</strong> bend the knees, stay low. Standing tall = slow feet. Cue: "If your knees aren't bent, you can't move."</li>
+          <li><strong>Distance — an arm's length away:</strong> close enough to pressure, far enough not to get beaten in one touch. Too close = one step and they're past you. Too far = they have all day to pick a pass.</li>
+          <li><strong>Slow (be patient):</strong> don't dive in. Wait. Every time you lunge, you're gambled and can be beaten. Make them make the first move.</li>
+          <li><strong>Fast (when to step in):</strong> heavy touch, head goes down, or they stop — that's the moment. Step in fast and win it.</li>
+          <li><strong>Side (show outside):</strong> angle your body to steer them toward the touchline, away from goal. Make the dangerous option hard, the safe option easy.</li>
+        </ul>
+      </div>
+
+      <!-- Defending diagram -->
+      <div class="diagram-wrap">
+        <div class="diagram-label">Station C · 1v1 Defending Channel · 6×8m</div>
+        <svg viewBox="0 0 460 200" role="img"><title>1v1 defending channel drill with body shape annotations</title><desc>A 6 by 8 metre channel. Attacker starts at one end and tries to dribble through a small gate at the far end. Defender sets up an arm's length away, sideways-on, weight on back foot, low. Annotations show the four cues: sideways-on, low, arm's length distance, and showing outside.</desc>
+          <rect x="0" y="0" width="460" height="200" rx="4" fill="#1e3d14" opacity=".85"/>
+          <!-- channel -->
+          <rect x="30" y="30" width="180" height="140" rx="3" fill="rgba(232,96,122,.06)" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="5 4" opacity=".7"/>
+          <!-- gate at far end -->
+          <rect x="198" y="82" width="12" height="36" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2" opacity=".8"/>
+          <text x="218" y="102" font-size="8" fill="#4CAF7D" font-family="IBM Plex Mono,monospace" opacity=".9">GATE</text>
+          <!-- attacker with ball -->
+          <circle cx="60" cy="100" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="60" cy="100" r="6" fill="#2DBFAD"/>
+          <circle cx="73" cy="107" r="4" fill="white" opacity=".8"/>
+          <text x="60" y="124" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">ATT</text>
+          <!-- attacker drive arrow -->
+          <defs>
+            <marker id="def1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+            <marker id="def2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+          </defs>
+          <path d="M74 100 L140 100" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5" marker-end="url(#def1)"/>
+          <!-- defender sideways-on body shape -->
+          <!-- body -->
+          <ellipse cx="158" cy="100" rx="9" ry="13" fill="#1B3A5C" stroke="#E8607A" stroke-width="2" transform="rotate(-20,158,100)"/>
+          <!-- head -->
+          <circle cx="158" cy="83" r="7" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="158" cy="83" r="3" fill="#E8607A"/>
+          <!-- front foot -->
+          <ellipse cx="150" cy="112" rx="5" ry="3" fill="#E8607A" opacity=".7" transform="rotate(-30,150,112)"/>
+          <!-- back foot -->
+          <ellipse cx="167" cy="110" rx="5" ry="3" fill="#E8607A" opacity=".5" transform="rotate(-30,167,110)"/>
+          <text x="158" y="130" text-anchor="middle" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEF</text>
+          <!-- arm's length distance bracket -->
+          <line x1="76" y1="145" x2="142" y2="145" stroke="#B8942E" stroke-width="1" opacity=".6"/>
+          <line x1="76" y1="141" x2="76" y2="149" stroke="#B8942E" stroke-width="1" opacity=".6"/>
+          <line x1="142" y1="141" x2="142" y2="149" stroke="#B8942E" stroke-width="1" opacity=".6"/>
+          <text x="109" y="158" text-anchor="middle" font-size="8" fill="#B8942E" font-family="IBM Plex Mono,monospace">arm's length away</text>
+          <!-- show outside arrow -->
+          <path d="M162 95 Q175 55 185 36" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="4 3" opacity=".6" marker-end="url(#def2)"/>
+          <text x="190" y="34" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">show outside</text>
+          <!-- annotation boxes -->
+          <rect x="235" y="20" width="215" height="155" rx="4" fill="rgba(30,48,69,.6)" stroke="#3D5166" stroke-width="1"/>
+          <text x="342" y="38" text-anchor="middle" font-size="9" fill="#8FA3B4" font-family="IBM Plex Mono,monospace" letter-spacing=".08em">FOUR CUES</text>
+          <!-- cue rows -->
+          <rect x="245" y="46" width="195" height="28" rx="3" fill="rgba(232,96,122,.1)"/>
+          <text x="252" y="59" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace" font-weight="600">SIDEWAYS-ON</text>
+          <text x="252" y="69" font-size="8" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">one foot fwd · weight on back foot</text>
+          <rect x="245" y="80" width="195" height="28" rx="3" fill="rgba(184,148,46,.1)"/>
+          <text x="252" y="93" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace" font-weight="600">LOW</text>
+          <text x="252" y="103" font-size="8" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">knees bent · tall = slow feet</text>
+          <rect x="245" y="114" width="95" height="28" rx="3" fill="rgba(76,175,125,.1)"/>
+          <text x="252" y="127" font-size="10" fill="#4CAF7D" font-family="IBM Plex Mono,monospace" font-weight="600">SLOW</text>
+          <text x="252" y="137" font-size="8" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">wait · be patient</text>
+          <rect x="345" y="114" width="95" height="28" rx="3" fill="rgba(91,141,217,.1)"/>
+          <text x="352" y="127" font-size="10" fill="#5B8DD9" font-family="IBM Plex Mono,monospace" font-weight="600">FAST</text>
+          <text x="352" y="137" font-size="8" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">heavy touch → step in</text>
+          <rect x="245" y="148" width="195" height="20" rx="3" fill="rgba(139,92,246,.1)"/>
+          <text x="252" y="161" font-size="9" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">SHOW OUTSIDE → steer away from goal</text>
+        </svg>
+      </div>
+
+      <div class="rotation-box">
+        <div class="rot-icon">ROTATION</div>
+        <div class="rot-body">Whistle every <strong>10 minutes</strong>. Coach stays, players rotate. Station C: Coach David demonstrates body shape before the first group begins — 2 minutes max demo, then they go. All three stations run simultaneously.</div>
+      </div>
+
+      <div class="scale">
+        <div class="sc-col sc-new">
+          <div class="sc-label">New Players — first contact, stay calm</div>
+          <ul>
+            <li>Station C: hold the sideways shield position — don't lean away</li>
+            <li>Defending: shape and patience only, no tackling this week</li>
+            <li>Stations A and B: second run — try to feel more confident than Tuesday</li>
+            <li>Getting leaned on is normal — stay low and hold</li>
+          </ul>
+        </div>
+        <div class="sc-col sc-exp">
+          <div class="sc-label">Experienced — small steps</div>
+          <ul>
+            <li>Shield for 5 seconds with partner leaning in</li>
+            <li>Defending: show outside (steer attacker to touchline side)</li>
+            <li>"Checking!" call at Station B every receive</li>
+            <li>Weak foot return pass at Station B</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Getting comfortable with physical contact is a skill, not a personality trait. Some players will be nervous about it — frame every contact rep as technique. "That's your body doing the work, not your arms." When you see a player hold a good shield for 5 seconds, stop play briefly: "Did you see how still he stayed? That's strength." For the lunge-happy defender: let them get beaten first, then ask what happened. One discovery beats five corrections.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: WHITEBOARD — THROW-INS -->
+  <!-- PHASE 4: WHITEBOARD — POSITIONAL ZONES -->
+  <!-- PHASE 4: WHITEBOARD — POSITIONAL ZONES -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">45 – 60</span>
+      <div class="pc-dot dot-wb"></div>
+      <span class="pc-name">Whiteboard + Water: Positional Zones</span>
+      <span class="pc-dur">15 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Players know the position names from Session 2 (Aug 15). Today goes deeper — where does each position actually live on the pitch, and why? Use the build-out line as the anchor. Draw it on the board, then walk out onto the pitch and show it in real space.</p>
+
+      <div class="wb-box">
+        <h5>Three Zones — Build-Out Line as the Anchor (7 min)</h5>
+        <p>Draw the pitch with both build-out lines. Divide into three zones. Ask: "If the striker runs all the way back to our goal, what problem does that create?" Let them answer.</p>
+        <ul>
+          <li><strong>Defending Third (goal → our build-out line):</strong> GK and 2 defenders own this zone. One defender can push up the touchline to offer the winger a backpass — the other stays back to cover. Never both forward at the same time.</li>
+          <li><strong>Middle Third (between both build-out lines):</strong> CM (The Glue) stays central. Wingers stay wide in this zone. When defending, wingers track back to our build-out line. When attacking, they drive forward and deliver crosses from the attacking third.</li>
+          <li><strong>Attacking Third (their build-out line → their goal):</strong> Striker's zone. Stay central, stay ready for crosses. When we don't have the ball, drop back to the halfway line so we can build out through the CM.</li>
+        </ul>
+      </div>
+
+      <div class="wb-box" style="margin-top:8px">
+        <h5>On-Pitch Walkthrough (8 min)</h5>
+        <p>Take all 18 onto the pitch. Point to the build-out lines — they can see them. Place 7 players in the 2-3-1 and walk around them while explaining each zone. Then ask: "Which zone is the winger in when we're defending?" "Where does the striker go when we don't have the ball?" Quick questions, quick answers, then send them to the SSG.</p>
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">U10 Pitch — Positional Zones (2-3-1)</div>
+        <svg viewBox="0 0 560 360" role="img" xmlns="http://www.w3.org/2000/svg"><title>U10 pitch showing positional zones and the 2-3-1 formation</title><desc>Top-down U10 pitch with build-out lines dividing the pitch into three zones. Defending third shaded blue with GK and 2 defenders. Middle third shaded purple with CM and 2 wingers. Attacking third shaded red with striker who drops to halfway when team doesn't have ball.</desc>
+          <rect x="0" y="0" width="560" height="360" fill="#2a6b1a"/>
+          <rect x="0" y="0"   width="560" height="45" fill="#2f7a1f"/>
+          <rect x="0" y="90"  width="560" height="45" fill="#2f7a1f"/>
+          <rect x="0" y="180" width="560" height="45" fill="#2f7a1f"/>
+          <rect x="0" y="270" width="560" height="45" fill="#2f7a1f"/>
+          <rect x="22" y="16" width="516" height="328" fill="none" stroke="white" stroke-width="2.5"/>
+          <line x1="280" y1="16" x2="280" y2="344" stroke="white" stroke-width="2"/>
+          <circle cx="280" cy="180" r="46" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="280" cy="180" r="4" fill="white"/>
+          <line x1="168" y1="16" x2="168" y2="344" stroke="white" stroke-width="2" stroke-dasharray="10 6"/>
+          <line x1="392" y1="16" x2="392" y2="344" stroke="white" stroke-width="2" stroke-dasharray="10 6"/>
+          <rect x="22" y="110" width="88" height="140" fill="none" stroke="white" stroke-width="2"/>
+          <rect x="22" y="142" width="32" height="76" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="82" cy="180" r="3" fill="white"/>
+          <rect x="5" y="156" width="18" height="48" fill="#1d4a10" stroke="white" stroke-width="2"/>
+          <rect x="450" y="110" width="88" height="140" fill="none" stroke="white" stroke-width="2"/>
+          <rect x="506" y="142" width="32" height="76" fill="none" stroke="white" stroke-width="2"/>
+          <circle cx="478" cy="180" r="3" fill="white"/>
+          <rect x="537" y="156" width="18" height="48" fill="#1d4a10" stroke="white" stroke-width="2"/>
+          <path d="M22 16 q10 0 10 10" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M538 16 q-10 0 -10 10" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M22 344 q10 0 10 -10" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M538 344 q-10 0 -10 -10" fill="none" stroke="white" stroke-width="1.5"/>
+          <!-- zone shading -->
+          <rect x="22" y="16" width="146" height="328" fill="rgba(91,141,217,.14)"/>
+          <rect x="168" y="16" width="224" height="328" fill="rgba(139,92,246,.10)"/>
+          <rect x="392" y="16" width="146" height="328" fill="rgba(232,96,122,.10)"/>
+          <!-- zone labels -->
+          <text x="95" y="356" text-anchor="middle" font-size="9" fill="#5B8DD9" font-family="IBM Plex Mono,monospace" opacity=".9">DEFENDING THIRD</text>
+          <text x="280" y="356" text-anchor="middle" font-size="9" fill="#8B5CF6" font-family="IBM Plex Mono,monospace" opacity=".9">MIDDLE THIRD</text>
+          <text x="465" y="356" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace" opacity=".9">ATTACKING THIRD</text>
+          <!-- GK -->
+          <circle cx="44" cy="180" r="18" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="2.5"/>
+          <text x="44" y="176" text-anchor="middle" font-size="11" fill="#2DBFAD" font-weight="700" font-family="Arial,sans-serif">GK</text>
+          <text x="44" y="188" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="Arial,sans-serif">COMMANDER</text>
+          <!-- DEF x2 -->
+          <circle cx="118" cy="132" r="16" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2.5"/>
+          <text x="118" y="128" text-anchor="middle" font-size="11" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+          <text x="118" y="140" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+          <circle cx="118" cy="228" r="16" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2.5"/>
+          <text x="118" y="224" text-anchor="middle" font-size="11" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+          <text x="118" y="236" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+          <!-- CM -->
+          <circle cx="240" cy="180" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2.5"/>
+          <text x="240" y="176" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">CM</text>
+          <text x="240" y="188" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">THE GLUE</text>
+          <!-- Wingers -->
+          <circle cx="240" cy="88" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
+          <text x="240" y="84" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+          <text x="240" y="96" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+          <circle cx="240" cy="272" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
+          <text x="240" y="268" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+          <text x="240" y="280" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+          <!-- Striker -->
+          <circle cx="420" cy="180" r="16" fill="#1B3A5C" stroke="#E8607A" stroke-width="2.5"/>
+          <text x="420" y="176" text-anchor="middle" font-size="11" fill="#E8607A" font-weight="700" font-family="Arial,sans-serif">ST</text>
+          <text x="420" y="188" text-anchor="middle" font-size="7" fill="#E8607A" font-family="Arial,sans-serif">THE HUNTER</text>
+          <!-- build-out labels -->
+          <text x="168" y="9" text-anchor="middle" font-size="8" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <text x="392" y="9" text-anchor="middle" font-size="8" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <!-- striker drop arrow -->
+          <defs><marker id="stdr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <path d="M404 180 L292 180" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="6 3" opacity=".55" marker-end="url(#stdr)"/>
+          <text x="346" y="172" text-anchor="middle" font-size="8" fill="#E8607A" opacity=".8" font-family="IBM Plex Mono,monospace">drops if no ball</text>
+        </svg>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The build-out line is already visible on their pitch — point to it rather than just drawing it. "Defenders live between our goal and that dashed line. CM between the two lines. Striker past the far line." Then watch the SSG: when a player naturally holds their zone without being told, name it immediately. That transfer from whiteboard to game is the whole point.</div>
+      </div>
+    </div>
+  </div>
+
+<!-- PHASE 5: SMALL-SIDED GAMES -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">Small-Sided Games: 3v3 with Full Restarts</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">First proper small-sided game with all restarts enforced. Players learned throw-ins in Session 3 and positional zones today — the SSG is where both transfer. Watch for players holding their zone naturally and calling restarts correctly. Coaches pause 5 seconds max for any restart question, then restart immediately.</p>
+
+      <div class="two-col">
+        <ul class="drill-list">
+          <li><strong>Format:</strong> Groups of 6 play 3v3 in their own zone — 3 zones running simultaneously. Each coach referees their zone.</li>
+          <li><strong>All restarts enforced:</strong> throw-ins (both hands, both feet, behind head), corner kicks, goal kicks, free kicks for fouls</li>
+          <li>Celebrate when a player correctly identifies the restart before the coach calls it</li>
+          <li>No offside in 3v3 — too small a space. Save it for next time.</li>
+          <li>Short rounds of 4–5 min with 30-second water sips between. Rotate opponents each round so all 6 play together.</li>
+          <li><strong>Bonus point:</strong> goal from open play where the scorer stayed in their correct positional zone throughout the build-up</li>
+        </ul>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">3v3 · Three Zones · 20×15m each</div>
+          <svg viewBox="0 0 260 230" role="img"><title>3v3 small sided games with three simultaneous zones</title><desc>Three 3v3 small-sided game zones run simultaneously, one per coach. Each zone has small goals. All restarts including throw-ins corner kicks and goal kicks are enforced.</desc>
+            <rect x="0" y="0" width="260" height="230" rx="4" fill="#1e3d14" opacity=".8"/>
+            <!-- Zone A (top) -->
+            <rect x="10" y="8" width="240" height="62" rx="2" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6"/>
+            <text x="130" y="22" text-anchor="middle" font-size="8" fill="#B8942E" opacity=".8" font-family="IBM Plex Mono,monospace">GOLD · Coach Pete</text>
+            <!-- Zone A goals -->
+            <rect x="10" y="24" width="6" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".6"/>
+            <rect x="244" y="24" width="6" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".6"/>
+            <!-- Zone A players -->
+            <circle cx="55" cy="42" r="7" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="55" cy="42" r="3" fill="#2DBFAD"/>
+            <circle cx="80" cy="32" r="7" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="80" cy="32" r="3" fill="#2DBFAD"/>
+            <circle cx="70" cy="58" r="7" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="70" cy="58" r="3" fill="#2DBFAD"/>
+            <circle cx="175" cy="32" r="7" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="175" cy="32" r="3" fill="#B8942E"/>
+            <circle cx="195" cy="48" r="7" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="195" cy="48" r="3" fill="#B8942E"/>
+            <circle cx="210" cy="32" r="7" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="210" cy="32" r="3" fill="#B8942E"/>
+            <circle cx="130" cy="42" r="3" fill="white" opacity=".7"/>
+            <!-- Zone B (middle) -->
+            <rect x="10" y="84" width="240" height="62" rx="2" fill="none" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6"/>
+            <text x="130" y="97" text-anchor="middle" font-size="8" fill="#2DBFAD" opacity=".8" font-family="IBM Plex Mono,monospace">BLUE · Coach Brent</text>
+            <rect x="10" y="98" width="6" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".6"/>
+            <rect x="244" y="98" width="6" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".6"/>
+            <circle cx="60" cy="115" r="7" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="60" cy="115" r="3" fill="#2DBFAD"/>
+            <circle cx="85" cy="105" r="7" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="85" cy="105" r="3" fill="#2DBFAD"/>
+            <circle cx="75" cy="130" r="7" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="75" cy="130" r="3" fill="#2DBFAD"/>
+            <circle cx="180" cy="108" r="7" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="180" cy="108" r="3" fill="#E8607A"/>
+            <circle cx="195" cy="125" r="7" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="195" cy="125" r="3" fill="#E8607A"/>
+            <circle cx="215" cy="108" r="7" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="215" cy="108" r="3" fill="#E8607A"/>
+            <circle cx="130" cy="115" r="3" fill="white" opacity=".7"/>
+            <!-- Zone C (bottom) -->
+            <rect x="10" y="160" width="240" height="62" rx="2" fill="none" stroke="#8FA3B4" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6"/>
+            <text x="130" y="173" text-anchor="middle" font-size="8" fill="#8FA3B4" opacity=".8" font-family="IBM Plex Mono,monospace">WHITE · Coach David</text>
+            <rect x="10" y="174" width="6" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".6"/>
+            <rect x="244" y="174" width="6" height="18" fill="none" stroke="white" stroke-width="1.5" opacity=".6"/>
+            <circle cx="65" cy="190" r="7" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="65" cy="190" r="3" fill="#E8E4DB"/>
+            <circle cx="80" cy="207" r="7" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="80" cy="207" r="3" fill="#E8E4DB"/>
+            <circle cx="90" cy="178" r="7" fill="none" stroke="#E8E4DB" stroke-width="1.5"/><circle cx="90" cy="178" r="3" fill="#E8E4DB"/>
+            <circle cx="175" cy="185" r="7" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="175" cy="185" r="3" fill="#8B5CF6"/>
+            <circle cx="195" cy="200" r="7" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="195" cy="200" r="3" fill="#8B5CF6"/>
+            <circle cx="210" cy="178" r="7" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="210" cy="178" r="3" fill="#8B5CF6"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> When a restart situation comes up, pause play for 5 seconds max: "Corner or goal kick — who knows?" Let a player call it. If they're right, say so and restart immediately. If wrong, correct it in one sentence and restart. Never stop play for more than 20 seconds — the game is the teacher. Watch for players spontaneously calling "throw-in!" or "our corner!" — that's the whiteboard working.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PHASE 6: KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Ritual — same every session</div>
+        <p>All 18. Penalty-style — one shot, miss = out. GK rotates every round. Eliminated players cheer loudly for remaining shooters. New players from the closer mark if needed — never announce it. Run all the way to a winner. End the week on a high.</p>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> After the winner is crowned, gather all 18 for 60 seconds. One question: "What's one thing you learned this week?" Take two answers — one from a new player, one from an experienced one. Affirm both. Then send them off. This 60-second close bookends the week and makes the learning feel intentional.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 1 · Week 3 Session 2 · Thu Aug 27, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>
