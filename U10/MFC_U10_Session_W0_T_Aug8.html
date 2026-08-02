@@ -13,21 +13,21 @@
   --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
 .page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
 .sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
-.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
 .sh-title{font-family:var(--font-head);font-size:52px;line-height:.9;color:var(--text);letter-spacing:.02em}
 .sh-title span{color:var(--gold)}
-.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
 .sh-meta{text-align:right}
-.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
 .meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
 .meta-pill.mp-new{border-color:var(--teal);color:var(--teal)}
 .timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
 .tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
-.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
-.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
 .tl-jug{background:#2a4a35;flex:5}
 .tl-warm{background:#2d3a4d;flex:15}
 .tl-wb{background:#3d3520;flex:20}
@@ -35,44 +35,44 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .tl-knock{background:#2d1f2a;flex:10}
 .phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
 .pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
-.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:48px}
 .pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
 .dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
-.pc-name{font-size:14px;font-weight:500;flex:1}
-.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
 .pc-body{padding:16px 18px;display:grid;gap:14px}
-.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
 .coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
-.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
 .ct-body strong{color:var(--gold);font-weight:600}
 .ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
-.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
-.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
 .wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
-.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
-.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
 .wb-box ul{list-style:none;display:grid;gap:5px}
-.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
-.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+.wb-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:14px}
 .drill-list{list-style:none;display:grid;gap:6px}
-.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
 .drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
 .ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
-.ko-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
-.ko-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
 .diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
-.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
 svg{width:100%;height:auto;display:block}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px}
-.hw-icon{font-size:18px;flex-shrink:0}
-.hw-body{font-size:12px;color:var(--muted);line-height:1.5}
+.hw-icon{font-size:21px;flex-shrink:0}
+.hw-body{font-size:15px;color:var(--muted);line-height:1.5}
 .hw-body strong{color:var(--heat)}
 .sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
-.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
-.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
 </style>
 </head>
 <body>
@@ -191,18 +191,18 @@ svg{width:100%;height:auto;display:block}
           <path d="M22 344 q10 0 10 -10" fill="none" stroke="white" stroke-width="1.5"/>
           <path d="M538 344 q-10 0 -10 -10" fill="none" stroke="white" stroke-width="1.5"/>
           <!-- labels -->
-          <text x="280" y="10" text-anchor="middle" font-size="9" fill="white" opacity=".7" font-family="IBM Plex Mono,monospace">TOUCHLINE</text>
-          <text x="280" y="354" text-anchor="middle" font-size="9" fill="white" opacity=".7" font-family="IBM Plex Mono,monospace">TOUCHLINE</text>
-          <text x="14" y="183" font-size="8" fill="white" opacity=".6" transform="rotate(-90,14,183)" text-anchor="middle" font-family="IBM Plex Mono,monospace">GOAL LINE</text>
-          <text x="546" y="183" font-size="8" fill="white" opacity=".6" transform="rotate(90,546,183)" text-anchor="middle" font-family="IBM Plex Mono,monospace">GOAL LINE</text>
-          <text x="168" y="350" text-anchor="middle" font-size="8" fill="white" opacity=".65" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
-          <text x="392" y="350" text-anchor="middle" font-size="8" fill="white" opacity=".65" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
-          <text x="75" y="176" text-anchor="middle" font-size="8" fill="#F59E0B" font-family="IBM Plex Mono,monospace">PENALTY</text>
-          <text x="75" y="186" text-anchor="middle" font-size="8" fill="#F59E0B" font-family="IBM Plex Mono,monospace">AREA</text>
-          <text x="485" y="176" text-anchor="middle" font-size="8" fill="#F59E0B" font-family="IBM Plex Mono,monospace">PENALTY</text>
-          <text x="485" y="186" text-anchor="middle" font-size="8" fill="#F59E0B" font-family="IBM Plex Mono,monospace">AREA</text>
-          <text x="280" y="174" text-anchor="middle" font-size="8" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">CENTRE</text>
-          <text x="280" y="184" text-anchor="middle" font-size="8" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">CIRCLE</text>
+          <text x="280" y="10" text-anchor="middle" font-size="12" fill="white" opacity=".7" font-family="IBM Plex Mono,monospace">TOUCHLINE</text>
+          <text x="280" y="354" text-anchor="middle" font-size="12" fill="white" opacity=".7" font-family="IBM Plex Mono,monospace">TOUCHLINE</text>
+          <text x="14" y="183" font-size="11" fill="white" opacity=".6" transform="rotate(-90,14,183)" text-anchor="middle" font-family="IBM Plex Mono,monospace">GOAL LINE</text>
+          <text x="546" y="183" font-size="11" fill="white" opacity=".6" transform="rotate(90,546,183)" text-anchor="middle" font-family="IBM Plex Mono,monospace">GOAL LINE</text>
+          <text x="168" y="350" text-anchor="middle" font-size="11" fill="white" opacity=".65" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <text x="392" y="350" text-anchor="middle" font-size="11" fill="white" opacity=".65" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <text x="75" y="176" text-anchor="middle" font-size="11" fill="#F59E0B" font-family="IBM Plex Mono,monospace">PENALTY</text>
+          <text x="75" y="186" text-anchor="middle" font-size="11" fill="#F59E0B" font-family="IBM Plex Mono,monospace">AREA</text>
+          <text x="485" y="176" text-anchor="middle" font-size="11" fill="#F59E0B" font-family="IBM Plex Mono,monospace">PENALTY</text>
+          <text x="485" y="186" text-anchor="middle" font-size="11" fill="#F59E0B" font-family="IBM Plex Mono,monospace">AREA</text>
+          <text x="280" y="174" text-anchor="middle" font-size="11" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">CENTRE</text>
+          <text x="280" y="184" text-anchor="middle" font-size="11" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">CIRCLE</text>
         </svg>
       </div>
 
@@ -240,18 +240,18 @@ svg{width:100%;height:auto;display:block}
               <marker id="r1b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
             </defs>
             <rect x="40" y="25" width="180" height="160" rx="3" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="5 4" opacity=".5"/>
-            <text x="130" y="16" text-anchor="middle" font-size="9" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">8 × 8 m</text>
+            <text x="130" y="16" text-anchor="middle" font-size="12" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">8 × 8 m</text>
             <circle cx="40" cy="25" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="40" cy="25" r="6" fill="#2DBFAD"/>
             <circle cx="220" cy="25" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="220" cy="25" r="6" fill="#2DBFAD"/>
             <circle cx="40" cy="185" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="40" cy="185" r="6" fill="#2DBFAD"/>
             <circle cx="220" cy="185" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="220" cy="185" r="6" fill="#2DBFAD"/>
             <circle cx="130" cy="105" r="13" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="130" cy="105" r="6" fill="#E8607A"/>
-            <text x="130" y="124" text-anchor="middle" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEFENDER</text>
+            <text x="130" y="124" text-anchor="middle" font-size="11" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEFENDER</text>
             <path d="M52 25 L208 25" fill="none" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity=".55" marker-end="url(#r1a)"/>
             <circle cx="55" cy="25" r="4" fill="white" opacity=".85"/>
             <path d="M130 92 Q100 60 58 28" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="4 3" opacity=".45" marker-end="url(#r1b)"/>
             <rect x="20" y="200" width="220" height="16" rx="3" fill="rgba(184,148,46,.12)"/>
-            <text x="130" y="211" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">win ball or 8 passes → swap to middle</text>
+            <text x="130" y="211" text-anchor="middle" font-size="12" fill="#B8942E" font-family="IBM Plex Mono,monospace">win ball or 8 passes → swap to middle</text>
           </svg>
         </div>
       </div>

@@ -18,26 +18,26 @@
   --font-mono:'IBM Plex Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
 
 /* ── layout ── */
 .page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
 
 /* ── header ── */
 .sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
-.sh-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
 .sh-title{font-family:var(--font-head);font-size:52px;line-height:.9;color:var(--text);letter-spacing:.02em}
 .sh-title span{color:var(--gold)}
-.sh-sub{font-size:13px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
 .sh-meta{text-align:right}
-.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:5px}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
 .meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
 
 /* ── timeline bar ── */
 .timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
 .tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;cursor:default}
-.tl-seg .tl-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
-.tl-seg .tl-time{font-size:9px;opacity:.6;margin-top:1px}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
 .tl-jug{background:#2a4a35;flex:5}
 .tl-warm{background:#2d3a4d;flex:15}
 .tl-wb{background:#3d3520;flex:20}
@@ -48,34 +48,34 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 /* ── phase cards ── */
 .phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
 .pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
-.pc-time{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:48px}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:48px}
 .pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
 .dot-tech{background:var(--teal)}.dot-ssg{background:#8B5CF6}.dot-knock{background:var(--gold)}
-.pc-name{font-size:14px;font-weight:500;flex:1}
-.pc-dur{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
 .pc-body{padding:16px 18px;display:grid;gap:14px}
 
 /* ── content elements ── */
-.pc-note{font-size:12.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
 .coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
-.ct-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.ct-body{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
 .ct-body strong{color:var(--gold);font-weight:600}
 
 .ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
-.ritual-box .rb-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
-.ritual-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
 
 .wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
-.wb-box h5{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
-.wb-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
 .wb-box ul{list-style:none;display:grid;gap:5px}
-.wb-box ul li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative}
-.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:11px}
+.wb-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:14px}
 
 .drill-list{list-style:none;display:grid;gap:6px}
-.drill-list li{font-size:12.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
 .drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
 
 /* ── groups ── */
@@ -84,29 +84,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
 .grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
 .grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
-.grp-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
 .grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
-.grp p{font-size:11.5px;color:var(--muted);line-height:1.5}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
 
 /* ── scale ── */
 .scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sc-col{border-radius:6px;padding:10px 12px}
 .sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
 .sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
-.sc-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
 .sc-col ul{list-style:none;display:grid;gap:4px}
-.sc-col ul li{font-size:11.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li{font-size:14.5px;color:var(--muted);padding-left:14px;position:relative}
 .sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
 
 /* ── knockout ── */
 .ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
-.ko-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
-.ko-box p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
 
 /* ── SVG diagrams ── */
 .diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
-.diagram-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
 svg{width:100%;height:auto;display:block}
 
 /* ── pitch field base ── */
@@ -118,13 +118,13 @@ svg{width:100%;height:auto;display:block}
 
 /* ── footer ── */
 .sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
-.sf-left{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em}
-.sf-right{font-family:var(--font-mono);font-size:9px;color:var(--faint);letter-spacing:.08em;text-align:right}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
 
 /* ── heat warning ── */
 .heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
-.hw-icon{font-size:18px;flex-shrink:0}
-.hw-body{font-size:12px;color:var(--muted);line-height:1.5}
+.hw-icon{font-size:21px;flex-shrink:0}
+.hw-body{font-size:15px;color:var(--muted);line-height:1.5}
 .hw-body strong{color:var(--heat)}
 </style>
 </head>
@@ -227,7 +227,7 @@ svg{width:100%;height:auto;display:block}
             <circle cx="209" cy="47" r="3" fill="white" opacity=".7"/>
             <circle cx="60" cy="97" r="3" fill="white" opacity=".7"/>
             <!-- zone label -->
-            <text x="130" y="170" text-anchor="middle" font-size="9" fill="#3D5166" font-family="IBM Plex Mono,monospace">25 × 25 m · every player has their own ball</text>
+            <text x="130" y="170" text-anchor="middle" font-size="12" fill="#3D5166" font-family="IBM Plex Mono,monospace">25 × 25 m · every player has their own ball</text>
           </svg>
         </div>
       </div>
@@ -287,33 +287,33 @@ svg{width:100%;height:auto;display:block}
           <path d="M538 344 q-10 0 -10 -10" fill="none" stroke="white" stroke-width="1.5"/>
           <!-- GK -->
           <circle cx="44" cy="180" r="18" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="2.5"/>
-          <text x="44" y="176" text-anchor="middle" font-size="11" fill="#2DBFAD" font-weight="700" font-family="Arial,sans-serif">GK</text>
-          <text x="44" y="188" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="Arial,sans-serif">COMMANDER</text>
+          <text x="44" y="176" text-anchor="middle" font-size="14" fill="#2DBFAD" font-weight="700" font-family="Arial,sans-serif">GK</text>
+          <text x="44" y="188" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="Arial,sans-serif">COMMANDER</text>
           <!-- DEF x2 -->
           <circle cx="118" cy="132" r="16" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2.5"/>
-          <text x="118" y="128" text-anchor="middle" font-size="11" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
-          <text x="118" y="140" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+          <text x="118" y="128" text-anchor="middle" font-size="14" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+          <text x="118" y="140" text-anchor="middle" font-size="10" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
           <circle cx="118" cy="228" r="16" fill="#1B3A5C" stroke="#5B8DD9" stroke-width="2.5"/>
-          <text x="118" y="224" text-anchor="middle" font-size="11" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
-          <text x="118" y="236" text-anchor="middle" font-size="7" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
+          <text x="118" y="224" text-anchor="middle" font-size="14" fill="#5B8DD9" font-weight="700" font-family="Arial,sans-serif">DEF</text>
+          <text x="118" y="236" text-anchor="middle" font-size="10" fill="#5B8DD9" font-family="Arial,sans-serif">PROTECTOR</text>
           <!-- CM (The Glue) -->
           <circle cx="240" cy="180" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2.5"/>
-          <text x="240" y="176" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">CM</text>
-          <text x="240" y="188" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">THE GLUE</text>
+          <text x="240" y="176" text-anchor="middle" font-size="14" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">CM</text>
+          <text x="240" y="188" text-anchor="middle" font-size="10" fill="#8B5CF6" font-family="Arial,sans-serif">THE GLUE</text>
           <!-- Wingers x2 -->
           <circle cx="240" cy="88" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
-          <text x="240" y="84" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
-          <text x="240" y="96" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+          <text x="240" y="84" text-anchor="middle" font-size="14" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+          <text x="240" y="96" text-anchor="middle" font-size="10" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
           <circle cx="240" cy="272" r="16" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="2"/>
-          <text x="240" y="268" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
-          <text x="240" y="280" text-anchor="middle" font-size="7" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
+          <text x="240" y="268" text-anchor="middle" font-size="14" fill="#8B5CF6" font-weight="700" font-family="Arial,sans-serif">WIN</text>
+          <text x="240" y="280" text-anchor="middle" font-size="10" fill="#8B5CF6" font-family="Arial,sans-serif">WINGER</text>
           <!-- Striker -->
           <circle cx="420" cy="180" r="16" fill="#1B3A5C" stroke="#E8607A" stroke-width="2.5"/>
-          <text x="420" y="176" text-anchor="middle" font-size="11" fill="#E8607A" font-weight="700" font-family="Arial,sans-serif">ST</text>
-          <text x="420" y="188" text-anchor="middle" font-size="7" fill="#E8607A" font-family="Arial,sans-serif">THE HUNTER</text>
+          <text x="420" y="176" text-anchor="middle" font-size="14" fill="#E8607A" font-weight="700" font-family="Arial,sans-serif">ST</text>
+          <text x="420" y="188" text-anchor="middle" font-size="10" fill="#E8607A" font-family="Arial,sans-serif">THE HUNTER</text>
           <!-- build-out line labels -->
-          <text x="168" y="350" text-anchor="middle" font-size="8" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
-          <text x="392" y="350" text-anchor="middle" font-size="8" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <text x="168" y="350" text-anchor="middle" font-size="11" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
+          <text x="392" y="350" text-anchor="middle" font-size="11" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">BUILD-OUT</text>
         </svg>
       </div>
 
@@ -366,10 +366,10 @@ svg{width:100%;height:auto;display:block}
             <circle cx="28" cy="77" r="3" fill="white" opacity=".8"/>
             <circle cx="170" cy="70" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="170" cy="70" r="5" fill="#2DBFAD"/>
             <rect x="128" y="28" width="48" height="16" rx="3" fill="rgba(245,158,11,.15)" stroke="#F59E0B" stroke-width="1"/>
-            <text x="152" y="40" text-anchor="middle" font-size="8" fill="#F59E0B" font-family="IBM Plex Mono,monospace">WHISTLE</text>
+            <text x="152" y="40" text-anchor="middle" font-size="11" fill="#F59E0B" font-family="IBM Plex Mono,monospace">WHISTLE</text>
             <ellipse cx="170" cy="82" rx="10" ry="4" fill="#B8942E" opacity=".4"/>
-            <text x="100" y="118" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">dribble → sole stop on whistle</text>
-            <text x="100" y="130" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">no pressure · coach demos first</text>
+            <text x="100" y="118" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">dribble → sole stop on whistle</text>
+            <text x="100" y="130" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">no pressure · coach demos first</text>
           </svg>
         </div>
         <div class="diagram-wrap">
@@ -383,9 +383,9 @@ svg{width:100%;height:auto;display:block}
             <line x1="40" y1="70" x2="148" y2="70" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#ft1)"/>
             <circle cx="95" cy="70" r="3" fill="white" opacity=".7"/>
             <line x1="148" y1="76" x2="40" y2="76" stroke="#B8942E" stroke-width="1" stroke-dasharray="4 3" opacity=".4" marker-end="url(#ft2)"/>
-            <text x="160" y="92" text-anchor="middle" font-size="7" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">inside foot</text>
-            <text x="100" y="118" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">roll → stop cleanly → return</text>
-            <text x="100" y="130" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">no pressure · any pace</text>
+            <text x="160" y="92" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">inside foot</text>
+            <text x="100" y="118" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">roll → stop cleanly → return</text>
+            <text x="100" y="130" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">no pressure · any pace</text>
           </svg>
         </div>
         <div class="diagram-wrap">
@@ -401,8 +401,8 @@ svg{width:100%;height:auto;display:block}
             <circle cx="150" cy="70" r="5" fill="#B8942E"/>
             <path d="M8 100 Q15 42 42 84 Q69 118 96 42 Q110 20 125 68" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="5 3" opacity=".7" marker-end="url(#sl1)"/>
             <circle cx="8" cy="100" r="8" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="8" cy="100" r="4" fill="#2DBFAD"/>
-            <text x="100" y="118" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">walk pace · any foot · coach demos first</text>
-            <text x="100" y="130" text-anchor="middle" font-size="8" fill="#3D5166" font-family="IBM Plex Mono,monospace">exp: jog · weak foot going</text>
+            <text x="100" y="118" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">walk pace · any foot · coach demos first</text>
+            <text x="100" y="130" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">exp: jog · weak foot going</text>
           </svg>
         </div>
       </div>

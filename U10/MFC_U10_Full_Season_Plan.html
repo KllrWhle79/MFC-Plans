@@ -29,19 +29,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 /* HERO */
 .hero{padding:60px 0 48px;border-bottom:1px solid var(--border);margin-bottom:52px;}
 .hero-top{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
 .eyebrow::before{content:'';width:24px;height:1px;background:var(--teal);}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);line-height:.88;letter-spacing:.02em;}
 .hero h1 span{color:var(--gold);}
 .hero-sub{font-size:15px;font-style:italic;color:var(--muted);margin-top:14px;line-height:1.7;max-width:480px;}
 .hero-pills{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
 .pill{background:var(--surf2);border:1px solid var(--borderbr);padding:9px 16px;border-radius:3px;text-align:right;}
-.pill .n{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);line-height:1;}
-.pill .l{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.pill .n{font-family:'Bebas Neue',sans-serif;font-size:31px;color:var(--gold);line-height:1;}
+.pill .l{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
 @media(max-width:600px){.hero-pills{flex-direction:row;flex-wrap:wrap;align-items:flex-start;}.hero-top{flex-direction:column;}}
 
 /* SECTION LABEL */
-.sec-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.sec-lbl{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:20px;}
 .sec-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
 
 /* TEAM CHIPS */
@@ -51,11 +51,11 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .tc-gold{border-color:var(--goldb);}.tc-blue{border-color:var(--blueb);}.tc-white{border-color:var(--whiteb);}
 .tc-head{padding:14px 18px;}
 .tc-gold .tc-head{background:var(--goldd);}.tc-blue .tc-head{background:var(--blued);}.tc-white .tc-head{background:var(--whited);}
-.tc-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.05em;}
+.tc-name{font-family:'Bebas Neue',sans-serif;font-size:31px;letter-spacing:.05em;}
 .tc-gold .tc-name{color:var(--gold);}.tc-blue .tc-name{color:var(--blue);}.tc-white .tc-name{color:var(--white-team);}
-.tc-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+.tc-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px;}
 .tc-body{background:var(--surf);padding:12px 18px;}
-.tc-desc{font-size:13px;line-height:1.6;color:var(--muted);font-style:italic;}
+.tc-desc{font-size:16px;line-height:1.6;color:var(--muted);font-style:italic;}
 
 /* SEASON SPINE */
 .season-spine{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:52px;}
@@ -67,24 +67,24 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .sb-b2 .sb-head{background:linear-gradient(135deg,rgba(62,207,178,.1),rgba(106,171,247,.07));}
 .sb-b3 .sb-head{background:linear-gradient(135deg,rgba(94,196,105,.1),rgba(62,207,178,.06));}
 .sb-b4 .sb-head{background:linear-gradient(135deg,rgba(232,96,122,.1),rgba(240,192,64,.06));}
-.sb-num{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;color:var(--faint);margin-bottom:4px;text-transform:uppercase;}
-.sb-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;line-height:1.1;}
+.sb-num{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--faint);margin-bottom:4px;text-transform:uppercase;}
+.sb-title{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:.04em;line-height:1.1;}
 .sb-b1 .sb-title{color:var(--heat);}
 .sb-b2 .sb-title{color:var(--teal);}
 .sb-b3 .sb-title{color:var(--green);}
 .sb-b4 .sb-title{color:var(--rose);}
-.sb-dates{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);margin-top:5px;}
+.sb-dates{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);margin-top:5px;}
 .sb-body{background:var(--surf);padding:10px 16px;}
-.sb-focus{font-size:12px;line-height:1.6;color:var(--muted);font-style:italic;}
-.sb-weeks{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);margin-top:7px;letter-spacing:.06em;}
+.sb-focus{font-size:15px;line-height:1.6;color:var(--muted);font-style:italic;}
+.sb-weeks{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);margin-top:7px;letter-spacing:.06em;}
 
 /* ARCH BARS */
 .arch-row{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px;}
 .arch-seg{flex:1;padding:12px 10px;border-right:1px solid var(--border);}
 .arch-seg:last-child{border-right:none;}
-.as-time{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);letter-spacing:.07em;margin-bottom:4px;}
-.as-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.03em;margin-bottom:2px;}
-.as-desc{font-size:11px;line-height:1.4;color:var(--muted);font-style:italic;}
+.as-time{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);letter-spacing:.07em;margin-bottom:4px;}
+.as-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.03em;margin-bottom:2px;}
+.as-desc{font-size:14px;line-height:1.4;color:var(--muted);font-style:italic;}
 .as-jug .as-name{color:var(--lime);}
 .as-warmup .as-name{color:var(--gold);}
 .as-white .as-name{color:var(--orange);}
@@ -95,16 +95,16 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .as-knock .as-name{color:var(--blue);}
 @media(max-width:680px){.arch-row{flex-direction:column;}.arch-seg{border-right:none;border-bottom:1px solid var(--border);}}
 
-.arch-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.04em;padding:8px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:3px;margin-bottom:44px;font-style:italic;}
+.arch-note{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.04em;padding:8px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:3px;margin-bottom:44px;font-style:italic;}
 
 /* BLOCK PANELS */
 .block-panel{margin-bottom:72px;}
 .block-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:28px;flex-wrap:wrap;}
-.bh-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase;margin-bottom:5px;}
+.bh-num{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase;margin-bottom:5px;}
 .bh-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:.03em;line-height:1;}
-.bh-sub{font-size:14px;font-style:italic;color:var(--muted);margin-top:7px;line-height:1.65;max-width:520px;}
+.bh-sub{font-size:17px;font-style:italic;color:var(--muted);margin-top:7px;line-height:1.65;max-width:520px;}
 .bh-meta{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
-.bh-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 12px;border-radius:2px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;border:1px solid;}
+.bh-tag{font-family:'IBM Plex Mono',monospace;font-size:13px;padding:4px 12px;border-radius:2px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;border:1px solid;}
 .blk-b1 .bh-title{color:var(--heat);}
 .blk-b1 .bh-tag{background:var(--heatd);border-color:rgba(255,107,53,.3);color:var(--heat);}
 .blk-b2 .bh-title{color:var(--teal);}
@@ -116,18 +116,18 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 /* HEAT ALERT */
 .heat-alert{background:var(--heatd);border:1px solid rgba(255,107,53,.3);border-left:3px solid var(--heat);border-radius:3px;padding:14px 18px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;}
-.ha-icon{font-size:18px;flex-shrink:0;}
-.heat-alert h4{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.04em;color:var(--heat);margin-bottom:4px;}
-.heat-alert p{font-size:12.5px;line-height:1.65;color:rgba(237,232,223,.65);font-style:italic;}
+.ha-icon{font-size:21px;flex-shrink:0;}
+.heat-alert h4{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.04em;color:var(--heat);margin-bottom:4px;}
+.heat-alert p{font-size:15.5px;line-height:1.65;color:rgba(237,232,223,.65);font-style:italic;}
 
 /* SEASON NOTE */
 .season-note{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.25);border-left:3px solid var(--violet);border-radius:3px;padding:14px 18px;margin-bottom:44px;display:flex;gap:14px;align-items:flex-start;}
-.season-note h4{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.04em;color:var(--violet);margin-bottom:4px;}
-.season-note p{font-size:12.5px;line-height:1.65;color:rgba(237,232,223,.65);font-style:italic;}
+.season-note h4{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.04em;color:var(--violet);margin-bottom:4px;}
+.season-note p{font-size:15.5px;line-height:1.65;color:rgba(237,232,223,.65);font-style:italic;}
 
 /* WEEK TABS */
 .week-tabs{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;}
-.wt-btn{background:transparent;border:1px solid var(--borderbr);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;padding:7px 16px;cursor:pointer;border-radius:3px;transition:all .18s;}
+.wt-btn{background:transparent;border:1px solid var(--borderbr);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.07em;padding:7px 16px;cursor:pointer;border-radius:3px;transition:all .18s;}
 .wt-btn:hover{border-color:var(--gold);color:var(--gold);}
 .wt-btn.on{background:var(--gold);border-color:var(--gold);color:#000;font-weight:500;}
 .wk-panel{display:none;}
@@ -136,10 +136,10 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 /* WEEK BANNER */
 .wk-banner{background:var(--surf);border:1px solid var(--border);border-left:3px solid;padding:18px 22px;margin-bottom:24px;border-radius:2px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;}
-.wk-banner h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.04em;margin-bottom:5px;}
-.wk-banner p{font-size:13px;line-height:1.68;color:var(--muted);font-style:italic;max-width:500px;}
+.wk-banner h3{font-family:'Bebas Neue',sans-serif;font-size:27px;letter-spacing:.04em;margin-bottom:5px;}
+.wk-banner p{font-size:16px;line-height:1.68;color:var(--muted);font-style:italic;max-width:500px;}
 .wk-tags{display:flex;flex-direction:column;gap:5px;align-items:flex-end;}
-.wt{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 11px;border-radius:2px;letter-spacing:.06em;border:1px solid;white-space:nowrap;}
+.wt{font-family:'IBM Plex Mono',monospace;font-size:13px;padding:4px 11px;border-radius:2px;letter-spacing:.06em;border:1px solid;white-space:nowrap;}
 .wt-t{background:var(--teald);border-color:rgba(62,207,178,.25);color:var(--teal);}
 .wt-f{background:var(--rosed);border-color:rgba(232,96,122,.25);color:var(--rose);}
 .wt-s{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.25);color:var(--violet);}
@@ -155,10 +155,10 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .sess-single{margin-bottom:16px;}
 .sc{background:var(--surf);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .sc-hd{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.sc-day{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em;}
+.sc-day{font-family:'Bebas Neue',sans-serif;font-size:25px;letter-spacing:.05em;}
 .sc-d1 .sc-day{color:var(--teal);}
 .sc-d2 .sc-day{color:var(--rose);}
-.sc-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:3px 10px;border-radius:2px;letter-spacing:.07em;border:1px solid;}
+.sc-badge{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:3px 10px;border-radius:2px;letter-spacing:.07em;border:1px solid;}
 .bdg-tech{background:var(--teald);border-color:rgba(62,207,178,.25);color:var(--teal);}
 .bdg-tact{background:var(--goldd);border-color:rgba(240,192,64,.25);color:var(--gold);}
 .bdg-game{background:var(--greend);border-color:rgba(94,196,105,.25);color:var(--green);}
@@ -170,23 +170,23 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .phase:last-child{border-bottom:none;}
 .phase:hover{background:rgba(255,255,255,.022);}
 .ph-row{display:flex;align-items:center;gap:9px;}
-.ph-tm{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);min-width:40px;flex-shrink:0;}
+.ph-tm{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);min-width:40px;flex-shrink:0;}
 .ph-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .d-jug{background:var(--lime);}
 .d-warm{background:var(--gold);} .d-white{background:var(--orange);}
 .d-tech{background:var(--teal);} .d-sta{background:var(--violet);}
 .d-ssg{background:var(--green);} .d-comb{background:var(--rose);}
 .d-knock{background:var(--blue);} .d-fun{background:#c07bf5;}
-.ph-name{font-size:13px;font-weight:600;flex:1;color:var(--text);}
-.ph-dur{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);flex-shrink:0;}
-.ph-chev{font-size:8px;color:var(--faint);transition:transform .2s;flex-shrink:0;}
+.ph-name{font-size:16px;font-weight:600;flex:1;color:var(--text);}
+.ph-dur{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);flex-shrink:0;}
+.ph-chev{font-size:11px;color:var(--faint);transition:transform .2s;flex-shrink:0;}
 .phase.open .ph-chev{transform:rotate(180deg);}
 .ph-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
 .ph-body.open{max-height:900px;}
 .ph-inner{margin:10px 0 8px 56px;padding-bottom:4px;}
-.ph-note{font-size:13px;line-height:1.7;color:var(--muted);font-style:italic;margin-bottom:10px;}
+.ph-note{font-size:16px;line-height:1.7;color:var(--muted);font-style:italic;margin-bottom:10px;}
 .drills{list-style:none;display:flex;flex-direction:column;gap:3px;margin-bottom:10px;}
-.drills li{font-size:12px;color:rgba(237,232,223,.55);padding-left:16px;position:relative;line-height:1.5;}
+.drills li{font-size:15px;color:rgba(237,232,223,.55);padding-left:16px;position:relative;line-height:1.5;}
 .drills li::before{content:'›';position:absolute;left:0;color:var(--teal);}
 
 /* STATION ROTATION BOX */
@@ -196,13 +196,13 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .sta-gold{background:rgba(240,192,64,.07);border-color:rgba(240,192,64,.25);}
 .sta-blue{background:rgba(106,171,247,.07);border-color:rgba(106,171,247,.25);}
 .sta-white{background:rgba(232,228,219,.06);border-color:rgba(232,228,219,.15);}
-.sta-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.sta-lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
 .sta-gold .sta-lbl{color:var(--gold);}.sta-blue .sta-lbl{color:var(--blue);}.sta-white .sta-lbl{color:var(--white-team);}
-.sta-coach{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-bottom:6px;letter-spacing:.06em;}
-.sta-drill{font-size:12px;line-height:1.55;color:var(--muted);font-style:italic;}
-.sta-scale{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:var(--faint);line-height:1.4;font-style:italic;}
+.sta-coach{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);margin-bottom:6px;letter-spacing:.06em;}
+.sta-drill{font-size:15px;line-height:1.55;color:var(--muted);font-style:italic;}
+.sta-scale{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.07);font-size:14px;color:var(--faint);line-height:1.4;font-style:italic;}
 
-.rotate-note{background:var(--surf2);border:1px solid var(--borderbr);border-left:2px solid var(--violet);border-radius:2px;padding:9px 13px;margin-bottom:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--violet);letter-spacing:.04em;}
+.rotate-note{background:var(--surf2);border:1px solid var(--borderbr);border-left:2px solid var(--violet);border-radius:2px;padding:9px 13px;margin-bottom:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--violet);letter-spacing:.04em;}
 
 /* GROUP SPLIT (Block 1 only) */
 .gs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
@@ -211,57 +211,57 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .gs-a{background:rgba(240,192,64,.06);border-color:rgba(240,192,64,.2);}
 .gs-b{background:rgba(106,171,247,.06);border-color:rgba(106,171,247,.2);}
 .gs-c{background:rgba(232,228,219,.05);border-color:rgba(232,228,219,.13);}
-.gs-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.gs-lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
 .gs-a .gs-lbl{color:var(--gold);} .gs-b .gs-lbl{color:var(--blue);} .gs-c .gs-lbl{color:var(--white-team);}
-.gs-drill{font-size:12px;line-height:1.55;color:var(--muted);font-style:italic;}
+.gs-drill{font-size:15px;line-height:1.55;color:var(--muted);font-style:italic;}
 
 /* SCALING BOX */
 .scale-box{background:var(--surf2);border:1px solid var(--borderbr);border-left:2px solid var(--gold);border-radius:2px;padding:11px 14px;margin-bottom:10px;}
-.scale-box h5{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+.scale-box h5{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
 .scale-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 @media(max-width:460px){.scale-row{grid-template-columns:1fr;}}
-.scale-col h6{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;margin-bottom:4px;}
+.scale-col h6{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;margin-bottom:4px;}
 .sc-new h6{color:var(--blue);} .sc-exp h6{color:var(--rose);}
 .scale-col ul{list-style:none;display:flex;flex-direction:column;gap:2px;}
-.scale-col li{font-size:11.5px;color:var(--muted);font-style:italic;padding-left:12px;position:relative;line-height:1.45;}
+.scale-col li{font-size:14.5px;color:var(--muted);font-style:italic;padding-left:12px;position:relative;line-height:1.45;}
 .scale-col li::before{content:'·';position:absolute;left:0;}
 
 /* COACHING TIP */
 .coach-tip{background:var(--surf2);border:1px solid rgba(240,192,64,.2);border-left:2px solid var(--gold);border-radius:2px;padding:11px 14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;}
 .ct-icon{font-size:15px;flex-shrink:0;}
-.coach-tip p{font-size:12.5px;line-height:1.65;color:rgba(237,232,223,.65);font-style:italic;}
+.coach-tip p{font-size:15.5px;line-height:1.65;color:rgba(237,232,223,.65);font-style:italic;}
 .coach-tip strong{color:var(--gold);font-style:normal;font-weight:600;}
 
 /* WHITEBOARD BOX */
 .wb-box{background:rgba(240,144,96,.06);border:1px solid rgba(240,144,96,.25);border-radius:3px;padding:13px 16px;margin-bottom:10px;}
 .wb-box h5{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.04em;color:var(--orange);margin-bottom:6px;}
-.wb-box p{font-size:12.5px;line-height:1.65;color:rgba(237,232,223,.6);font-style:italic;}
+.wb-box p{font-size:15.5px;line-height:1.65;color:rgba(237,232,223,.6);font-style:italic;}
 .wb-box ul{list-style:none;display:flex;flex-direction:column;gap:3px;margin-top:6px;}
-.wb-box li{font-size:12px;color:rgba(237,232,223,.55);padding-left:14px;position:relative;}
+.wb-box li{font-size:15px;color:rgba(237,232,223,.55);padding-left:14px;position:relative;}
 .wb-box li::before{content:'▸';position:absolute;left:0;color:var(--orange);}
 
 /* COMBINE NOTE */
-.comb-note{background:var(--surf2);border:1px solid var(--borderbr);border-left:2px solid var(--rose);border-radius:2px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.65;color:var(--muted);font-style:italic;}
+.comb-note{background:var(--surf2);border:1px solid var(--borderbr);border-left:2px solid var(--rose);border-radius:2px;padding:10px 14px;margin-bottom:8px;font-size:15.5px;line-height:1.65;color:var(--muted);font-style:italic;}
 
 /* KNOCKOUT */
 .knockout-box{background:linear-gradient(135deg,rgba(106,171,247,.08),rgba(62,207,178,.05));border:1px solid rgba(106,171,247,.25);border-radius:3px;padding:13px 18px;margin:0 18px 14px;}
 .kb-title{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.04em;color:var(--blue);margin-bottom:5px;}
-.kb-body{font-size:12.5px;line-height:1.65;color:var(--muted);font-style:italic;}
+.kb-body{font-size:15.5px;line-height:1.65;color:var(--muted);font-style:italic;}
 
 /* JUGGLING BOX */
 .jug-box{background:rgba(190,242,100,.06);border:1px solid rgba(190,242,100,.2);border-radius:3px;padding:11px 14px;margin-bottom:8px;}
-.jug-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase;margin-bottom:5px;}
-.jug-box p{font-size:12px;line-height:1.65;color:var(--muted);font-style:italic;}
+.jug-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase;margin-bottom:5px;}
+.jug-box p{font-size:15px;line-height:1.65;color:var(--muted);font-style:italic;}
 
 /* PRINCIPLES */
 .prin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:56px;}
 @media(max-width:680px){.prin-grid{grid-template-columns:1fr;}}
 .p-card{background:var(--surf);border:1px solid var(--border);border-radius:4px;padding:18px;}
-.p-ico{font-size:20px;margin-bottom:8px;}
-.p-ttl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
-.p-txt{font-size:13px;line-height:1.65;color:var(--muted);font-style:italic;}
+.p-ico{font-size:23px;margin-bottom:8px;}
+.p-ttl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
+.p-txt{font-size:16px;line-height:1.65;color:var(--muted);font-style:italic;}
 
-.note-block{font-family:'Crimson Pro',serif;font-style:italic;font-size:13.5px;color:var(--muted);line-height:1.7;padding:14px 0;}
+.note-block{font-family:'Crimson Pro',serif;font-style:italic;font-size:16.5px;color:var(--muted);line-height:1.7;padding:14px 0;}
 </style>
 </head>
 <body>
@@ -333,7 +333,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 <!-- SESSION ARCHITECTURES -->
 <div class="sec-lbl">Session Formats</div>
 
-<p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCK 1 · SESSION 1 (AUG 8) · PRE-SEASON OPENER · 70 MIN</p>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCK 1 · SESSION 1 (AUG 8) · PRE-SEASON OPENER · 70 MIN</p>
 <div class="arch-row">
   <div class="arch-seg as-jug"><div class="as-time">0–15</div><div class="as-name">Juggling</div><div class="as-desc">15 min. Extended opening — first-timer teaching progressions. No warm-up game today.</div></div>
   <div class="arch-seg as-white"><div class="as-time">15–35</div><div class="as-name">Whiteboard + Water</div><div class="as-desc">Soccer Field &amp; Basic Rules. Pitch diagram, key areas, restarts overview.</div></div>
@@ -341,7 +341,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   <div class="arch-seg as-knock"><div class="as-time">60–70</div><div class="as-name">⚽ Knockout</div><div class="as-desc">First of the season. All 18.</div></div>
 </div>
 
-<p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCK 1 · SESSIONS 2–3 (AUG 15, AUG 22) · SINGLE SESSION · 70 MIN</p>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCK 1 · SESSIONS 2–3 (AUG 15, AUG 22) · SINGLE SESSION · 70 MIN</p>
 <div class="arch-row">
   <div class="arch-seg as-jug"><div class="as-time">0–5</div><div class="as-name">Juggling</div><div class="as-desc">Personal bests. Call out every player's number from the previous session.</div></div>
   <div class="arch-seg as-warmup"><div class="as-time">5–20</div><div class="as-name">Warm-Up Game</div><div class="as-desc">All 18. Freeze Dribble (S2) / Freeze Dribble + Name Recall (S3).</div></div>
@@ -350,7 +350,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   <div class="arch-seg as-knock"><div class="as-time">60–70</div><div class="as-name">⚽ Knockout</div><div class="as-desc">All 18. Full 10 min. Run to a winner.</div></div>
 </div>
 
-<p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCK 1 · WEEKS 3–4 · TWO SESSIONS/WEEK (90 MIN)</p>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCK 1 · WEEKS 3–4 · TWO SESSIONS/WEEK (90 MIN)</p>
 <div class="arch-row">
   <div class="arch-seg as-jug"><div class="as-time">0–5</div><div class="as-name">Juggling</div><div class="as-desc">All in. Personal bests. Gets everyone on the pitch together.</div></div>
   <div class="arch-seg as-warmup"><div class="as-time">5–15</div><div class="as-name">Warm-Up Game</div><div class="as-desc">All 18. Ball always present. Rondos, tag, dribble games.</div></div>
@@ -360,7 +360,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   <div class="arch-seg as-knock"><div class="as-time">80–90</div><div class="as-name">⚽ Knockout</div><div class="as-desc">All 18. Penalty shootout every session. No exceptions.</div></div>
 </div>
 
-<p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCKS 2–4 · ALL SESSIONS (90 MIN) · 3-STATION ROTATION</p>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:12px;">BLOCKS 2–4 · ALL SESSIONS (90 MIN) · 3-STATION ROTATION</p>
 <div class="arch-row">
   <div class="arch-seg as-jug"><div class="as-time">0–5</div><div class="as-name">Juggling</div><div class="as-desc">All in. Personal bests. No instruction — just juggle.</div></div>
   <div class="arch-seg as-warmup"><div class="as-time">5–15</div><div class="as-name">Warm-Up Game</div><div class="as-desc">All 18. Game-based. Ball always present.</div></div>
@@ -566,7 +566,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
                 <li>Ball from behind and over the head</li>
                 <li>Both feet on or behind the touchline when releasing</li>
               </ul>
-              <p style="margin-top:8px;font-size:12px;color:var(--muted)">Coach demos once correctly, then one deliberate foul throw — wait for players to call it. 3 players demo: one correct, one foot over, one one-handed. Everyone attempts one throw-in to a partner 5m away.</p>
+              <p style="margin-top:8px;font-size:15px;color:var(--muted)">Coach demos once correctly, then one deliberate foul throw — wait for players to call it. 3 players demo: one correct, one foot over, one one-handed. Everyone attempts one throw-in to a partner 5m away.</p>
             </div>
           </div></div>
         </div>
@@ -1635,18 +1635,18 @@ function showWeek(blk,n,btn){
 .dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;margin-bottom:40px;}
 .dcard{border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--surf);}
 .dcard-hd{padding:12px 16px 10px;border-bottom:1px solid var(--border);}
-.dcard-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:4px;}
-.dcard-hd h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;color:var(--text);}
-.dcard-hd .dcoach{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px;}
+.dcard-lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:4px;}
+.dcard-hd h3{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:.04em;color:var(--text);}
+.dcard-hd .dcoach{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);margin-top:2px;}
 .dpitch{padding:10px;background:var(--surf2);}
 .dnotes{padding:12px 16px 14px;}
-.dnotes p{font-size:13px;line-height:1.65;color:var(--muted);font-style:italic;}
+.dnotes p{font-size:16px;line-height:1.65;color:var(--muted);font-style:italic;}
 .dscale{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
 .dscol{background:var(--bg);border-radius:3px;padding:8px 10px;border:1px solid var(--border);}
-.dscol .dlbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.dscol .dlbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
 .dscol-new .dlbl{color:var(--blue);} .dscol-exp .dlbl{color:var(--rose);}
-.dscol p{font-size:12px;color:var(--muted);line-height:1.5;font-style:italic;}
-.dsec{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin:0 0 16px;}
+.dscol p{font-size:15px;color:var(--muted);line-height:1.5;font-style:italic;}
+.dsec{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin:0 0 16px;}
 .dsec::after{content:'';flex:1;height:1px;background:var(--border);}
 </style>
 
@@ -1676,10 +1676,10 @@ function showWeek(blk,n,btn){
           <circle cx="30" cy="77" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/>
           <circle cx="30" cy="77" r="5" fill="#3ecfb2"/>
           <circle cx="40" cy="86" r="4" fill="white" opacity=".8"/>
-          <text x="30" y="14" text-anchor="middle" font-size="9" fill="#f0c040" opacity=".8" font-family="IBM Plex Mono,monospace">START</text>
-          <text x="240" y="14" text-anchor="middle" font-size="9" fill="#f0c040" opacity=".8" font-family="IBM Plex Mono,monospace">END</text>
-          <text x="140" y="135" text-anchor="middle" font-size="10" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">one ball per player · all run simultaneously</text>
-          <text x="140" y="148" text-anchor="middle" font-size="9" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">sole roll at each cone · head up</text>
+          <text x="30" y="14" text-anchor="middle" font-size="12" fill="#f0c040" opacity=".8" font-family="IBM Plex Mono,monospace">START</text>
+          <text x="240" y="14" text-anchor="middle" font-size="12" fill="#f0c040" opacity=".8" font-family="IBM Plex Mono,monospace">END</text>
+          <text x="140" y="135" text-anchor="middle" font-size="13" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">one ball per player · all run simultaneously</text>
+          <text x="140" y="148" text-anchor="middle" font-size="12" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">sole roll at each cone · head up</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1706,16 +1706,16 @@ function showWeek(blk,n,btn){
           <circle cx="190" cy="42" r="11" fill="none" stroke="#6aabf7" stroke-width="1.5"/><circle cx="190" cy="42" r="5" fill="#6aabf7"/>
           <line x1="61" y1="42" x2="179" y2="42" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity=".4" marker-end="url(#d-arr2)"/>
           <circle cx="115" cy="42" r="4" fill="white" opacity=".8"/>
-          <text x="120" y="30" text-anchor="middle" font-size="9" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">6m</text>
+          <text x="120" y="30" text-anchor="middle" font-size="12" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">6m</text>
           <circle cx="50" cy="90" r="11" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="50" cy="90" r="5" fill="#f0c040"/>
           <circle cx="190" cy="90" r="11" fill="none" stroke="#6aabf7" stroke-width="1.5"/><circle cx="190" cy="90" r="5" fill="#6aabf7"/>
           <line x1="61" y1="90" x2="179" y2="90" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity=".4" marker-end="url(#d-arr2)"/>
           <circle cx="50" cy="130" r="11" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="50" cy="130" r="5" fill="#f0c040"/>
           <circle cx="190" cy="130" r="11" fill="none" stroke="#6aabf7" stroke-width="1.5"/><circle cx="190" cy="130" r="5" fill="#6aabf7"/>
           <line x1="61" y1="130" x2="179" y2="130" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity=".4" marker-end="url(#d-arr2)"/>
-          <text x="32" y="42" font-size="8" fill="#f0c040" opacity=".7" font-family="IBM Plex Mono,monospace" text-anchor="middle">rolls</text>
-          <text x="212" y="42" font-size="8" fill="#6aabf7" opacity=".7" font-family="IBM Plex Mono,monospace" text-anchor="middle">receives</text>
-          <text x="240" y="90" font-size="8" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">3 pairs</text>
+          <text x="32" y="42" font-size="11" fill="#f0c040" opacity=".7" font-family="IBM Plex Mono,monospace" text-anchor="middle">rolls</text>
+          <text x="212" y="42" font-size="11" fill="#6aabf7" opacity=".7" font-family="IBM Plex Mono,monospace" text-anchor="middle">receives</text>
+          <text x="240" y="90" font-size="11" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">3 pairs</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1748,8 +1748,8 @@ function showWeek(blk,n,btn){
           <path d="M230 77 Q190 130 150 95 Q110 60 70 120 Q50 138 20 110" fill="none" stroke="#e8607a" stroke-width="1" stroke-dasharray="3 3" opacity=".4"/>
           <circle cx="20" cy="110" r="11" fill="none" stroke="#e8e4db" stroke-width="1.5"/><circle cx="20" cy="110" r="5" fill="#e8e4db"/>
           <circle cx="20" cy="140" r="8" fill="none" stroke="#e8e4db" stroke-width="1" opacity=".4"/>
-          <text x="20" y="144" font-size="7" fill="white" opacity=".3" text-anchor="middle" font-family="IBM Plex Mono,monospace">wait</text>
-          <text x="140" y="14" text-anchor="middle" font-size="9" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">go (teal) · return (rose) · one at a time</text>
+          <text x="20" y="144" font-size="10" fill="white" opacity=".3" text-anchor="middle" font-family="IBM Plex Mono,monospace">wait</text>
+          <text x="140" y="14" text-anchor="middle" font-size="12" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">go (teal) · return (rose) · one at a time</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1777,13 +1777,13 @@ function showWeek(blk,n,btn){
           <circle cx="128" cy="76" r="12" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="128" cy="76" r="5" fill="#e8607a"/>
           <line x1="108" y1="84" x2="120" y2="94" stroke="#3ecfb2" stroke-width="3" stroke-linecap="round" opacity=".5"/>
           <circle cx="225" cy="55" r="11" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="225" cy="55" r="5" fill="#f0c040"/>
-          <text x="225" y="38" text-anchor="middle" font-size="9" fill="#f0c040" opacity=".9" font-family="IBM Plex Mono,monospace">TARGET</text>
+          <text x="225" y="38" text-anchor="middle" font-size="12" fill="#f0c040" opacity=".9" font-family="IBM Plex Mono,monospace">TARGET</text>
           <circle cx="225" cy="125" r="11" fill="none" stroke="#f0c040" stroke-width="1.5" opacity=".45"/><circle cx="225" cy="125" r="5" fill="#f0c040" opacity=".45"/>
           <path d="M100 77 Q155 45 217 57" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity=".45" marker-end="url(#d-arr4)"/>
           <path d="M110 86 Q160 68 217 59" fill="none" stroke="#3ecfb2" stroke-width="1.5" opacity=".7" marker-end="url(#d-arr4)"/>
-          <text x="148" y="34" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace" text-anchor="middle">CHECKING!</text>
-          <text x="55" y="55" font-size="9" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">8 sec</text>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">shield · scan · call name · pass</text>
+          <text x="148" y="34" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace" text-anchor="middle">CHECKING!</text>
+          <text x="55" y="55" font-size="12" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">8 sec</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".6" font-family="IBM Plex Mono,monospace">shield · scan · call name · pass</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1809,15 +1809,15 @@ function showWeek(blk,n,btn){
           <circle cx="235" cy="60" r="5" fill="#f0c040"/>
           <circle cx="235" cy="95" r="5" fill="#f0c040"/>
           <line x1="235" y1="60" x2="235" y2="95" stroke="#f0c040" stroke-width="2" opacity=".7"/>
-          <text x="253" y="80" font-size="9" fill="#f0c040" opacity=".9" font-family="IBM Plex Mono,monospace">GATE</text>
+          <text x="253" y="80" font-size="12" fill="#f0c040" opacity=".9" font-family="IBM Plex Mono,monospace">GATE</text>
           <circle cx="170" cy="77" r="12" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="170" cy="77" r="5" fill="#e8607a"/>
           <circle cx="50" cy="77" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="50" cy="77" r="5" fill="#3ecfb2"/>
           <circle cx="64" cy="77" r="4" fill="white" opacity=".85"/>
           <path d="M64 77 L157 77" fill="none" stroke="#3ecfb2" stroke-width="1.2" stroke-dasharray="4 3" opacity=".5" marker-end="url(#d-arr5)"/>
           <path d="M157 77 Q170 60 180 65 Q190 70 200 77 Q215 76 228 77" fill="none" stroke="#3ecfb2" stroke-width="1.5" opacity=".75" marker-end="url(#d-arr5)"/>
-          <text x="183" y="56" font-size="9" fill="#3ecfb2" opacity=".85" font-family="IBM Plex Mono,monospace" text-anchor="middle">skill move!</text>
-          <text x="140" y="135" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">3 pairs · roles swap every 2 reps</text>
-          <text x="140" y="148" text-anchor="middle" font-size="9" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">named skill move required (Wk3+)</text>
+          <text x="183" y="56" font-size="12" fill="#3ecfb2" opacity=".85" font-family="IBM Plex Mono,monospace" text-anchor="middle">skill move!</text>
+          <text x="140" y="135" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">3 pairs · roles swap every 2 reps</text>
+          <text x="140" y="148" text-anchor="middle" font-size="12" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">named skill move required (Wk3+)</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1843,9 +1843,9 @@ function showWeek(blk,n,btn){
           <circle cx="140" cy="22" r="6" fill="#f0c040"/>
           <circle cx="50" cy="128" r="6" fill="#f0c040"/>
           <circle cx="230" cy="128" r="6" fill="#f0c040"/>
-          <text x="140" y="13" text-anchor="middle" font-size="8" fill="#f0c040" font-family="IBM Plex Mono,monospace">A</text>
-          <text x="50" y="147" text-anchor="middle" font-size="8" fill="#f0c040" font-family="IBM Plex Mono,monospace">B</text>
-          <text x="230" y="147" text-anchor="middle" font-size="8" fill="#f0c040" font-family="IBM Plex Mono,monospace">C</text>
+          <text x="140" y="13" text-anchor="middle" font-size="11" fill="#f0c040" font-family="IBM Plex Mono,monospace">A</text>
+          <text x="50" y="147" text-anchor="middle" font-size="11" fill="#f0c040" font-family="IBM Plex Mono,monospace">B</text>
+          <text x="230" y="147" text-anchor="middle" font-size="11" fill="#f0c040" font-family="IBM Plex Mono,monospace">C</text>
           <circle cx="140" cy="22" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/>
           <circle cx="50" cy="128" r="11" fill="none" stroke="#6aabf7" stroke-width="1.5"/>
           <circle cx="230" cy="128" r="11" fill="none" stroke="#e8e4db" stroke-width="1.5"/>
@@ -1853,8 +1853,8 @@ function showWeek(blk,n,btn){
           <path d="M140 33 Q98 78 57 123" fill="none" stroke="#3ecfb2" stroke-width="1" stroke-dasharray="4 3" opacity=".5" marker-end="url(#d-arr6)"/>
           <path d="M61 128 L219 128" fill="none" stroke="white" stroke-width="1" opacity=".3" stroke-dasharray="3 3"/>
           <circle cx="126" cy="27" r="4" fill="white" opacity=".8"/>
-          <text x="90" y="85" font-size="8" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace" text-anchor="middle">ball →</text>
-          <text x="68" y="82" font-size="8" fill="#3ecfb2" opacity=".6" font-family="IBM Plex Mono,monospace" text-anchor="middle">← run</text>
+          <text x="90" y="85" font-size="11" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace" text-anchor="middle">ball →</text>
+          <text x="68" y="82" font-size="11" fill="#3ecfb2" opacity=".6" font-family="IBM Plex Mono,monospace" text-anchor="middle">← run</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1888,18 +1888,18 @@ function showWeek(blk,n,btn){
           <line x1="30" y1="35" x2="240" y2="35" stroke="#f0c040" stroke-width="1" stroke-dasharray="4 4" opacity=".45"/>
           <line x1="30" y1="120" x2="240" y2="120" stroke="#f0c040" stroke-width="1" stroke-dasharray="4 4" opacity=".45"/>
           <line x1="18" y1="35" x2="18" y2="120" stroke="white" stroke-width=".5" opacity=".25"/>
-          <text x="9" y="80" font-size="8" fill="white" opacity=".4" text-anchor="middle" font-family="IBM Plex Mono,monospace">3m</text>
+          <text x="9" y="80" font-size="11" fill="white" opacity=".4" text-anchor="middle" font-family="IBM Plex Mono,monospace">3m</text>
           <circle cx="240" cy="57" r="5" fill="#f0c040"/>
           <circle cx="240" cy="98" r="5" fill="#f0c040"/>
           <line x1="240" y1="57" x2="240" y2="98" stroke="#f0c040" stroke-width="2" opacity=".7"/>
-          <text x="262" y="80" font-size="9" fill="#f0c040" opacity=".9" font-family="IBM Plex Mono,monospace">GATE</text>
+          <text x="262" y="80" font-size="12" fill="#f0c040" opacity=".9" font-family="IBM Plex Mono,monospace">GATE</text>
           <circle cx="48" cy="77" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="48" cy="77" r="5" fill="#3ecfb2"/>
           <circle cx="62" cy="77" r="4" fill="white" opacity=".85"/>
           <circle cx="155" cy="77" r="12" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="155" cy="77" r="5" fill="#e8607a"/>
           <path d="M62 77 L142 77" fill="none" stroke="#3ecfb2" stroke-width="1.2" stroke-dasharray="4 3" opacity=".5" marker-end="url(#d-b2a)"/>
           <path d="M155 77 Q165 100 182 112" fill="none" stroke="#e8607a" stroke-width="1" stroke-dasharray="3 2" opacity=".5" marker-end="url(#d-b2a)"/>
-          <text x="178" y="128" font-size="8" fill="#e8607a" opacity=".8" font-family="IBM Plex Mono,monospace">show outside</text>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">stay goal-side · jockey · never lunge</text>
+          <text x="178" y="128" font-size="11" fill="#e8607a" opacity=".8" font-family="IBM Plex Mono,monospace">show outside</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">stay goal-side · jockey · never lunge</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1923,7 +1923,7 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="#1e3d12" opacity=".5"/>
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <rect x="52" y="18" width="158" height="118" rx="3" fill="none" stroke="#f0c040" stroke-width="1" stroke-dasharray="5 4" opacity=".45"/>
-          <text x="140" y="12" text-anchor="middle" font-size="9" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">8m × 8m</text>
+          <text x="140" y="12" text-anchor="middle" font-size="12" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">8m × 8m</text>
           <circle cx="52" cy="18" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="52" cy="18" r="5" fill="#3ecfb2"/>
           <circle cx="210" cy="18" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="210" cy="18" r="5" fill="#3ecfb2"/>
           <circle cx="52" cy="136" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="52" cy="136" r="5" fill="#3ecfb2"/>
@@ -1932,8 +1932,8 @@ function showWeek(blk,n,btn){
           <circle cx="162" cy="93" r="11" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="162" cy="93" r="5" fill="#e8607a"/>
           <circle cx="64" cy="23" r="4" fill="white" opacity=".8"/>
           <path d="M64 22 L200 22" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="4 3" opacity=".45" marker-end="url(#d-b2b)"/>
-          <text x="140" y="57" text-anchor="middle" font-size="9" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">CHECKING!</text>
-          <text x="140" y="148" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">rotate defenders: interception or 8 passes</text>
+          <text x="140" y="57" text-anchor="middle" font-size="12" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">CHECKING!</text>
+          <text x="140" y="148" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">rotate defenders: interception or 8 passes</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -1957,18 +1957,18 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="#1e3d12" opacity=".5"/>
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <circle cx="35" cy="100" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="35" cy="100" r="5" fill="#3ecfb2"/>
-          <text x="22" y="88" font-size="9" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">A</text>
+          <text x="22" y="88" font-size="12" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">A</text>
           <circle cx="138" cy="58" r="12" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="138" cy="58" r="5" fill="#f0c040"/>
-          <text x="125" y="45" font-size="9" fill="#f0c040" font-family="IBM Plex Mono,monospace">B (wall)</text>
+          <text x="125" y="45" font-size="12" fill="#f0c040" font-family="IBM Plex Mono,monospace">B (wall)</text>
           <path d="M47 95 L127 62" fill="none" stroke="white" stroke-width="1.5" opacity=".6" marker-end="url(#d-b2c)"/>
-          <text x="80" y="72" font-size="8" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">1. pass</text>
+          <text x="80" y="72" font-size="11" fill="white" opacity=".5" font-family="IBM Plex Mono,monospace">1. pass</text>
           <path d="M147 65 L185 93" fill="none" stroke="#f0c040" stroke-width="1.5" opacity=".7" marker-end="url(#d-b2c)"/>
-          <text x="178" y="78" font-size="8" fill="#f0c040" opacity=".7" font-family="IBM Plex Mono,monospace">3. return</text>
+          <text x="178" y="78" font-size="11" fill="#f0c040" opacity=".7" font-family="IBM Plex Mono,monospace">3. return</text>
           <path d="M35 100 Q95 110 182 98" fill="none" stroke="#3ecfb2" stroke-width="1" stroke-dasharray="4 3" opacity=".6" marker-end="url(#d-b2c)"/>
-          <text x="100" y="120" font-size="8" fill="#3ecfb2" opacity=".55" font-family="IBM Plex Mono,monospace">2. sprint into space</text>
+          <text x="100" y="120" font-size="11" fill="#3ecfb2" opacity=".55" font-family="IBM Plex Mono,monospace">2. sprint into space</text>
           <circle cx="190" cy="96" r="10" fill="none" stroke="#3ecfb2" stroke-width="1.5" stroke-dasharray="3 2" opacity=".6"/>
           <circle cx="90" cy="78" r="4" fill="white" opacity=".8"/>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">one-touch return · time the run · defender from Wk2</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">one-touch return · time the run · defender from Wk2</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2004,8 +2004,8 @@ function showWeek(blk,n,btn){
           <path d="M192 70 L138 74" fill="none" stroke="#e8607a" stroke-width="1.5" opacity=".7" marker-end="url(#d-b2d)"/>
           <path d="M192 84 L138 80" fill="none" stroke="#e8607a" stroke-width="1" opacity=".5" marker-end="url(#d-b2d)"/>
           <rect x="100" y="12" width="80" height="20" rx="3" fill="rgba(232,96,122,.2)" stroke="#e8607a" stroke-width="1"/>
-          <text x="140" y="26" text-anchor="middle" font-size="10" fill="#e8607a" font-family="IBM Plex Mono,monospace">1...2...3...4</text>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">coach counts aloud · bonus pt for win + score</text>
+          <text x="140" y="26" text-anchor="middle" font-size="13" fill="#e8607a" font-family="IBM Plex Mono,monospace">1...2...3...4</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">coach counts aloud · bonus pt for win + score</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2037,17 +2037,17 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="#1e3d12" opacity=".5"/>
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <line x1="250" y1="22" x2="250" y2="133" stroke="white" stroke-width="2" opacity=".35"/>
-          <text x="262" y="80" font-size="8" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">END</text>
+          <text x="262" y="80" font-size="11" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">END</text>
           <circle cx="42" cy="77" r="12" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="42" cy="77" r="5" fill="#e8607a"/>
           <circle cx="56" cy="77" r="4" fill="white" opacity=".85"/>
           <circle cx="112" cy="77" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="112" cy="77" r="5" fill="#3ecfb2"/>
           <circle cx="84" cy="77" r="14" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity=".25"/>
-          <text x="84" y="61" font-size="8" fill="white" opacity=".4" text-anchor="middle" font-family="IBM Plex Mono,monospace">TACKLE</text>
+          <text x="84" y="61" font-size="11" fill="white" opacity=".4" text-anchor="middle" font-family="IBM Plex Mono,monospace">TACKLE</text>
           <circle cx="200" cy="48" r="12" fill="none" stroke="#e8607a" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="200" cy="48" r="5" fill="#e8607a" opacity=".45"/>
           <path d="M122 75 Q170 58 240 76" fill="none" stroke="#3ecfb2" stroke-width="1.5" stroke-dasharray="5 3" opacity=".7" marker-end="url(#d-b3a)"/>
           <rect x="143" y="28" width="62" height="20" rx="3" fill="rgba(62,207,178,.15)" stroke="#3ecfb2" stroke-width="1"/>
-          <text x="174" y="42" text-anchor="middle" font-size="10" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">5 SEC</text>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">win ball → look up → play forward fast</text>
+          <text x="174" y="42" text-anchor="middle" font-size="13" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">5 SEC</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">win ball → look up → play forward fast</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2072,19 +2072,19 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <line x1="250" y1="52" x2="250" y2="103" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".6"/>
           <circle cx="38" cy="42" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="38" cy="42" r="5" fill="#3ecfb2"/>
-          <text x="38" y="46" text-anchor="middle" font-size="10" fill="white" font-family="IBM Plex Mono,monospace">1</text>
+          <text x="38" y="46" text-anchor="middle" font-size="13" fill="white" font-family="IBM Plex Mono,monospace">1</text>
           <circle cx="38" cy="77" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="38" cy="77" r="5" fill="#3ecfb2"/>
-          <text x="38" y="81" text-anchor="middle" font-size="10" fill="white" font-family="IBM Plex Mono,monospace">2</text>
+          <text x="38" y="81" text-anchor="middle" font-size="13" fill="white" font-family="IBM Plex Mono,monospace">2</text>
           <circle cx="38" cy="112" r="11" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="38" cy="112" r="5" fill="#3ecfb2"/>
-          <text x="38" y="116" text-anchor="middle" font-size="10" fill="white" font-family="IBM Plex Mono,monospace">3</text>
+          <text x="38" y="116" text-anchor="middle" font-size="13" fill="white" font-family="IBM Plex Mono,monospace">3</text>
           <circle cx="165" cy="63" r="12" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="165" cy="63" r="5" fill="#e8607a"/>
           <circle cx="165" cy="105" r="12" fill="none" stroke="#e8607a" stroke-width="1.5"/><circle cx="165" cy="105" r="5" fill="#e8607a"/>
           <path d="M49 77 Q100 58 154 68" fill="none" stroke="#3ecfb2" stroke-width="2" stroke-dasharray="5 3" opacity=".8" marker-end="url(#d-b3b)"/>
           <circle cx="28" cy="77" r="4" fill="white" opacity=".8"/>
           <path d="M36 77 Q85 77 152 70" fill="none" stroke="white" stroke-width="1.2" opacity=".45" marker-end="url(#d-b3b)"/>
           <rect x="2" y="28" width="42" height="20" rx="3" fill="rgba(240,192,64,.2)" stroke="#f0c040" stroke-width="1"/>
-          <text x="23" y="42" text-anchor="middle" font-size="10" fill="#f0c040" font-family="IBM Plex Mono,monospace">"2!"</text>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">sprint immediately on call · 3v2 develops</text>
+          <text x="23" y="42" text-anchor="middle" font-size="13" fill="#f0c040" font-family="IBM Plex Mono,monospace">"2!"</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">sprint immediately on call · 3v2 develops</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2109,15 +2109,15 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <line x1="250" y1="58" x2="250" y2="97" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".6"/>
           <circle cx="218" cy="28" r="12" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="218" cy="28" r="5" fill="#f0c040"/>
-          <text x="218" y="15" text-anchor="middle" font-size="8" fill="#f0c040" font-family="IBM Plex Mono,monospace">WIDE</text>
+          <text x="218" y="15" text-anchor="middle" font-size="11" fill="#f0c040" font-family="IBM Plex Mono,monospace">WIDE</text>
           <circle cx="28" cy="77" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="28" cy="77" r="5" fill="#3ecfb2"/>
           <circle cx="42" cy="77" r="4" fill="white" opacity=".85"/>
           <path d="M42 77 Q110 77 162 55" fill="none" stroke="#3ecfb2" stroke-width="1.2" stroke-dasharray="5 3" opacity=".6" marker-end="url(#d-b3c)"/>
           <path d="M165 53 L208 32" fill="none" stroke="white" stroke-width="1.5" opacity=".6" marker-end="url(#d-b3c)"/>
           <path d="M224 34 Q238 52 242 77" fill="none" stroke="#f0c040" stroke-width="1.5" opacity=".7" marker-end="url(#d-b3c)"/>
           <circle cx="210" cy="83" r="10" fill="none" stroke="#e8e4db" stroke-width="1.5" stroke-dasharray="3 2" opacity=".65"/>
-          <text x="140" y="135" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">dribble across · play wide · cross to box</text>
-          <text x="140" y="148" text-anchor="middle" font-size="9" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">attacker makes timed run into box</text>
+          <text x="140" y="135" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">dribble across · play wide · cross to box</text>
+          <text x="140" y="148" text-anchor="middle" font-size="12" fill="white" opacity=".4" font-family="IBM Plex Mono,monospace">attacker makes timed run into box</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2142,8 +2142,8 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <rect x="0" y="0" width="38" height="155" rx="0" fill="#f0c040" opacity=".07"/>
           <rect x="242" y="0" width="38" height="155" rx="0" fill="#f0c040" opacity=".07"/>
-          <text x="19" y="12" text-anchor="middle" font-size="8" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">WIDE</text>
-          <text x="261" y="12" text-anchor="middle" font-size="8" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">WIDE</text>
+          <text x="19" y="12" text-anchor="middle" font-size="11" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">WIDE</text>
+          <text x="261" y="12" text-anchor="middle" font-size="11" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">WIDE</text>
           <circle cx="19" cy="77" r="10" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="19" cy="77" r="5" fill="#f0c040"/>
           <circle cx="261" cy="77" r="10" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="261" cy="77" r="5" fill="#f0c040"/>
           <circle cx="90" cy="52" r="10" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="90" cy="52" r="5" fill="#3ecfb2"/>
@@ -2155,7 +2155,7 @@ function showWeek(blk,n,btn){
           <path d="M170 54 L253 73" fill="none" stroke="white" stroke-width="1.2" opacity=".5" marker-end="url(#d-b3d)"/>
           <path d="M260 65 Q256 48 235 43" fill="none" stroke="#f0c040" stroke-width="1.2" opacity=".6" marker-end="url(#d-b3d)"/>
           <circle cx="162" cy="52" r="4" fill="white" opacity=".8"/>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">central → wide player → cross to goal</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">central → wide player → cross to goal</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2188,20 +2188,20 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <line x1="252" y1="52" x2="252" y2="103" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".7"/>
           <circle cx="32" cy="100" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="32" cy="100" r="5" fill="#3ecfb2"/>
-          <text x="18" y="88" font-size="9" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">A</text>
+          <text x="18" y="88" font-size="12" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">A</text>
           <circle cx="130" cy="62" r="12" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="130" cy="62" r="5" fill="#f0c040"/>
-          <text x="116" y="48" font-size="9" fill="#f0c040" font-family="IBM Plex Mono,monospace">B</text>
+          <text x="116" y="48" font-size="12" fill="#f0c040" font-family="IBM Plex Mono,monospace">B</text>
           <path d="M44 95 L119 66" fill="none" stroke="white" stroke-width="1.5" opacity=".6" marker-end="url(#d-b4a)"/>
-          <text x="75" y="74" font-size="8" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace">1</text>
+          <text x="75" y="74" font-size="11" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace">1</text>
           <path d="M32 100 Q90 108 178 91" fill="none" stroke="#3ecfb2" stroke-width="1" stroke-dasharray="4 3" opacity=".6" marker-end="url(#d-b4a)"/>
-          <text x="105" y="118" font-size="8" fill="#3ecfb2" opacity=".55" font-family="IBM Plex Mono,monospace">2. sprint</text>
+          <text x="105" y="118" font-size="11" fill="#3ecfb2" opacity=".55" font-family="IBM Plex Mono,monospace">2. sprint</text>
           <path d="M140 69 L178 88" fill="none" stroke="#f0c040" stroke-width="1.5" opacity=".7" marker-end="url(#d-b4a)"/>
-          <text x="160" y="73" font-size="8" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">3</text>
+          <text x="160" y="73" font-size="11" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">3</text>
           <path d="M188 89 L244 79" fill="none" stroke="#3ecfb2" stroke-width="2" opacity=".8" marker-end="url(#d-b4a)"/>
-          <text x="215" y="70" font-size="8" fill="#3ecfb2" opacity=".8" font-family="IBM Plex Mono,monospace">4. SHOOT</text>
+          <text x="215" y="70" font-size="11" fill="#3ecfb2" opacity=".8" font-family="IBM Plex Mono,monospace">4. SHOOT</text>
           <circle cx="88" cy="80" r="4" fill="white" opacity=".8"/>
           <circle cx="160" cy="66" r="10" fill="none" stroke="#e8607a" stroke-width="1.5" stroke-dasharray="4 3" opacity=".65"/><circle cx="160" cy="66" r="5" fill="#e8607a" opacity=".45"/>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">one-touch throughout · first-time finish</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">one-touch throughout · first-time finish</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2226,19 +2226,19 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <line x1="252" y1="52" x2="252" y2="103" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".7"/>
           <circle cx="32" cy="77" r="12" fill="none" stroke="#3ecfb2" stroke-width="1.5"/><circle cx="32" cy="77" r="5" fill="#3ecfb2"/>
-          <text x="18" y="65" font-size="9" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">A</text>
+          <text x="18" y="65" font-size="12" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">A</text>
           <circle cx="138" cy="46" r="12" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="138" cy="46" r="5" fill="#f0c040"/>
-          <text x="124" y="33" font-size="9" fill="#f0c040" font-family="IBM Plex Mono,monospace">B</text>
+          <text x="124" y="33" font-size="12" fill="#f0c040" font-family="IBM Plex Mono,monospace">B</text>
           <path d="M44 73 L127 49" fill="none" stroke="white" stroke-width="1.5" opacity=".6" marker-end="url(#d-b4b)"/>
-          <text x="83" y="54" font-size="8" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace">1. pass</text>
+          <text x="83" y="54" font-size="11" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace">1. pass</text>
           <path d="M32 77 Q75 108 140 128 Q182 140 202 112" fill="none" stroke="#3ecfb2" stroke-width="1.5" stroke-dasharray="5 3" opacity=".7" marker-end="url(#d-b4b)"/>
-          <text x="115" y="138" font-size="8" fill="#3ecfb2" opacity=".65" font-family="IBM Plex Mono,monospace">2. overlap outside</text>
+          <text x="115" y="138" font-size="11" fill="#3ecfb2" opacity=".65" font-family="IBM Plex Mono,monospace">2. overlap outside</text>
           <path d="M146 52 L196 107" fill="none" stroke="#f0c040" stroke-width="1.5" opacity=".7" marker-end="url(#d-b4b)"/>
-          <text x="182" y="82" font-size="8" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">3. play in</text>
+          <text x="182" y="82" font-size="11" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">3. play in</text>
           <circle cx="204" cy="112" r="10" fill="none" stroke="#3ecfb2" stroke-width="1.5" stroke-dasharray="3 2" opacity=".75"/>
           <path d="M212 107 L244 83" fill="none" stroke="#3ecfb2" stroke-width="2" opacity=".7" marker-end="url(#d-b4b)"/>
           <circle cx="90" cy="61" r="4" fill="white" opacity=".8"/>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">pass → overlap outside → receive → cross</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">pass → overlap outside → receive → cross</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2274,8 +2274,8 @@ function showWeek(blk,n,btn){
           <path d="M28 112 Q75 103 112 75" fill="none" stroke="#3ecfb2" stroke-width="1" stroke-dasharray="4 3" opacity=".5" marker-end="url(#d-b4c)"/>
           <path d="M118 73 Q180 66 244 77" fill="none" stroke="#3ecfb2" stroke-width="2" opacity=".8" marker-end="url(#d-b4c)"/>
           <rect x="76" y="26" width="92" height="18" rx="3" fill="rgba(62,207,178,.15)" stroke="#3ecfb2" stroke-width="1"/>
-          <text x="122" y="39" text-anchor="middle" font-size="9" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">COMBINATION</text>
-          <text x="140" y="145" text-anchor="middle" font-size="9" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">wall pass or overlap → then shoot · fresh wave each rep</text>
+          <text x="122" y="39" text-anchor="middle" font-size="12" fill="#3ecfb2" font-family="IBM Plex Mono,monospace">COMBINATION</text>
+          <text x="140" y="145" text-anchor="middle" font-size="12" fill="white" opacity=".55" font-family="IBM Plex Mono,monospace">wall pass or overlap → then shoot · fresh wave each rep</text>
         </svg>
       </div>
       <div class="dnotes">
@@ -2299,23 +2299,23 @@ function showWeek(blk,n,btn){
           <rect x="0" y="0" width="280" height="155" rx="4" fill="#1e3d12" opacity=".5"/>
           <rect x="0" y="0" width="280" height="155" rx="4" fill="none" stroke="#3a7a24" stroke-width="1" opacity=".4"/>
           <rect x="8" y="14" width="80" height="118" rx="4" fill="rgba(240,192,64,.12)" stroke="#f0c040" stroke-width="1" stroke-dasharray="5 4"/>
-          <text x="48" y="27" text-anchor="middle" font-size="9" fill="#f0c040" font-family="IBM Plex Mono,monospace">STATION A</text>
-          <text x="48" y="39" text-anchor="middle" font-size="8" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">Coach A</text>
+          <text x="48" y="27" text-anchor="middle" font-size="12" fill="#f0c040" font-family="IBM Plex Mono,monospace">STATION A</text>
+          <text x="48" y="39" text-anchor="middle" font-size="11" fill="#f0c040" opacity=".65" font-family="IBM Plex Mono,monospace">Coach A</text>
           <circle cx="48" cy="83" r="10" fill="none" stroke="#f0c040" stroke-width="1.5"/><circle cx="48" cy="83" r="5" fill="#f0c040"/>
-          <text x="48" y="87" text-anchor="middle" font-size="7" fill="white" font-family="IBM Plex Mono,monospace">GOLD</text>
+          <text x="48" y="87" text-anchor="middle" font-size="10" fill="white" font-family="IBM Plex Mono,monospace">GOLD</text>
           <rect x="100" y="14" width="80" height="118" rx="4" fill="rgba(106,171,247,.1)" stroke="#6aabf7" stroke-width="1" stroke-dasharray="5 4"/>
-          <text x="140" y="27" text-anchor="middle" font-size="9" fill="#6aabf7" font-family="IBM Plex Mono,monospace">STATION B</text>
-          <text x="140" y="39" text-anchor="middle" font-size="8" fill="#6aabf7" opacity=".65" font-family="IBM Plex Mono,monospace">Coach B</text>
+          <text x="140" y="27" text-anchor="middle" font-size="12" fill="#6aabf7" font-family="IBM Plex Mono,monospace">STATION B</text>
+          <text x="140" y="39" text-anchor="middle" font-size="11" fill="#6aabf7" opacity=".65" font-family="IBM Plex Mono,monospace">Coach B</text>
           <circle cx="140" cy="83" r="10" fill="none" stroke="#6aabf7" stroke-width="1.5"/><circle cx="140" cy="83" r="5" fill="#6aabf7"/>
-          <text x="140" y="87" text-anchor="middle" font-size="7" fill="white" font-family="IBM Plex Mono,monospace">BLUE</text>
+          <text x="140" y="87" text-anchor="middle" font-size="10" fill="white" font-family="IBM Plex Mono,monospace">BLUE</text>
           <rect x="192" y="14" width="80" height="118" rx="4" fill="rgba(232,228,219,.07)" stroke="#e8e4db" stroke-width="1" stroke-dasharray="5 4"/>
-          <text x="232" y="27" text-anchor="middle" font-size="9" fill="#e8e4db" font-family="IBM Plex Mono,monospace">STATION C</text>
-          <text x="232" y="39" text-anchor="middle" font-size="8" fill="#e8e4db" opacity=".65" font-family="IBM Plex Mono,monospace">Coach C</text>
+          <text x="232" y="27" text-anchor="middle" font-size="12" fill="#e8e4db" font-family="IBM Plex Mono,monospace">STATION C</text>
+          <text x="232" y="39" text-anchor="middle" font-size="11" fill="#e8e4db" opacity=".65" font-family="IBM Plex Mono,monospace">Coach C</text>
           <circle cx="232" cy="83" r="10" fill="none" stroke="#e8e4db" stroke-width="1.5"/><circle cx="232" cy="83" r="5" fill="#e8e4db"/>
-          <text x="232" y="87" text-anchor="middle" font-size="7" fill="white" font-family="IBM Plex Mono,monospace">WHITE</text>
+          <text x="232" y="87" text-anchor="middle" font-size="10" fill="white" font-family="IBM Plex Mono,monospace">WHITE</text>
           <path d="M88 136 Q110 148 100 136" fill="none" stroke="white" stroke-width="1" opacity=".35" marker-end="url(#d-b4rot)"/>
           <path d="M180 136 Q158 148 168 136" fill="none" stroke="white" stroke-width="1" opacity=".35" marker-end="url(#d-b4rot)"/>
-          <text x="140" y="148" text-anchor="middle" font-size="9" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace">whistle → rotate → 15 min per station</text>
+          <text x="140" y="148" text-anchor="middle" font-size="12" fill="white" opacity=".45" font-family="IBM Plex Mono,monospace">whistle → rotate → 15 min per station</text>
         </svg>
       </div>
       <div class="dnotes">
