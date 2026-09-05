@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .drill-list{list-style:none;display:grid;gap:6px}
 .drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
 .drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
-.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .grp{border-radius:6px;padding:10px 12px}
 .grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
 .grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
@@ -96,7 +96,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
 svg{width:100%;height:auto;display:block}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px}
 .hw-icon{font-size:21px;flex-shrink:0}
 .hw-body{font-size:15px;color:var(--muted);line-height:1.5}
@@ -121,7 +121,7 @@ svg{width:100%;height:auto;display:block}
     <div>
       <div class="sh-eyebrow">MFC U10 Boys · Block 2 · Week 1 · Day 2</div>
       <div class="sh-title">Block <span>2</span> · Thu<br>Pressing &amp; Escape</div>
-      <div class="sh-sub">Thursday, September 17, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent, Coach David</div>
+      <div class="sh-sub">Thursday, September 17, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent</div>
     </div>
     <div class="sh-meta">
       <div class="meta-pill">19 Players · 4 Teams · 2 Games</div><br>
@@ -132,7 +132,7 @@ svg{width:100%;height:auto;display:block}
 
   <div class="step-up">
     <div class="su-icon">B2 W1</div>
-    <div class="su-body"><strong>Thursday — same three stations, pressing theme.</strong> Thursday opens with Tiki-Tak passing instead of juggling: fast, sharp, one-touch. All three stations continue from Tuesday with Thursday variations. No whiteboard. Teach through the game.</div>
+    <div class="su-body"><strong>Thursday — same two stations, pressing theme.</strong> Thursday opens with Tiki-Tak passing instead of juggling: fast, sharp, one-touch. All three stations continue from Tuesday with Thursday variations. No whiteboard. Teach through the game.</div>
   </div>
 
   <div class="timeline">
@@ -198,15 +198,15 @@ svg{width:100%;height:auto;display:block}
     <div class="pc-head">
       <span class="pc-time">15 – 60</span>
       <div class="pc-dot dot-tech"></div>
-      <span class="pc-name">Technical Stations: 1v1 Defending · Escape Pressure · 4v2 Rondo</span>
+      <span class="pc-name">Technical Stations: 1v1 Defending · Escape Pressure</span>
       <span class="pc-dur">45 min · 15 min per station</span>
     </div>
     <div class="pc-body">
-      <p class="pc-note">Same three stations as Tuesday. No re-introduction needed — coaches pick up where they left off. Thursday variation: Station A adds drive-to-cone after winning the ball; Station B same corner escape setup; Station C must call receiver's name before passing.</p>
+      <p class="pc-note">Same two stations as Tuesday. No re-introduction needed — coaches pick up where they left off. Thursday variation: Station A adds drive-to-cone after winning the ball; Station B same corner escape setup; Station C must call receiver's name before passing.</p>
 
       <div class="rotation-box">
         <div class="rot-icon">⟳ ROTATION</div>
-        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at their station. Groups rotate simultaneously: <strong>Gold → Blue → White → Gold</strong>. No lines, no waiting.</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at their station. Groups rotate simultaneously: <strong>Gold → Blue → Gold</strong>. No lines, no waiting.</div>
       </div>
 
       <div class="groups">
@@ -218,10 +218,7 @@ svg{width:100%;height:auto;display:block}
           <div class="grp-label">Blue · Coach Brent · Station B — Escape Pressure (Corner Setup)</div>
           <p>Same corner setup as Tuesday — attacker backed into the corner, defender passes well then follows to pressure, two gates at 45°. Thursday: defender reads the first touch and tries to cut off the chosen gate — no diving, but genuine pressure. <strong style="color:#2DBFAD">New: same as Tuesday — good pass, first touch, choose a gate, unlimited touches. Exp: 2-touch limit after first touch; defender actively cuts off one gate without diving — attacker must commit and accelerate through the other.</strong></p>
         </div>
-        <div class="grp grp-c">
-          <div class="grp-label">White · Coach David · Station C — 4v2 Rondo</div>
-          <p>Same 4v2 as Tuesday. Thursday: beat the group's Tuesday record. Experienced players must call the name of the receiver before passing. <strong style="color:#8FA3B4">New: unlimited touches, try to beat Tuesday's count. Exp: 2-touch mandatory, call name of receiver before passing — no call = redo the pass.</strong></p>
-        </div>
+
       </div>
 
       <div class="wb-box" style="background:rgba(45,191,173,.06);border-color:rgba(45,191,173,.2);margin-top:4px">
@@ -237,7 +234,9 @@ svg{width:100%;height:auto;display:block}
 
       <!-- Three diagrams -->
       <div class="three-col">
-        <div class="diagram-wrap">
+
+
+                <div class="diagram-wrap">
           <div class="diagram-label">Station A · 1v1 Thu — Win Ball, Drive On</div>
           <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>1v1 defending Thursday variation win ball then drive to target cone</title><desc>Same 1v1 channel as Tuesday. After winning or forcing the ball out, defender immediately drives to a target cone to build press-and-go habit.</desc>
             <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
@@ -247,26 +246,21 @@ svg{width:100%;height:auto;display:block}
               <marker id="a3t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#4CAF7D" stroke-width="1.8" stroke-linecap="round"/></marker>
             </defs>
             <rect x="50" y="10" width="100" height="140" rx="2" fill="rgba(184,148,46,.05)" stroke="#B8942E" stroke-width="1" stroke-dasharray="5 4" opacity=".5"/>
-            <!-- gate bottom -->
             <line x1="70" y1="140" x2="70" y2="150" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
             <line x1="130" y1="140" x2="130" y2="150" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
-            <!-- target cone top-right -->
             <polygon points="172,18 178,30 166,30" fill="#F59E0B" opacity=".85"/>
             <text x="172" y="40" text-anchor="middle" font-size="11" fill="#F59E0B" font-family="IBM Plex Mono,monospace">TARGET</text>
-            <!-- attacker -->
             <circle cx="100" cy="25" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="25" r="5" fill="#2DBFAD"/>
             <circle cx="100" cy="38" r="4" fill="white" opacity=".8"/>
             <line x1="100" y1="42" x2="100" y2="95" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#a1t)"/>
-            <!-- defender sideways-on -->
             <ellipse cx="100" cy="108" rx="8" ry="13" fill="#1B3A5C" stroke="#E8607A" stroke-width="1.8" transform="rotate(-15,100,108)"/>
             <circle cx="100" cy="93" r="7" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="100" cy="93" r="3" fill="#E8607A"/>
-            <!-- drive-to-cone arrow after winning -->
             <path d="M112 95 Q145 70 165 28" fill="none" stroke="#4CAF7D" stroke-width="2" stroke-dasharray="5 3" opacity=".8" marker-end="url(#a3t)"/>
             <text x="100" y="130" text-anchor="middle" font-size="11" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">win → drive on!</text>
           </svg>
         </div>
 
-                <div class="diagram-wrap">
+        <div class="diagram-wrap">
           <div class="diagram-label">Station B · Escape Pressure — Corner Setup</div>
           <svg viewBox="0 0 220 200" role="img" xmlns="http://www.w3.org/2000/svg"><title>Station B escape pressure corner setup diagram</title><desc>Attacker is backed into the corner of the field with the touchline behind them and the end line to their side. Defender stands ten feet away and passes to the attacker, then follows to apply pressure. Two gates are placed at roughly 45 degrees from each other giving the attacker two escape routes: one up the touchline and one up the field.</desc>
             <rect x="0" y="0" width="220" height="200" rx="4" fill="#1e3d14" opacity=".85"/>
@@ -305,23 +299,7 @@ svg{width:100%;height:auto;display:block}
           </svg>
         </div>
 
-        <div class="diagram-wrap">
-          <div class="diagram-label">Station C · 4v2 — Beat Tuesday's Record</div>
-          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>4v2 rondo Thursday beat the Tuesday record and call name before passing</title><desc>Same 4v2 rondo as Tuesday. Thursday goal: beat Tuesday's consecutive pass record. Experienced players must call receiver name before passing.</desc>
-            <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
-            <defs><marker id="r1t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-            <rect x="30" y="20" width="140" height="120" rx="2" fill="none" stroke="#8B5CF6" stroke-width="1.2" stroke-dasharray="6 4" opacity=".5"/>
-            <circle cx="30"  cy="20"  r="12" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="30"  cy="20"  r="5" fill="#8B5CF6"/>
-            <circle cx="170" cy="20"  r="12" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="170" cy="20"  r="5" fill="#8B5CF6"/>
-            <circle cx="30"  cy="140" r="12" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="30"  cy="140" r="5" fill="#8B5CF6"/>
-            <circle cx="170" cy="140" r="12" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="170" cy="140" r="5" fill="#8B5CF6"/>
-            <circle cx="85"  cy="70"  r="11" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="85"  cy="70"  r="4" fill="#E8607A"/>
-            <circle cx="115" cy="105" r="11" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="115" cy="105" r="4" fill="#E8607A"/>
-            <rect x="50" y="68" width="100" height="24" rx="4" fill="rgba(184,148,46,.25)" stroke="#B8942E" stroke-width="1"/>
-            <text x="100" y="84" text-anchor="middle" font-size="13" fill="#B8942E" font-weight="700" font-family="IBM Plex Mono,monospace">BEAT TUE RECORD</text>
-            <text x="100" y="155" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">exp: call name before passing</text>
-          </svg>
-        </div>
+
       </div>
 
       <div class="scale">
@@ -330,7 +308,6 @@ svg{width:100%;height:auto;display:block}
           <ul>
             <li>Station A: shadow + point to where you'd go if you won the ball</li>
             <li>Station B: good pass, first touch, choose a gate — same as Tuesday</li>
-            <li>Station C: unlimited touches, try to beat Tuesday's count</li>
             <li>Coaches: same one-word cue per rep as Tuesday</li>
           </ul>
         </div>
@@ -339,7 +316,6 @@ svg{width:100%;height:auto;display:block}
           <ul>
             <li>Station A: contest, win ball, immediately drive to target cone</li>
             <li>Station B: 2-touch limit; defender cuts off one gate — commit and go through the other</li>
-            <li>Station C: 2-touch, call receiver's name before every pass</li>
             <li>Call direction or gate out loud before every first touch</li>
           </ul>
         </div>
@@ -352,25 +328,104 @@ svg{width:100%;height:auto;display:block}
     </div>
   </div>
 
-  <!-- PHASE 4: SSG -->
+  <!-- PHASE 4: OVER THE RIVER -->
   <div class="phase-card">
     <div class="pc-head">
       <span class="pc-time">60 – 80</span>
       <div class="pc-dot dot-ssg"></div>
-      <span class="pc-name">SSG: 5v5 + 5v4 — Pressing &amp; Pass Condition</span>
+      <span class="pc-name">Over the River — Two Simultaneous Games</span>
       <span class="pc-dur">20 min</span>
     </div>
     <div class="pc-body">
-      <p class="pc-note">19 players split into 4 teams — roughly 5, 5, 5, and 4. Two simultaneous games: Game 1 is 5v5, Game 2 is 5v4. All four teams are on the field the whole time. No subs. Thursday conditions: 2 passes before shooting + press on every turnover.</p>
-      <ul class="drill-list">
-        <li>Condition 1 (all): complete 2 passes before shooting — coaches count aloud</li>
-        <li>Condition 2 (all): press on every turnover — coaches call "PRESS!" on every loss</li>
-        <li>Rotate opponents after 10 minutes — teams swap pitches so everyone faces a different opponent</li>
-        <li>Final 4 min: drop both conditions — free play, no coaching. Let it breathe.</li>
-      </ul>
+      <p class="pc-note">19 players across two simultaneous Over the River games. Each game: 3 teams of 3 (one team of 4 for the odd player). Team with the ball builds to 5 passes before switching — one defender enters their grid after 5 seconds to apply pressure. All of Team C resets to the middle after a successful switch. Both games run the full 20 minutes, one coach per game.</p>
+
+      <div class="wb-box" style="background:rgba(184,148,46,.06);border-color:rgba(184,148,46,.2)">
+        <h5 style="color:#B8942E">Over the River — Rules</h5>
+        <ul class="drill-list">
+          <li><strong>Setup:</strong> Three zones — two outer grids (~12×10m each) + one narrow middle zone (~5m wide). Three teams of 3 (one team of 4 for the odd player). Team A starts with the ball in their grid. Team B waits in the opposite grid. Team C starts in the middle.</li>
+          <li><strong>Step 1 — Build to 5:</strong> Team A must complete <strong>5 passes</strong> within their own grid before they are allowed to pass through the middle to Team B. Passes must be clean — if the ball goes out or Team C intercepts, restart the count.</li>
+          <li><strong>Step 2 — Pressure enters:</strong> After <strong>5 seconds</strong> from the start of the rep, <strong>1 player from Team C</strong> enters Team A's grid to apply pressure. They try to win the ball or force a mistake before Team A reaches 5 passes. The other Team C players hold in the middle.</li>
+          <li><strong>Step 3 — Switch:</strong> Once Team A completes 5 passes, they pass the ball through the middle zone to Team B. The switch must be a clean pass — if Team C intercepts it in the middle, possession resets to Team C in the middle and Team A returns to the outer grid to receive.</li>
+          <li><strong>Step 4 — Reset:</strong> When the ball is successfully switched to Team B, all of Team C returns to the middle zone. Team B now has the ball and begins their own 5-pass build. Cycle repeats.</li>
+          <li><strong>Scoring:</strong> Each successful switch = 1 point for the team that completed it. First team to 3 points wins the round. Reset roles and go again.</li>
+          <li><strong>Progression (min 10):</strong> raise the pass count to 6 or add a 2-touch limit inside the outer grid</li>
+        </ul>
+      </div>
+</div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Over the River · 3 Teams of 3 · Two Games</div>
+        <svg viewBox="0 0 540 200" role="img" xmlns="http://www.w3.org/2000/svg"><title>Two simultaneous Over the River games across the full pitch</title><desc>Two side by side Over the River setups. Each has three zones: left outer, narrow middle, right outer. Team A and B pass through the middle. Team C defends the middle. Intercept equals swap roles.</desc>
+          <rect x="0" y="0" width="540" height="200" rx="4" fill="#1e3d14" opacity=".85"/>
+          <defs>
+            <marker id="otr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+          </defs>
+
+          <!-- GAME 1 (left half) -->
+          <text x="130" y="14" text-anchor="middle" font-size="11" fill="#8FA3B4" font-family="IBM Plex Mono,monospace" letter-spacing=".1em">GAME 1</text>
+          <!-- left zone -->
+          <rect x="8"  y="20" width="80" height="140" rx="3" fill="rgba(184,148,46,.1)"  stroke="#B8942E" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="48" y="17" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">TEAM A</text>
+          <!-- middle zone -->
+          <rect x="92" y="20" width="60" height="140" rx="3" fill="rgba(232,96,122,.08)" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="122" y="17" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">MID</text>
+          <!-- right zone -->
+          <rect x="156" y="20" width="80" height="140" rx="3" fill="rgba(45,191,173,.08)"  stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="196" y="17" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">TEAM B</text>
+          <!-- Team A players -->
+          <circle cx="28"  cy="60"  r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="28"  cy="60"  r="4" fill="#B8942E"/>
+          <circle cx="68"  cy="90"  r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="68"  cy="90"  r="4" fill="#B8942E"/>
+          <circle cx="35"  cy="125" r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="35"  cy="125" r="4" fill="#B8942E"/>
+          <!-- Team C (mid defenders) -->
+          <circle cx="108" cy="70"  r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="108" cy="70"  r="4" fill="#E8607A"/>
+          <circle cx="136" cy="120" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="136" cy="120" r="4" fill="#E8607A"/>
+          <!-- Team B players -->
+          <circle cx="172" cy="55"  r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="172" cy="55"  r="4" fill="#2DBFAD"/>
+          <circle cx="216" cy="90"  r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="216" cy="90"  r="4" fill="#2DBFAD"/>
+          <circle cx="180" cy="130" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="180" cy="130" r="4" fill="#2DBFAD"/>
+          <!-- transfer pass game 1 -->
+          <circle cx="122" cy="88" r="5" fill="white" opacity=".8"/>
+          <path d="M76 88 L168 88" fill="none" stroke="white" stroke-width="2" stroke-dasharray="6 3" opacity=".6" marker-end="url(#otr1)"/>
+
+          <!-- divider -->
+          <line x1="270" y1="10" x2="270" y2="190" stroke="#243241" stroke-width="2" stroke-dasharray="6 4"/>
+
+          <!-- GAME 2 (right half) -->
+          <text x="405" y="14" text-anchor="middle" font-size="11" fill="#8FA3B4" font-family="IBM Plex Mono,monospace" letter-spacing=".1em">GAME 2</text>
+          <!-- left zone -->
+          <rect x="278" y="20" width="80" height="140" rx="3" fill="rgba(184,148,46,.1)"  stroke="#B8942E" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="318" y="17" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">TEAM A</text>
+          <!-- middle zone -->
+          <rect x="362" y="20" width="60" height="140" rx="3" fill="rgba(232,96,122,.08)" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="392" y="17" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">MID</text>
+          <!-- right zone -->
+          <rect x="426" y="20" width="80" height="140" rx="3" fill="rgba(45,191,173,.08)"  stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="466" y="17" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">TEAM B</text>
+          <!-- Team A players (team of 4 here) -->
+          <circle cx="295" cy="55"  r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="295" cy="55"  r="4" fill="#B8942E"/>
+          <circle cx="338" cy="80"  r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="338" cy="80"  r="4" fill="#B8942E"/>
+          <circle cx="300" cy="115" r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="300" cy="115" r="4" fill="#B8942E"/>
+          <circle cx="330" cy="140" r="10" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="4 2"/><circle cx="330" cy="140" r="4" fill="#B8942E" opacity=".6"/>
+          <!-- Team C defenders -->
+          <circle cx="378" cy="65"  r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="378" cy="65"  r="4" fill="#E8607A"/>
+          <circle cx="406" cy="115" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="406" cy="115" r="4" fill="#E8607A"/>
+          <!-- Team B players -->
+          <circle cx="444" cy="60"  r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="444" cy="60"  r="4" fill="#2DBFAD"/>
+          <circle cx="490" cy="90"  r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="490" cy="90"  r="4" fill="#2DBFAD"/>
+          <circle cx="450" cy="130" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="450" cy="130" r="4" fill="#2DBFAD"/>
+          <!-- transfer pass game 2 -->
+          <circle cx="392" cy="80" r="5" fill="white" opacity=".8"/>
+          <path d="M346 80 L436 80" fill="none" stroke="white" stroke-width="2" stroke-dasharray="6 3" opacity=".6" marker-end="url(#otr1)"/>
+
+          <!-- bottom labels -->
+          <text x="130" y="192" text-anchor="middle" font-size="10" fill="#3D5166" font-family="IBM Plex Mono,monospace">5 passes → switch · 1 defender enters at 5 sec</text>
+          <text x="405" y="192" text-anchor="middle" font-size="10" fill="#3D5166" font-family="IBM Plex Mono,monospace">all defenders reset to middle after switch</text>
+        </svg>
+      </div>
+
       <div class="coach-tip">
         <div class="ct-icon">💡</div>
-        <div class="ct-body"><strong>Coaching tip:</strong> Watch for the 2-pass condition creating a better shot angle — teams who keep the ball with two clean passes will have a stronger chance. If you see a well-executed press that leads directly to a goal, freeze briefly: "That press created that goal. From Station A today." Connect it explicitly once, then let it go.</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Count the 5 passes out loud for the first few reps so players calibrate the pace — "1, 2, 3…" — then stop counting and let them do it. The 5-second delay before pressure enters is key: it gives the ball team a moment to settle and find their shape before the defender arrives. Call "PRESSURE!" when the player enters so everyone knows the clock has started. When a team completes the 5 passes and switches cleanly, name it immediately: "Five passes, clean switch — that's the whole drill." When Team C wins the ball early, name that too: "One defender, one mistake — that's why the 5 passes matter."</div>
       </div>
     </div>
   </div>
@@ -393,7 +448,7 @@ svg{width:100%;height:auto;display:block}
 
   <div class="sess-footer">
     <div class="sf-left">MFC U10 Boys · Block 2 · Week 1 · Session 2 · Thu Sep 17, 2026</div>
-    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 (480) 589-6441</div>
   </div>
 
 </div>

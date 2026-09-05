@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 2 · Week 1 · Sep 15 · Defending & Pressure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:30}
+.tl-wb{background:#3d3520;flex:15}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px;overflow:hidden;word-break:break-word}
+
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box+.wb-box{margin-top:10px}
+.wb-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:14px}
+.drill-list{list-style:none;display:grid;gap:6px;overflow-wrap:break-word}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:14.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px}
+.hw-icon{font-size:21px;flex-shrink:0}
+.hw-body{font-size:15px;color:var(--muted);line-height:1.5}
+.hw-body strong{color:var(--heat)}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+/* corner scenario cards */
+.corner-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.corner-card{border-radius:6px;padding:10px 12px}
+.cc-corner{background:rgba(45,191,173,.1);border:1px solid rgba(45,191,173,.25)}
+.cc-goalkick{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.25)}
+.cc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.cc-corner .cc-label{color:var(--teal)}.cc-goalkick .cc-label{color:var(--gold)}
+.corner-card p{font-size:14.5px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 2 · Week 3 · Day 2</div>
+      <div class="sh-title">Block <span>2</span> · Thu<br>Pressing Combinations</div>
+      <div class="sh-sub">Thursday, October 1, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players · 3 Groups</div><br>
+      <div class="meta-pill mp-wk">Week 3 · Block 2</div><br>
+      <div class="meta-pill">🚫 No Whiteboard</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B2 W3</div>
+    <div class="su-body"><strong>Thursday — press window tightens to 5 seconds.</strong> Station C press-back window tightens from 6 to 5 seconds for all players. Over the River raises to 7 passes. Last Thursday before Week 4 — coaches finalise home challenge assignments.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"  style="flex:5"><span class="tl-label">Tiki-Tak</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm" style="flex:10"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech" style="flex:45"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-ssg"  style="flex:15"><span class="tl-label">Over the River</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock" style="flex:10"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Tiki-Tak — Speed &amp; Intensity Opening</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Thursday Opening Ritual</div>
+        <p>Groups of 2 or 3, 6 feet apart. One-touch, maximum pace. Triangle flow for groups of 3. Penalty for holding: 5 toe-taps and restart. Week 3: coaches should be able to run a full rep themselves — lead by doing.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Transition Chase Rondo — Finish Required</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Same transition rondo. Week 3: when defenders win the ball, the 2v1 must end with a combination before the shot — a wall pass or give-and-go. Directly links to Station B today.</p>
+      <ul class="drill-list">
+        <li>5v2 in 10×10m. Swap on intercept or 8 passes.</li>
+        <li>Defenders win ball → 2v1 → must complete a wall pass or give-and-go before the finish</li>
+        <li>Progression (min 10): 3 defenders inside</li>
+      </ul>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The combination requirement will cause some defenders to slow down after winning the ball — that's fine. The instinct to look for the partner immediately after winning is exactly what you want to build. Name it when you see it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Pass &amp; Move · Wall Pass · Press-Back 3v3</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Thursday passing stations. Week 3 step: Station A adds a second defender for the top group. Station B experienced players must beat the defender to the space. Station C press window tightens to 5 seconds for all.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays. Groups rotate: <strong>Gold → Blue → White → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Pass &amp; Move (2 Defenders)</div>
+          <p>Triangle passing with 1 defender — same as Tuesday. Week 3 top group: 2 defenders. Passing player must identify the free player before receiving. <strong style="color:#B8942E">New: 1 defender, unlimited touches, scanning call every receive. Exp: 2 defenders, 2-touch, must name the free player out loud before receiving.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Blue · Coach Brent · Station B — Wall Pass (Beat the Defender)</div>
+          <p>Same give-and-go. Week 3: defender tracks A's run and actively tries to intercept the return pass. Attacker must time the run to arrive before the defender. <strong style="color:#2DBFAD">New: defender jogs tracking — focus on timing the run into space. Exp: defender fully active, A must beat defender to the return — one-touch finish if possible.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — Press-Back 3v3 (5-Sec Window)</div>
+          <p>Press window tightens from 6 to <strong>5 seconds</strong> for all players. Coach counts aloud for new players, silently times for experienced. Combination required before shooting after winning the ball. <strong style="color:#8FA3B4">New: 5-second window, coach counts — press before the count finishes. Exp: 5-second window, win ball → combination → shoot, coach times silently.</strong></p>
+        </div>
+      </div>
+
+      <div class="three-col" style="grid-template-columns:1fr 1fr 1fr">
+                <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Pass &amp; Move — Triangle Flow</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>Pass and move triangle drill with active defender</title><desc>Three players on a triangle. Player passes to the next cone and follows their pass to that position. One active defender tries to intercept. Scanning call mandatory before every receive.</desc>
+            <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="pm1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="pm2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="pm3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- triangle cones -->
+            <polygon points="100,18 106,30 94,30" fill="#B8942E" opacity=".8"/>
+            <polygon points="34,132 40,144 28,144" fill="#B8942E" opacity=".8"/>
+            <polygon points="166,132 172,144 160,144" fill="#B8942E" opacity=".8"/>
+            <!-- players at two positions -->
+            <circle cx="100" cy="36" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.8"/><circle cx="100" cy="36" r="5" fill="#2DBFAD"/>
+            <circle cx="34"  cy="118" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.8"/><circle cx="34"  cy="118" r="5" fill="#2DBFAD"/>
+            <circle cx="166" cy="118" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.8"/><circle cx="166" cy="118" r="5" fill="#2DBFAD"/>
+            <!-- ball -->
+            <circle cx="100" cy="46" r="4" fill="white" opacity=".8"/>
+            <!-- pass A→B (top to bottom-left) -->
+            <path d="M92 44 L42 112" fill="none" stroke="white" stroke-width="1.8" stroke-dasharray="5 3" opacity=".6" marker-end="url(#pm1)"/>
+            <!-- follow run (top player moves to bottom-left cone) -->
+            <path d="M96 46 Q70 90 44 116" fill="none" stroke="#2DBFAD" stroke-width="1.4" stroke-dasharray="4 3" opacity=".5" marker-end="url(#pm2)"/>
+            <!-- checking call bubble -->
+            <rect x="2" y="88" width="56" height="16" rx="3" fill="rgba(45,191,173,.2)"/>
+            <text x="30" y="100" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">"checking!"</text>
+            <!-- active defender in middle -->
+            <circle cx="100" cy="90" r="11" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="100" cy="90" r="4" fill="#E8607A"/>
+            <text x="100" y="78" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEF</text>
+            <!-- defender lunge toward pass -->
+            <path d="M92 88 Q76 76 60 68" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="3 3" opacity=".5" marker-end="url(#pm3)"/>
+            <text x="100" y="154" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">pass · follow · scan · repeat</text>
+          </svg>
+        </div>
+                <div class="diagram-wrap">
+          <div class="diagram-label">Station B · Wall Pass — Give &amp; Go</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>Wall pass give and go drill</title><desc>Player A passes to wall player B, then sprints into space to receive the return. Defender tracks A's run from week 2 onward.</desc>
+            <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="wp1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="wp2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="wp3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- A passer -->
+            <circle cx="30" cy="110" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.8"/><circle cx="30" cy="110" r="5" fill="#2DBFAD"/>
+            <text x="30" cy="128" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" dy="22">A</text>
+            <!-- B wall -->
+            <circle cx="110" cy="110" r="12" fill="none" stroke="#B8942E" stroke-width="1.8"/><circle cx="110" cy="110" r="5" fill="#B8942E"/>
+            <text x="110" cy="128" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace" dy="22">B (wall)</text>
+            <!-- pass A→B -->
+            <line x1="43" y1="108" x2="97" y2="108" stroke="white" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#wp1)"/>
+            <!-- A sprint into space -->
+            <path d="M34 98 Q60 55 148 52" fill="none" stroke="#2DBFAD" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#wp2)"/>
+            <!-- return pass B→A's space -->
+            <path d="M118 100 Q140 72 152 58" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#wp3)"/>
+            <!-- space receiver -->
+            <circle cx="155" cy="48" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 2"/><circle cx="155" cy="48" r="4" fill="#2DBFAD" opacity=".6"/>
+            <!-- defender tracking -->
+            <circle cx="60" cy="98" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="60" cy="98" r="4" fill="#E8607A"/>
+            <text x="60" y="86" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEF tracks</text>
+            <text x="100" y="152" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">pass · sprint · receive return</text>
+          </svg>
+        </div>
+                <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Press-Back 3v3</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>Press-back 3v3 drill with 6 second press window</title><desc>3v3 in a zone. Team losing the ball must win it back within the press window. Coach counts aloud. Bonus point for winning the ball and scoring directly.</desc>
+            <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <rect x="10" y="10" width="180" height="140" rx="3" fill="rgba(232,96,122,.04)" stroke="#E8607A" stroke-width="1" stroke-dasharray="5 4" opacity=".5"/>
+            <!-- mini goals -->
+            <line x1="10" y1="62" x2="10" y2="98" stroke="#4CAF7D" stroke-width="4" stroke-linecap="round"/>
+            <line x1="190" y1="62" x2="190" y2="98" stroke="#4CAF7D" stroke-width="4" stroke-linecap="round"/>
+            <!-- team blue -->
+            <circle cx="45"  cy="50"  r="11" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="45"  cy="50"  r="4" fill="#2DBFAD"/>
+            <circle cx="40"  cy="90"  r="11" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="40"  cy="90"  r="4" fill="#2DBFAD"/>
+            <circle cx="70"  cy="120" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="70"  cy="120" r="4" fill="#2DBFAD"/>
+            <!-- team red -->
+            <circle cx="155" cy="50"  r="11" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="155" cy="50"  r="4" fill="#E8607A"/>
+            <circle cx="160" cy="90"  r="11" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="160" cy="90"  r="4" fill="#E8607A"/>
+            <circle cx="130" cy="120" r="11" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="130" cy="120" r="4" fill="#E8607A"/>
+            <!-- press clock -->
+            <rect x="75" y="62" width="50" height="22" rx="4" fill="rgba(245,158,11,.2)" stroke="#F59E0B" stroke-width="1"/>
+            <text x="100" y="77" text-anchor="middle" font-size="13" fill="#F59E0B" font-weight="700" font-family="IBM Plex Mono,monospace">6 SEC</text>
+            <text x="100" y="152" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">lose ball → press immediately</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="scale">
+        <div class="sc-col sc-new">
+          <div class="sc-label">New Players — pressure up</div>
+          <ul>
+            <li>Station A: 1 defender, unlimited touches — scan before every receive</li>
+            <li>Station B: defender jogs — time your run and get there first</li>
+            <li>Station C: 5 seconds — press immediately, don't wait for the count to start</li>
+          </ul>
+        </div>
+        <div class="sc-col sc-exp">
+          <div class="sc-label">Experienced — full speed</div>
+          <ul>
+            <li>Station A: 2 defenders, 2-touch — name the free player before receiving</li>
+            <li>Station B: beat the defender to the space — one-touch finish if on</li>
+            <li>Station C: win ball → wall pass or give-and-go → shoot</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Home challenge prep:</strong> This is the last Thursday before Week 4. After the session, coaches take 5 minutes to finalise one personalised home challenge per player for the fall break. Write them down. You'll hand them out Thursday Week 4.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: OVER THE RIVER -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">Over the River — Two Games · 7-Pass Build</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Same two-game format. Week 3: build count raises to 7 passes. 2-touch limit now in effect for all players from the start (introduced at 10 min in Week 2 — now it's the baseline).</p>
+      <ul class="drill-list">
+        <li><strong>7 passes required</strong> before switching through the middle</li>
+        <li>2-touch limit in the outer grid from the first rep — no exceptions</li>
+        <li>After 5 seconds: 1 defender from Team C enters</li>
+        <li>Successful switch → full reset → cycle repeats</li>
+        <li>Progression (min 10): 2 defenders enter after 5 seconds (up from 1)</li>
+      </ul>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> With 2-touch now the baseline, teams will find 7 passes harder. That's correct. The pressure of 2-touch forces quicker thinking and better positioning. At 10 minutes add the second defender: "Two defenders after five seconds — let's go." No other explanation needed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">⚽ Knockout — The Final Four</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Ritual</div>
+        <p>All 19. GK cuts angle. Style attempts welcome. Hustle rule enforced. Final Four ceremony when 4 remain. Winner calls their home challenge out loud — first preview of Week 4 send-off.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 2 · Week 3 · Session 2 · Thu Oct 1, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach Brent (623) 451-5967 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>

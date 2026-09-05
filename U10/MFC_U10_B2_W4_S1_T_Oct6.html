@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 2 · Week 1 · Sep 15 · Defending & Pressure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:30}
+.tl-wb{background:#3d3520;flex:15}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:48px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-wb{background:var(--heat)}
+.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px;overflow:hidden;word-break:break-word}
+
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box+.wb-box{margin-top:10px}
+.wb-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:14px}
+.drill-list{list-style:none;display:grid;gap:6px;overflow-wrap:break-word}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-c{background:rgba(232,228,219,.06);border:1px solid rgba(232,228,219,.15)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--teal)}.grp-c .grp-label{color:var(--muted)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-col{border-radius:6px;padding:10px 12px}
+.sc-new{background:rgba(91,141,217,.08);border:1px solid rgba(91,141,217,.25)}
+.sc-exp{background:rgba(232,96,122,.08);border:1px solid rgba(232,96,122,.25)}
+.sc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sc-new .sc-label{color:#5B8DD9}.sc-exp .sc-label{color:var(--rose)}
+.sc-col ul{list-style:none;display:grid;gap:4px}
+.sc-col ul li{font-size:14.5px;color:var(--muted);padding-left:14px;position:relative}
+.sc-col ul li::before{content:'·';position:absolute;left:0;color:inherit}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.heat-warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px}
+.hw-icon{font-size:21px;flex-shrink:0}
+.hw-body{font-size:15px;color:var(--muted);line-height:1.5}
+.hw-body strong{color:var(--heat)}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+/* corner scenario cards */
+.corner-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.corner-card{border-radius:6px;padding:10px 12px}
+.cc-corner{background:rgba(45,191,173,.1);border:1px solid rgba(45,191,173,.25)}
+.cc-goalkick{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.25)}
+.cc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.cc-corner .cc-label{color:var(--teal)}.cc-goalkick .cc-label{color:var(--gold)}
+.corner-card p{font-size:14.5px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 2 · Week 4 · Day 1</div>
+      <div class="sh-title">Block <span>2</span> · Tue<br>Max Pressure</div>
+      <div class="sh-sub">Tuesday, October 6, 2026 · 90 minutes · Madison #1 · Coach Pete, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players · 2 Stations · Coach Brent Out</div><br>
+      <div class="meta-pill mp-wk">Week 4 · Block 2</div><br>
+      <div class="meta-pill">🚫 No Whiteboard</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B2 W4</div>
+    <div class="su-body"><strong>Week 4 — Coach Brent is away. Two stations, max pressure.</strong> Station A and Station C run simultaneously with larger groups. Full pressure at every rep — no passive defenders anywhere. Thursday is the celebration session and home challenge send-off.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"  style="flex:5"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm" style="flex:10"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech" style="flex:45"><span class="tl-label">2 Stations · 20 min each</span><span class="tl-time">15–55</span></div>
+    <div class="tl-seg tl-ssg"  style="flex:20"><span class="tl-label">SSG</span><span class="tl-time">55–80</span></div>
+    <div class="tl-seg tl-knock" style="flex:10"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Block 2 Records</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Opening Ritual — final Tuesday of Block 2</div>
+        <p>All 19 juggling as they arrive. This is the last Tuesday before fall break. Coaches call every player's Block 2 high score — not just their current number. If anyone hasn't improved since Block 1, encourage them quietly: the home challenge is coming.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Sharks &amp; Minnows — Max Pressure</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Final Sharks &amp; Minnows of Block 2. 6 sharks, 13 minnows. Sharks press in threes. Hardest version yet — highest ratio, most coordinated pressure.</p>
+      <ul class="drill-list">
+        <li>6 sharks in groups of 3. All three must arrive within 2 seconds of each other or the press doesn't count.</li>
+        <li>Minnows: may pass to each other to escape — 3 minnows with balls to start</li>
+        <li>Last minnow with ball wins Block 2 Sharks &amp; Minnows champion title</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 3: 2 STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 55</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: 1v1 Defending · 5v2 Rondo</span>
+      <span class="pc-dur">40 min · 20 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Two stations with larger groups — roughly 9–10 per station. 20 minutes each. Full pressure everywhere. Coach Pete runs Station A, Coach David runs Station C. Swap groups at 20 minutes.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">One whistle at <strong>20 minutes</strong>. Groups swap. Coach stays at their station.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — 1v1 Defending (Max Pressure)</div>
+          <p>Narrowest channel of Block 2. Defender wins ball AND plays to a named target with one touch. Multiple reps running simultaneously — pairs line up and go continuously. <strong style="color:#B8942E">New: win or force out-of-bounds, point at target. Exp: win ball, one-touch to named target — call the name before touching the ball.</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">White · Coach David · Station C — 5v2 Rondo (All Players)</div>
+          <p>All players do 5v2 this week — no 4v2. Larger 10×10m square. "Checking!" mandatory, 2-touch for all. Defenders fully active. Group record: beat Thursday Week 3's best sequence. <strong style="color:#8FA3B4">New: 5v2, unlimited touches for first 5 min then 2-touch — ease into it. Exp: 5v2, 2-touch from rep 1, "checking!" mandatory, call receiver's name before every pass.</strong></p>
+        </div>
+      </div>
+
+      <div class="three-col" style="grid-template-columns:1fr 1fr">
+                <div class="diagram-wrap">
+          <div class="diagram-label">Station A · 1v1 Defending — Jockey &amp; Shape</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>1v1 defending channel with gate</title><desc>Attacker dribbles toward a 2-metre gate. Defender stays goal-side, sideways-on, jockeying. New players shadow only. Experienced players contest on heavy touch.</desc>
+            <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <rect x="50" y="10" width="100" height="140" rx="2" fill="rgba(184,148,46,.05)" stroke="#B8942E" stroke-width="1" stroke-dasharray="5 4" opacity=".5"/>
+            <line x1="70" y1="140" x2="70" y2="150" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="130" y1="140" x2="130" y2="150" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <text x="100" y="158" text-anchor="middle" font-size="11" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">GATE</text>
+            <circle cx="100" cy="25" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="25" r="5" fill="#2DBFAD"/>
+            <circle cx="100" cy="38" r="4" fill="white" opacity=".8"/>
+            <line x1="100" y1="42" x2="100" y2="100" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#a1)"/>
+            <ellipse cx="100" cy="112" rx="8" ry="13" fill="#1B3A5C" stroke="#E8607A" stroke-width="1.8" transform="rotate(-15,100,112)"/>
+            <circle cx="100" cy="97" r="7" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="100" cy="97" r="3" fill="#E8607A"/>
+            <text x="100" y="130" text-anchor="middle" font-size="11" fill="#E8607A" font-family="IBM Plex Mono,monospace">sideways-on</text>
+            <text x="100" y="10" text-anchor="middle" font-size="11" fill="#B8942E" font-family="IBM Plex Mono,monospace">stay low · show outside</text>
+          </svg>
+        </div>
+                <div class="diagram-wrap">
+          <div class="diagram-label">Station C · 4v2 Rondo — Scanning &amp; Sequence</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>4v2 rondo scanning diagram</title><desc>Four outside players, two defenders inside 8 by 8 square. Checking call mandatory before every receive. Defenders fully active.</desc>
+            <rect x="0" y="0" width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs><marker id="cr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+            <rect x="30" y="20" width="140" height="120" rx="2" fill="none" stroke="#8B5CF6" stroke-width="1.2" stroke-dasharray="6 4" opacity=".5"/>
+            <circle cx="30"  cy="20"  r="11" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="30"  cy="20"  r="5" fill="#8B5CF6"/>
+            <circle cx="170" cy="20"  r="11" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="170" cy="20"  r="5" fill="#8B5CF6"/>
+            <circle cx="30"  cy="140" r="11" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="30"  cy="140" r="5" fill="#8B5CF6"/>
+            <circle cx="170" cy="140" r="11" fill="none" stroke="#8B5CF6" stroke-width="1.5"/><circle cx="170" cy="140" r="5" fill="#8B5CF6"/>
+            <circle cx="85"  cy="72"  r="11" fill="none" stroke="#E8607A" stroke-width="1.8"/><circle cx="85"  cy="72"  r="4" fill="#E8607A"/>
+            <circle cx="120" cy="104" r="11" fill="none" stroke="#E8607A" stroke-width="1.8"/><circle cx="120" cy="104" r="4" fill="#E8607A"/>
+            <circle cx="30"  cy="20"  r="5" fill="white" opacity=".8"/>
+            <path d="M42 22 L158 22" fill="none" stroke="white" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5" marker-end="url(#cr1)"/>
+            <rect x="90" y="14" width="60" height="16" rx="3" fill="rgba(139,92,246,.2)"/>
+            <text x="120" y="26" text-anchor="middle" font-size="11" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">"checking!"</text>
+            <text x="100" y="154" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">defenders fully active · swap on intercept</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="scale">
+        <div class="sc-col sc-new">
+          <div class="sc-label">New Players — best reps of Block 2</div>
+          <ul>
+            <li>Station A: full pressure — this is what Block 3 will feel like every rep</li>
+            <li>Station C: 5v2, unlimited for first 5 min — get comfortable in the bigger space</li>
+            <li>Coaches: name one specific thing each player has improved since Week 1</li>
+          </ul>
+        </div>
+        <div class="sc-col sc-exp">
+          <div class="sc-label">Experienced — Block 2 peak</div>
+          <ul>
+            <li>Station A: win ball, call name, one-touch to target — no hesitation</li>
+            <li>Station C: 5v2, 2-touch, call receiver's name — if either is skipped, possession switches</li>
+            <li>Set the standard for the rest of the group</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: SSG -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">55 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: 5v5 + 5v4 — Full Pressure · Press &amp; Shape</span>
+      <span class="pc-dur">25 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">19 players, 4 teams. Two simultaneous games. Full pressure all Block 2 conditions active simultaneously: positional starts, press on turnover, CM condition. Longest SSG of the block — give them the extra time to express what they've learned.</p>
+      <ul class="drill-list">
+        <li>Positional 2-3-1 starts. Press on every turnover. Play through CM before shooting.</li>
+        <li>Rotate opponents at 12 minutes (slightly longer round than previous weeks).</li>
+        <li>Final 6 min: drop all conditions — free play. No coaching. Let Block 2 express itself.</li>
+      </ul>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> During the free play final 6 minutes, coaches step back completely. No calls, no "PRESS!", no corrections. Just watch. What you see in those 6 minutes — unprompted, unconditioned — is exactly what Block 2 built. Remember specific moments for Thursday's send-off.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">⚽ Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Ritual</div>
+        <p>All 19. GK cuts angle. Style attempts welcome. Hustle rule. Final Four ceremony. Tease Thursday: "The last session of Block 2 is Thursday. Come ready."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 Boys · Block 2 · Week 4 · Session 1 · Tue Oct 6, 2026</div>
+    <div class="sf-right">Coach Pete (801) 633-0556 · Coach David (480) 589-6441</div>
+  </div>
+
+</div>
+</body>
+</html>
