@@ -48,7 +48,6 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .block-label.b2{color:var(--violet)}
 .block-label.b3{color:var(--green)}
 .block-label.b4{color:var(--rose)}
-.block-theme{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .block-dates{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
 .block-rule{flex:1;height:1px;background:var(--border)}
 
@@ -83,6 +82,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .card.offline .card-open{color:var(--faint)}
 .card.offline .card-open::after{content:'⚠';color:var(--faint)}
 
+/* QUICK NAV */
+.qnav{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0}
+.qnav-pill{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:7px 14px;border-radius:4px;border:1px solid var(--border);color:var(--muted);background:var(--surf);transition:border-color .18s,color .18s,background .18s}
+.qnav-pill:hover{background:var(--surf2)}
+.qnav-pill.b1{border-color:var(--teal);color:var(--teal)}
+.qnav-pill.b1:hover{background:rgba(45,191,173,.12)}
+.qnav-pill.b2{border-color:var(--violet);color:var(--violet)}
+.qnav-pill.b2:hover{background:rgba(139,92,246,.12)}
+.qnav-pill.b3{border-color:var(--green);color:var(--green)}
+.qnav-pill.b3:hover{background:rgba(94,196,105,.12)}
+.qnav-pill.b4{border-color:var(--rose);color:var(--rose)}
+.qnav-pill.b4:hover{background:rgba(232,96,122,.12)}
+
 /* FOOTER */
 .foot{margin-top:64px;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .foot-l,.foot-r{font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
@@ -103,6 +115,8 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="sc-title">U10 Academy · <span>Season Plan</span></div>
     <div class="sc-sub">Blocks, team splits, session architecture, and macro focus areas across the whole season.</div>
   </a>
+
+  <nav class="qnav" id="qnav"></nav>
 
   <div class="sec-lbl">Session plans</div>
   <div id="blocks"></div>
@@ -217,6 +231,7 @@ function render() {
     const meta = BLOCK_META[blockNum] || { label:`Block ${blockNum}`, dates:'', cls:'b1' };
     const blockEl = document.createElement('section');
     blockEl.className = 'block';
+    blockEl.id = `block-${blockNum}`;
     blockEl.innerHTML = `
       <div class="block-head">
         <div class="block-label ${meta.cls}">${meta.label}</div>
@@ -252,6 +267,17 @@ function render() {
 
   document.getElementById('foot-count').textContent =
     `2026–27 · ${SESSIONS.length} session${SESSIONS.length !== 1 ? 's' : ''}`;
+
+  // Populate quick-nav
+  const qnav = document.getElementById('qnav');
+  for (const [blockNum] of byBlock) {
+    const meta = BLOCK_META[blockNum] || { label:`Block ${blockNum}`, cls:'b1' };
+    const a = document.createElement('a');
+    a.className = `qnav-pill ${meta.cls}`;
+    a.href = `#block-${blockNum}`;
+    a.textContent = meta.label;
+    qnav.appendChild(a);
+  }
 }
 
 async function hydrateTitle(el, path) {
