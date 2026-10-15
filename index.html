@@ -46,8 +46,9 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .block-label{font-family:var(--font-head);font-size:32px;letter-spacing:.04em}
 .block-label.b1{color:var(--teal)}
 .block-label.b2{color:var(--violet)}
-.block-label.b3{color:var(--heat)}
+.block-label.b3{color:var(--green)}
 .block-label.b4{color:var(--rose)}
+.block-theme{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .block-dates{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
 .block-rule{flex:1;height:1px;background:var(--border)}
 
@@ -148,13 +149,25 @@ const SESSIONS = [
   // ── Block 2 · Week 4 ──────────────────────────────────────────
   { file:'MFC_U10_B2_W4_S1_T_Oct6.html',    block:2, week:4, sess:1, day:'T',  date:'Oct 6',   title:'Max Pressure — 2 Stations' },
   { file:'MFC_U10_B2_W4_S2_Th_Oct8.html',   block:2, week:4, sess:2, day:'Th', date:'Oct 8',   title:'Block 2 Festival & Send-Off 🎉' },
+  // ── Block 3 · Week 1 ──────────────────────────────────────────
+  { file:'MFC_U10_B3_W1_S1_T_Oct20.html',   block:3, week:1, sess:1, day:'T',  date:'Oct 20',  title:'Full Stride + Build Out' },
+  { file:'MFC_U10_B3_W1_S2_Th_Oct22.html',  block:3, week:1, sess:2, day:'Th', date:'Oct 22',  title:'Track the Runner' },
+  // ── Block 3 · Week 2 ──────────────────────────────────────────
+  { file:'MFC_U10_B3_W2_S1_T_Oct27.html',   block:3, week:2, sess:1, day:'T',  date:'Oct 27',  title:'Read the Press' },
+  { file:'MFC_U10_B3_W2_S2_Th_Oct29.html',  block:3, week:2, sess:2, day:'Th', date:'Oct 29',  title:'Agility Day' },
+  // ── Block 3 · Week 3 ──────────────────────────────────────────
+  { file:'MFC_U10_B3_W3_S1_T_Nov3.html',    block:3, week:3, sess:1, day:'T',  date:'Nov 3',   title:'Long Touch, Big Space' },
+  { file:'MFC_U10_B3_W3_S2_Th_Nov5.html',   block:3, week:3, sess:2, day:'Th', date:'Nov 5',   title:'Read the Ball Flight' },
+  // ── Block 3 · Week 4 ──────────────────────────────────────────
+  { file:'MFC_U10_B3_W4_S1_T_Nov10.html',   block:3, week:4, sess:1, day:'T',  date:'Nov 10',  title:'All Together' },
+  { file:'MFC_U10_B3_W4_S2_Th_Nov12.html',  block:3, week:4, sess:2, day:'Th', date:'Nov 12',  title:'Block 3 Finale' },
 ];
 
 const BLOCK_META = {
-  1: { label:'Block 1', dates:'Aug 8 – Sep 10',   cls:'b1' },
-  2: { label:'Block 2', dates:'Sep 15 – Oct 8 · Break Oct 12–16',   cls:'b2' },
-  3: { label:'Block 3', dates:'Oct 13 – Nov 5',   cls:'b3' },
-  4: { label:'Block 4', dates:'Nov 10 – Dec 12',  cls:'b4' },
+  1: { label:'Block 1 · Foundations & Club Basics',          dates:'Aug 8 – Sep 10',                    cls:'b1' },
+  2: { label:'Block 2 · Defending, Escaping & Pressing',     dates:'Sep 15 – Oct 8 · Break Oct 12–16', cls:'b2' },
+  3: { label:'Block 3 · Transitions & Reading the Game',     dates:'Oct 20 – Nov 12',                  cls:'b3' },
+  4: { label:'Block 4 · Positional Play & Team Shape',       dates:'Nov 10 – Dec 12',                  cls:'b4' },
 };
 
 const DAY_FULL = { T:'Tuesday', Th:'Thursday', Sa:'Saturday' };

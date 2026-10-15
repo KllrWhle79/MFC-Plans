@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 3 · Week 4 · Nov 10 · All Together</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--green);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--green)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-green{border-color:var(--green);color:var(--green)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(94,196,105,.07);border:1px solid rgba(94,196,105,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--green);background:rgba(94,196,105,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--green)}
+.ssg-box{background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:6px;padding:14px 16px}
+.ssg-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--violet);text-transform:uppercase;margin-bottom:8px}
+.ssg-box ul{list-style:none;display:grid;gap:5px}
+.ssg-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.ssg-box ul li::before{content:'→';position:absolute;left:0;color:var(--violet);font-size:14px}
+.agility-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ag-item{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:10px 12px}
+.ag-name{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--heat);text-transform:uppercase;margin-bottom:4px}
+.ag-item p{font-size:14px;color:var(--muted);line-height:1.5}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.agility-grid{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 3 · Week 4 · Day 1</div>
+      <div class="sh-title">Block <span>3</span> · Tue<br>All Together</div>
+      <div class="sh-sub">Tuesday, November 10, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill mp-heat">Agility/Speed Station · 2 of 2</div><br>
+      <div class="meta-pill mp-wk">Week 4 · Block 3</div><br>
+      <div class="meta-pill">19 Players · 4 Teams · 2 Games</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B3 W4</div>
+    <div class="su-body"><strong>Second and final Agility/Speed station of Block 3.</strong> Pete adds a reaction-start and direction-call variant to push beyond the fixed patterns from W2. Brent's sprint dribbling is player-led: self-directed reps. David's 1v1 defending runs 3 consecutive reps without stopping. 3v3+Target runs with no coaching cues from the sideline.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug" style="flex:5"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm" style="flex:10"><span class="tl-label">Pressure Rondo</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech" style="flex:45"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-ssg" style="flex:20"><span class="tl-label">3v3 + GK + Target · No Cues</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock" style="flex:10"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Tuesday Opening Ritual</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Tuesday Opening Ritual — Block 3</div>
+        <p>Players juggle freely on arrival. Feet only. No target, no counting aloud unless a player wants to call their own best. W4 twist: if anyone reaches 20 consecutive touches, they set down the ball and cheer on the others until the 5 minutes is up.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Pressure Rondo</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Returning from W2 Tuesday. 4v2 in a 10×10m square. Defenders stay side-on, no diving. Primes the defending stations and the pressing decisions that will appear in the SSG.</p>
+      <ul class="drill-list">
+        <li>4 attackers keep possession vs. 2 side-on defenders in a 10×10m square</li>
+        <li>Defenders: stay side-on at all times. No diving across. No ball-watching from behind.</li>
+        <li>When a defender wins the ball, they immediately swap with the attacker who lost it — no pause</li>
+        <li>Progress at 7 minutes: shrink to 8×8m. Same rules. Tighter = more decisions per second.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Agility Final · Sprint Free-Choice · Defending Consecutive</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Station A is the second and final agility circuit — adds reaction start and direction call. Station B is self-directed: players choose their own reps. Station C runs three consecutive 1v1 defending rounds without stopping between.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Agility/Speed Circuit: Reaction Start + Direction Call</div>
+          <p>Same four drills from W2 (hurdle step-overs, skipping bounds, zig-zag+pause, kneeling start). New layer: on the kneeling-start sprint, coach calls "LEFT" or "RIGHT" at the 8m mark — player cuts in that direction to a cone and continues. Also add: two players race the kneeling sprint side-by-side once (pure competition). <strong style="color:#B8942E">Cue: "React first. Think second."</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach Brent · Station B — Full-Sprint Dribbling: Self-Directed</div>
+          <p>All three gate options available (straight gate, front-defender variant, reactive gate). Player chooses which one to run each rep. Coach stands back. Minimum 8 reps in 15 minutes — that's the only rule. The player decides their challenge level. Brent observes and gives one short note per player when the group is done. <strong style="color:#5ec469">Cue: "You decide. You push."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach David · Station C — Defending Body Shape: 3 Consecutive Reps</div>
+          <p>1v1 defending. Instead of swapping roles after each rep, the defender defends three rounds in a row against three different attackers, back-to-back with no reset. Challenges the mantra under fatigue. After three consecutive defenses, the first defender rotates out. Mantra aloud on every rep: "Side — Low — Fast — Slow." <strong style="color:#2DBFAD">Cue: "Still correct on rep 3. Say the mantra every time."</strong></p>
+        </div>
+      </div>
+
+      <!-- Agility upgrade details -->
+      <div style="margin-top:4px">
+        <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px">Station A W4 Upgrades — Reaction + Race (Pete)</div>
+        <div class="agility-grid">
+          <div class="ag-item">
+            <div class="ag-name">Kneeling Start + Direction Cut</div>
+            <p>Same kneeling start — but at the 8m cone, coach calls "LEFT" or "RIGHT". Player must cut to that side and run to a wide cone 5m off-centre. Can't predict the call; must read and react at speed.</p>
+          </div>
+          <div class="ag-item">
+            <div class="ag-name">Side-by-Side Kneeling Race</div>
+            <p>Two players kneel next to each other. Coach calls "GO!" — first to the 15m cone wins. Once per player per rotation. Pure competition adds intensity the drill doesn't have on its own.</p>
+          </div>
+          <div class="ag-item">
+            <div class="ag-name">Zig-Zag + One Extra Bound</div>
+            <p>Returning from W2 — but after the final zig-zag cone, player immediately bounds one more time (unpredictable direction — coach points left or right as they land the last cone). Tests sustained reaction after a fatiguing sequence.</p>
+          </div>
+          <div class="ag-item">
+            <div class="ag-name">Hurdle Step-Overs → Sprint → 180° Turn</div>
+            <p>Same hurdle sequence as W2, but after the 10m sprint: player touches the cone and immediately turns 180° and sprints back 5m. The full sequence is hurdles → sprint → touch → return sprint. No stopping at the far cone.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- diagrams -->
+      <div class="three-col" style="margin-top:8px">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Kneeling Start + Direction Cut</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Kneeling start with direction cut drill</title>
+            <desc>Player kneels and sprints on go. At the eight metre cone the coach calls left or right. The player cuts to a wide cone five metres off centre in the called direction.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="dc1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="2" stroke-linecap="round"/></marker>
+              <marker id="dc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- start player kneeling -->
+            <circle cx="100" cy="148" r="10" fill="none" stroke="#5ec469" stroke-width="1.5"/><circle cx="100" cy="148" r="3.5" fill="#5ec469"/>
+            <text x="100" y="160" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">START</text>
+            <!-- sprint up -->
+            <line x1="100" y1="137" x2="100" y2="90" stroke="#5ec469" stroke-width="2" stroke-dasharray="5 3" opacity=".7"/>
+            <!-- decision cone at 8m -->
+            <polygon points="100,85 106,95 94,95" fill="#F59E0B" opacity=".85"/>
+            <text x="100" y="80" text-anchor="middle" font-size="9" fill="#F59E0B" font-family="IBM Plex Mono,monospace">CALL!</text>
+            <!-- left cut -->
+            <path d="M95 85 Q65 70 40 55" fill="none" stroke="#F59E0B" stroke-width="1.8" opacity=".8" marker-end="url(#dc2)"/>
+            <polygon points="38,48 32,58 44,58" fill="#F59E0B" opacity=".7"/>
+            <text x="38" y="44" text-anchor="middle" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">LEFT</text>
+            <!-- right cut -->
+            <path d="M105 85 Q135 70 160 55" fill="none" stroke="#5ec469" stroke-width="1.8" opacity=".8" marker-end="url(#dc1)"/>
+            <polygon points="162,48 156,58 168,58" fill="#5ec469" opacity=".7"/>
+            <text x="162" y="44" text-anchor="middle" font-size="10" fill="#5ec469" font-family="IBM Plex Mono,monospace">RIGHT</text>
+            <!-- coach call label -->
+            <text x="100" y="30" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">COACH CALLS</text>
+            <text x="100" y="42" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">AT CONE</text>
+          </svg>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · Self-Directed Gates</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Self directed sprint dribbling — player chooses which gate variant to run each rep</title>
+            <desc>Three gate options available: straight gate, front defender variant, and reactive gate. The player chooses which one to run each rep. Minimum eight reps in fifteen minutes. Coach observes and gives one short note per player at the end.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="sd1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="2" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- three gate options shown as columns -->
+            <!-- gate A: straight -->
+            <polygon points="45,118 40,128 50,128" fill="#F59E0B" opacity=".8"/>
+            <polygon points="55,118 50,128 60,128" fill="#F59E0B" opacity=".8"/>
+            <line x1="50" y1="118" x2="50" y2="50" stroke="#5ec469" stroke-width="2" stroke-dasharray="5 3" opacity=".7" marker-end="url(#sd1)"/>
+            <polygon points="50,42 44,52 56,52" fill="#5ec469" opacity=".7"/>
+            <text x="50" y="36" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">OPTION A</text>
+            <text x="50" y="145" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">STRAIGHT</text>
+            <!-- gate B: defender -->
+            <polygon points="95,118 90,128 100,128" fill="#F59E0B" opacity=".8"/>
+            <polygon points="105,118 100,128 110,128" fill="#F59E0B" opacity=".8"/>
+            <line x1="100" y1="118" x2="100" y2="78" stroke="#5ec469" stroke-width="2" stroke-dasharray="5 3" opacity=".7"/>
+            <circle cx="100" cy="65" r="9" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="100" y="69" text-anchor="middle" font-size="8" fill="#E8607A">DEF</text>
+            <polygon points="100,42 94,52 106,52" fill="#5ec469" opacity=".7"/>
+            <text x="100" y="36" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">OPTION B</text>
+            <text x="100" y="145" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">+DEFENDER</text>
+            <!-- gate C: reactive -->
+            <polygon points="145,118 140,128 150,128" fill="#F59E0B" opacity=".8"/>
+            <polygon points="155,118 150,128 160,128" fill="#F59E0B" opacity=".8"/>
+            <line x1="150" y1="118" x2="150" y2="88" stroke="#5ec469" stroke-width="2" stroke-dasharray="5 3" opacity=".7"/>
+            <text x="150" y="78" text-anchor="middle" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">CALL!</text>
+            <path d="M150 75 Q170 60 182 45" fill="none" stroke="#5ec469" stroke-width="1.5" opacity=".7" marker-end="url(#sd1)"/>
+            <text x="150" y="36" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">OPTION C</text>
+            <text x="150" y="145" text-anchor="middle" font-size="9" fill="#F59E0B" font-family="IBM Plex Mono,monospace">REACTIVE</text>
+            <!-- YOU CHOOSE label -->
+            <text x="100" y="12" text-anchor="middle" font-size="11" fill="#5ec469" font-family="IBM Plex Mono,monospace" font-weight="600">YOU CHOOSE</text>
+          </svg>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · 3 Consecutive 1v1 Defending</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Three consecutive 1v1 defending reps with no reset between rounds</title>
+            <desc>Defender takes on three different attackers back to back with no rest between reps. After three consecutive defending rounds the first defender rotates out. The mantra side low fast slow is said aloud every rep.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3045" opacity=".9"/>
+            <defs>
+              <marker id="c1v1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- Rep 1 -->
+            <text x="14" y="35" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">REP 1</text>
+            <circle cx="55" cy="35" r="8" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="55" y="39" text-anchor="middle" font-size="8" fill="#2DBFAD">A1</text>
+            <circle cx="110" cy="35" r="9" fill="#1B3A5C" stroke="#E8607A" stroke-width="2"/><text x="110" y="39" text-anchor="middle" font-size="8" fill="#E8607A">DEF</text>
+            <line x1="63" y1="35" x2="100" y2="35" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#c1v1)"/>
+            <!-- Rep 2 -->
+            <text x="14" y="82" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">REP 2</text>
+            <circle cx="55" cy="82" r="8" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="55" y="86" text-anchor="middle" font-size="8" fill="#2DBFAD">A2</text>
+            <circle cx="110" cy="82" r="9" fill="#1B3A5C" stroke="#E8607A" stroke-width="2"/><text x="110" y="86" text-anchor="middle" font-size="8" fill="#E8607A">DEF</text>
+            <line x1="63" y1="82" x2="100" y2="82" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#c1v1)"/>
+            <!-- Rep 3 -->
+            <text x="14" y="130" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">REP 3</text>
+            <circle cx="55" cy="130" r="8" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="55" y="134" text-anchor="middle" font-size="8" fill="#2DBFAD">A3</text>
+            <circle cx="110" cy="130" r="9" fill="#1B3A5C" stroke="#E8607A" stroke-width="2"/><text x="110" y="134" text-anchor="middle" font-size="8" fill="#E8607A">DEF</text>
+            <line x1="63" y1="130" x2="100" y2="130" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#c1v1)"/>
+            <!-- SIDE LOW FAST SLOW mantra strip -->
+            <text x="150" y="50" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" font-weight="600">SIDE</text>
+            <text x="150" y="64" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" font-weight="600">LOW</text>
+            <text x="150" y="78" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" font-weight="600">FAST</text>
+            <text x="150" y="92" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" font-weight="600">SLOW</text>
+            <text x="150" y="110" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">×3 then</text>
+            <text x="150" y="122" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">ROTATE</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: 3v3 + GK + TARGET — NO CUES -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: 3v3 + GK + Target Player — No Coaching Cues</span>
+      <span class="pc-dur">20 min · Two Simultaneous Games</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Final scheduled 3v3+Target appearance. Full rules in place. No cues from the sideline — coaches observe and record. The players know the format; let them demonstrate what they've learned.</p>
+      <div class="ssg-box">
+        <h5>Full Rules — Reminder</h5>
+        <ul>
+          <li>GK receives ball, rolls to Team 1. Team 1 builds toward the target player at far end. Target player must "show" — move to receive.</li>
+          <li>If Team 2 intercepts: immediate counter-attack — no reset, play on.</li>
+          <li>Goal scored only by receiving the ball from the target player and then scoring (target player may not score directly).</li>
+          <li>Rotate GK and target player every 4 minutes. Two games running simultaneously — Field 1 and Field 2.</li>
+        </ul>
+      </div>
+      <div class="ssg-box" style="margin-top:4px">
+        <h5>No-Coaching Protocol</h5>
+        <ul>
+          <li>Coaches stay silent on both fields for the full 20 minutes. No encouragement, no cues, no corrections — observe only.</li>
+          <li>Each coach watches one field and takes a mental note of 2 specific players: one making strong decisions, one who needs a conversation.</li>
+          <li>After Knockout, coaches share notes with each other (2 min). Individual conversations happen at the next session or practice.</li>
+        </ul>
+      </div>
+
+      <!-- Two-field SSG diagram -->
+      <div class="diagram-wrap">
+        <div class="diagram-label">3v3 + GK + Target · Two Simultaneous Fields · No Coaching Cues</div>
+        <svg viewBox="0 0 560 200" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>3v3 plus GK plus target player SSG on two simultaneous fields</title>
+          <desc>Two identical small-sided game fields side by side. Each field has a GK at one end and a target player at the other end. Three versus three in the middle. The GK rolls to the building team who must play through to the target player. Teams counter attack immediately on turnovers.</desc>
+          <rect width="560" height="200" rx="6" fill="#1a2a3a"/>
+          <!-- FIELD 1 -->
+          <rect x="15" y="10" width="255" height="180" rx="4" fill="none" stroke="#3D5166" stroke-width="1.5"/>
+          <text x="143" y="8" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">FIELD 1</text>
+          <!-- GK left -->
+          <rect x="15" y="85" width="8" height="30" fill="none" stroke="#5ec469" stroke-width="2"/>
+          <circle cx="37" cy="100" r="9" fill="#1B3A5C" stroke="#5ec469" stroke-width="1.5"/><text x="37" y="104" text-anchor="middle" font-size="8" fill="#5ec469">GK</text>
+          <!-- Target right -->
+          <circle cx="250" cy="100" r="9" fill="#1B3A5C" stroke="#F59E0B" stroke-width="1.5"/><text x="250" y="104" text-anchor="middle" font-size="7" fill="#F59E0B">TGT</text>
+          <rect x="257" y="85" width="8" height="30" fill="none" stroke="#F59E0B" stroke-width="2"/>
+          <!-- players mid -->
+          <circle cx="100" cy="65" r="9" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="100" y="69" text-anchor="middle" font-size="8" fill="#2DBFAD">T1</text>
+          <circle cx="143" cy="95" r="9" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="143" y="99" text-anchor="middle" font-size="8" fill="#2DBFAD">T1</text>
+          <circle cx="100" cy="135" r="9" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="100" y="139" text-anchor="middle" font-size="8" fill="#2DBFAD">T1</text>
+          <circle cx="190" cy="70" r="9" fill="#1B3A5C" stroke="#E8607A" stroke-width="1.5"/><text x="190" y="74" text-anchor="middle" font-size="8" fill="#E8607A">T2</text>
+          <circle cx="165" cy="130" r="9" fill="#1B3A5C" stroke="#E8607A" stroke-width="1.5"/><text x="165" y="134" text-anchor="middle" font-size="8" fill="#E8607A">T2</text>
+          <circle cx="70" cy="100" r="9" fill="#1B3A5C" stroke="#E8607A" stroke-width="1.5"/><text x="70" y="104" text-anchor="middle" font-size="8" fill="#E8607A">T2</text>
+          <!-- ball -->
+          <circle cx="120" cy="100" r="5" fill="white" opacity=".85"/>
+          <!-- roll arrow from GK -->
+          <defs><marker id="tgt1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <line x1="46" y1="100" x2="108" y2="100" stroke="#5ec469" stroke-width="1.3" stroke-dasharray="4 3" opacity=".6" marker-end="url(#tgt1)"/>
+
+          <!-- DIVIDER -->
+          <line x1="290" y1="10" x2="290" y2="190" stroke="#3D5166" stroke-width="2" stroke-dasharray="6 4" opacity=".5"/>
+
+          <!-- FIELD 2 -->
+          <rect x="295" y="10" width="255" height="180" rx="4" fill="none" stroke="#3D5166" stroke-width="1.5"/>
+          <text x="423" y="8" text-anchor="middle" font-size="11" fill="#3D5166" font-family="IBM Plex Mono,monospace">FIELD 2</text>
+          <!-- GK left -->
+          <rect x="295" y="85" width="8" height="30" fill="none" stroke="#5ec469" stroke-width="2"/>
+          <circle cx="317" cy="100" r="9" fill="#1B3A5C" stroke="#5ec469" stroke-width="1.5"/><text x="317" y="104" text-anchor="middle" font-size="8" fill="#5ec469">GK</text>
+          <!-- Target right -->
+          <circle cx="530" cy="100" r="9" fill="#1B3A5C" stroke="#F59E0B" stroke-width="1.5"/><text x="530" y="104" text-anchor="middle" font-size="7" fill="#F59E0B">TGT</text>
+          <rect x="537" y="85" width="8" height="30" fill="none" stroke="#F59E0B" stroke-width="2"/>
+          <!-- players mid -->
+          <circle cx="380" cy="70" r="9" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="1.5"/><text x="380" y="74" text-anchor="middle" font-size="8" fill="#8B5CF6">T3</text>
+          <circle cx="423" cy="100" r="9" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="1.5"/><text x="423" y="104" text-anchor="middle" font-size="8" fill="#8B5CF6">T3</text>
+          <circle cx="380" cy="130" r="9" fill="#1B3A5C" stroke="#8B5CF6" stroke-width="1.5"/><text x="380" y="134" text-anchor="middle" font-size="8" fill="#8B5CF6">T3</text>
+          <circle cx="470" cy="65" r="9" fill="#1B3A5C" stroke="#F59E0B" stroke-width="1.5"/><text x="470" y="69" text-anchor="middle" font-size="8" fill="#F59E0B">T4</text>
+          <circle cx="445" cy="135" r="9" fill="#1B3A5C" stroke="#F59E0B" stroke-width="1.5"/><text x="445" y="139" text-anchor="middle" font-size="8" fill="#F59E0B">T4</text>
+          <circle cx="350" cy="100" r="9" fill="#1B3A5C" stroke="#F59E0B" stroke-width="1.5"/><text x="350" y="104" text-anchor="middle" font-size="8" fill="#F59E0B">T4</text>
+          <!-- ball -->
+          <circle cx="400" cy="100" r="5" fill="white" opacity=".85"/>
+          <!-- roll arrow from GK -->
+          <defs><marker id="tgt2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <line x1="326" y1="100" x2="388" y2="100" stroke="#5ec469" stroke-width="1.3" stroke-dasharray="4 3" opacity=".6" marker-end="url(#tgt2)"/>
+          <!-- no coaching label -->
+          <text x="280" y="196" text-anchor="middle" font-size="11" fill="#E8607A" font-family="IBM Plex Mono,monospace" opacity=".7">NO COACHING CUES — OBSERVE ONLY</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Game</div>
+        <p>Standard knockout. One ball, all 19. After the session's observation period — coaches can now cheer and be loud. High energy finish. One more session in Block 3 on Thursday. Set the expectation before they leave: "Thursday is our final session of the block — come ready."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 3 · Week 4 · Tue Nov 10</div>
+    <div class="sf-right">B3 W4 S1 · All Together · Agility 2/2</div>
+  </div>
+
+</div>
+</body>
+</html>

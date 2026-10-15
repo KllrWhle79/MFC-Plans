@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 3 · Week 4 · Nov 12 · Block 3 Finale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--green);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--green)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-green{border-color:var(--green);color:var(--green)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(94,196,105,.07);border:1px solid rgba(94,196,105,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--green);background:rgba(94,196,105,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--green)}
+.ssg-box{background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:6px;padding:14px 16px}
+.ssg-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--violet);text-transform:uppercase;margin-bottom:8px}
+.ssg-box ul{list-style:none;display:grid;gap:5px}
+.ssg-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.ssg-box ul li::before{content:'→';position:absolute;left:0;color:var(--violet);font-size:14px}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.block-close{background:rgba(94,196,105,.06);border:1px solid rgba(94,196,105,.2);border-radius:8px;padding:18px 20px;margin-top:8px}
+.bc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--green);text-transform:uppercase;margin-bottom:10px}
+.bc-body{font-size:15.5px;color:var(--muted);line-height:1.7}
+.bc-body strong{color:var(--text)}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 3 · Week 4 · Day 2 · Final Session</div>
+      <div class="sh-title">Block <span>3</span> · Thu<br>Block 3 Finale</div>
+      <div class="sh-sub">Thursday, November 12, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill mp-green">Block 3 · Session 8 of 8</div><br>
+      <div class="meta-pill mp-wk">Week 4 · Final</div><br>
+      <div class="meta-pill">19 Players · Full Speed</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">FINALE</div>
+    <div class="su-body"><strong>Final session of Block 3 — Transitions &amp; Positional Awareness.</strong> All stations run at full consolidation pace. Pressing at game-speed 3v3. Brent's station adds a GK chip-into-space element. David's aerial closes with a full sequence: chest → lay-off → teammate shoots. SSG is coach's choice: run whichever of Dog Fight or 3v3+Target the coaches want to observe.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug" style="flex:5"><span class="tl-label">Tiki-Tak W4</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm" style="flex:10"><span class="tl-label">Dynamic Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech" style="flex:45"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-ssg" style="flex:20"><span class="tl-label">SSG · Coach's Choice</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock" style="flex:10"><span class="tl-label">Knockout + Block Close</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: TIKI-TAK W4 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Tiki-Tak Passing — W4 Final: Full Triangle, Shadow Defender, All Move After Pass</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Thursday Opening Ritual — Block 3 W4 · Full Progression</div>
+        <p>Groups of 4 — 3 passers in a triangle plus 1 shadow defender who follows but never intercepts. Every player must move to a new position immediately after passing — no staying in place. The shadow defender mirrors the ball, staying 1m away. Purpose: passing and movement under permanent positional pressure. No pausing, no re-setting. If the group keeps moving continuously for 60 seconds, they win the round.</p>
+      </div>
+      <ul class="drill-list">
+        <li>Shadow defender follows the ball — not the player. Ball moves, shadow moves.</li>
+        <li>Every passer: one step in any direction immediately after the ball leaves your foot.</li>
+        <li>This is the most complex Tiki-Tak variation of Block 3. If a group struggles, drop back to W3 (triangles without the shadow) for 1 minute, then re-introduce.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Combination — Free Dribble Into Pressure Rondo</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Block 3 has two warm-up formats: free dribble (Tuesdays) and transition/rondo (Thursdays). This finale blends both. 5 minutes of free dribble with all three moves available; then transition immediately into a 4v2 rondo. No break between — move as a team.</p>
+      <ul class="drill-list">
+        <li>Minutes 5–10: free dribble in a large grid. All moves available (scissor, sole stop, front-foot cut). No instruction — coaches observe.</li>
+        <li>At the 10-minute whistle: all players immediately move into their rondo squares (4v2, 10×10m). No explanation needed — they know this format.</li>
+        <li>Minutes 10–15: rondo at full intensity. If a defender wins the ball, the attacker who lost it becomes the next defender immediately.</li>
+      </ul>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The dribble-to-rondo transition is itself a transition exercise. Watch who organizes quickly and who needs direction. Those are the leaders for the SSG in 45 minutes. No coaching during either segment — just observe.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Pressing Consolidation · Sprint + GK Chip · Aerial Full Sequence</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Each station is a final, full-speed version of its Block 3 progression. No new concepts — consolidation and performance. Coaches give one piece of feedback per player at the end of their 15 minutes, then the group rotates.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Pressing: Game-Speed 3v3 Consolidation</div>
+          <p>Full 3v3 press. No cue from Pete about which shape to use — pressing team calls the shape themselves before each rep ("Close only!" / "Channel!" / "Full press!"). Attackers try to play through. 3 minutes on, 1 minute off, 3 sets. Pete gives one note per player, on their best press or their most frequent error, at the end. <strong style="color:#B8942E">Cue: "You choose the shape. You call it. Now press."</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach Brent · Station B — Sprint Dribbling: GK Chip Into Space</div>
+          <p>New scenario for the finale: GK (Brent or a player) chips the ball into open space 20m away. Player sprints, arrives first, takes the first touch long in the direction of a goal (or end cone), then shoots or dribbles past a final gate. The whole sequence — react, sprint, long touch, finish — must be completed in one continuous movement. No stopping to re-position. <strong style="color:#5ec469">Cue: "Sprint onto it. Big touch. Don't stop."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach David · Station C — Aerial Final: Chest → Lay-off → Teammate Shoots</div>
+          <p>Three-player sequence at game speed. David chips to Player A from 10m. A chest traps, immediately lays off to Player B (who has moved to receive — no waiting). B shoots on goal or a target cone. Rotate: A→B→server. All serves from the foot — no hand tosses. <strong>No heading at any point.</strong> <strong style="color:#2DBFAD">Cue: "Trap — lay off — shoot. No pauses."</strong></p>
+        </div>
+      </div>
+
+      <!-- diagrams -->
+      <div class="three-col" style="margin-top:8px">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Self-Called Press Shape</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Self-called pressing shape — pressing team calls their shape before each rep</title>
+            <desc>Three defenders call their pressing shape before each rep choosing between close only, channel, or full press. Three attackers try to play through. Three minutes on, one minute off, three sets.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3045" opacity=".9"/>
+            <defs>
+              <marker id="sc1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.8" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- call-out box -->
+            <rect x="50" y="10" width="100" height="24" rx="3" fill="rgba(232,96,122,.12)" stroke="#E8607A" stroke-width="1" stroke-dasharray="3 2"/>
+            <text x="100" y="26" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">"FULL PRESS!"</text>
+            <!-- attackers (bottom) -->
+            <circle cx="45" cy="130" r="9" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="45" y="134" text-anchor="middle" font-size="8" fill="#2DBFAD">A</text>
+            <circle cx="100" cy="125" r="9" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="100" y="129" text-anchor="middle" font-size="8" fill="#2DBFAD">A</text>
+            <circle cx="155" cy="130" r="9" fill="#1B3A5C" stroke="#2DBFAD" stroke-width="1.5"/><text x="155" y="134" text-anchor="middle" font-size="8" fill="#2DBFAD">A</text>
+            <!-- ball -->
+            <circle cx="100" cy="112" r="4" fill="white" opacity=".85"/>
+            <!-- defenders pressing -->
+            <circle cx="100" cy="78" r="9" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="100" y="82" text-anchor="middle" font-size="8" fill="#E8607A">D1</text>
+            <circle cx="55" cy="65" r="9" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="55" y="69" text-anchor="middle" font-size="8" fill="#E8607A">D2</text>
+            <circle cx="145" cy="65" r="9" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="145" y="69" text-anchor="middle" font-size="8" fill="#E8607A">D3</text>
+            <!-- press arrows -->
+            <line x1="100" y1="87" x2="100" y2="116" stroke="#E8607A" stroke-width="1.8" opacity=".8" marker-end="url(#sc1)"/>
+            <line x1="60" y1="70" x2="90" y2="116" stroke="#E8607A" stroke-width="1.2" opacity=".5" marker-end="url(#sc1)"/>
+            <line x1="140" y1="70" x2="110" y2="116" stroke="#E8607A" stroke-width="1.2" opacity=".5" marker-end="url(#sc1)"/>
+          </svg>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · GK Chip Into Space</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>GK chip into space drill — player sprints onto a chipped ball, takes a long touch and finishes</title>
+            <desc>The GK chips the ball into open space twenty metres away. The player sprints, arrives first, takes the first touch long in the direction of goal, then shoots or dribbles past a final gate. The whole sequence is one continuous movement with no stopping.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="gk1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="2.2" stroke-linecap="round"/></marker>
+              <marker id="gk2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- GK left -->
+            <circle cx="18" cy="130" r="9" fill="#1B3A5C" stroke="#5ec469" stroke-width="1.5"/><text x="18" y="134" text-anchor="middle" font-size="8" fill="#5ec469">GK</text>
+            <!-- chip arc -->
+            <path d="M27 124 Q80 50 130 90" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="5 3" opacity=".8" marker-end="url(#gk2)"/>
+            <!-- ball in air -->
+            <circle cx="80" cy="60" r="5" fill="white" opacity=".7"/>
+            <!-- player sprint start -->
+            <circle cx="55" cy="148" r="9" fill="none" stroke="#5ec469" stroke-width="1.5" opacity=".5"/><circle cx="55" cy="148" r="3" fill="#5ec469" opacity=".5"/>
+            <!-- player sprint path -->
+            <path d="M60 143 Q95 120 128 94" fill="none" stroke="#5ec469" stroke-width="2" stroke-dasharray="5 3" opacity=".7" marker-end="url(#gk1)"/>
+            <!-- first touch long -->
+            <circle cx="130" cy="90" r="4" fill="white" opacity=".85"/>
+            <path d="M134 88 Q160 70 185 55" fill="none" stroke="#5ec469" stroke-width="2.5" opacity=".9" marker-end="url(#gk1)"/>
+            <!-- goal/target -->
+            <rect x="180" y="40" width="8" height="25" fill="none" stroke="#F59E0B" stroke-width="2"/>
+            <text x="184" y="35" text-anchor="middle" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">GOAL</text>
+            <!-- labels -->
+            <text x="100" y="155" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">SPRINT → BIG TOUCH → FINISH</text>
+          </svg>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Chest → Lay-off → Shoot</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Aerial final sequence — chest trap then lay-off to a teammate who shoots</title>
+            <desc>Server chips to player A from ten metres. Player A chest traps and immediately lays off to player B who has moved to receive. Player B shoots on goal. No heading at any point. Rotate positions after each rep.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="cl1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="cl2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="cl3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- server (David / player role) -->
+            <circle cx="20" cy="140" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="20" cy="140" r="3" fill="#B8942E"/>
+            <text x="20" y="155" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">SRV</text>
+            <!-- chip to player A -->
+            <path d="M29 134 Q70 70 110 95" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="5 3" opacity=".8" marker-end="url(#cl2)"/>
+            <!-- ball in air -->
+            <circle cx="70" cy="75" r="5" fill="white" opacity=".7"/>
+            <!-- player A chest trap -->
+            <circle cx="110" cy="100" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="110" cy="100" r="3.5" fill="#2DBFAD"/>
+            <text x="110" y="116" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">CHEST</text>
+            <!-- lay-off to B -->
+            <path d="M120 97 Q145 88 165 80" fill="none" stroke="#2DBFAD" stroke-width="1.8" opacity=".8" marker-end="url(#cl1)"/>
+            <!-- player B shoots -->
+            <circle cx="168" cy="76" r="10" fill="none" stroke="#F59E0B" stroke-width="1.5"/><circle cx="168" cy="76" r="3.5" fill="#F59E0B"/>
+            <text x="168" y="92" text-anchor="middle" font-size="9" fill="#F59E0B" font-family="IBM Plex Mono,monospace">SHOOT</text>
+            <path d="M178 72 L192 55" stroke="#F59E0B" stroke-width="2.2" opacity=".9" marker-end="url(#cl3)"/>
+            <!-- goal target -->
+            <rect x="188" y="40" width="7" height="20" fill="none" stroke="#F59E0B" stroke-width="2"/>
+            <!-- no heading -->
+            <text x="20" y="20" font-size="18" fill="#E8607A" opacity=".6">⊘</text>
+            <text x="20" y="32" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">no heading</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: SSG COACH'S CHOICE -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: Coach's Choice — Dog Fight or 3v3 + GK + Target</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Run whichever SSG format the coaching staff wants to observe on the block's last day. Both are fully established. Decide before the session based on what Thursday's observation from W4 S1 showed — if transition decisions need more reps, run Dog Fight. If build-and-connect needed work, run 3v3+Target.</p>
+      <div class="ssg-box">
+        <h5>Option A: Dog Fight (if chosen)</h5>
+        <ul>
+          <li>Wide &amp; short. 3 pug goals each end. Whole team. 2 balls. All restarts apply.</li>
+          <li>Cue: "Win it — pick a goal — go!" — the sequence from W3. Let the players call it to each other this time.</li>
+        </ul>
+      </div>
+      <div class="ssg-box" style="margin-top:4px">
+        <h5>Option B: 3v3 + GK + Target (if chosen)</h5>
+        <ul>
+          <li>Two simultaneous games. GK rolls to Team 1. Target player shows. Immediate counter on intercept.</li>
+          <li>Let it run with no cues. Final observation opportunity for individual decision-making under pressure.</li>
+        </ul>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">⚡</div>
+        <div class="ct-body"><strong>Either way:</strong> the last 5 minutes of the SSG (75–80), pull back all coaching. Pure competition. Players own it. That's what Block 3 has been building toward.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: KNOCKOUT + BLOCK CLOSE -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout + Block 3 Close</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Final Game of Block 3</div>
+        <p>Standard knockout — full energy, full competition. Keep it to 7 minutes so there's time for a block close. Coaches are allowed to celebrate and cheer during knockout.</p>
+      </div>
+      <div class="block-close">
+        <div class="bc-label">Block 3 Close — 2–3 Minutes Maximum</div>
+        <div class="bc-body">
+          Gather the group after knockout. Short and specific — no speeches. Cover three things:<br><br>
+          <strong>1. What we worked on:</strong> "This block was about transitions — reading when the ball changes hands and reacting before anyone tells you to."<br><br>
+          <strong>2. Name something you saw:</strong> One specific moment from today's SSG. A real name, a real play. "I saw [player] start running before the tackle even happened. That's the point."<br><br>
+          <strong>3. What's next:</strong> Block 4 starts in two weeks. New block, new theme. Don't preview the content — just leave the door open. "Two weeks, we start something new. Come back ready."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 3 · Week 4 · Thu Nov 12 · Final Session</div>
+    <div class="sf-right">B3 W4 S2 · Block 3 Finale · Session 8 / 8</div>
+  </div>
+
+</div>
+</body>
+</html>

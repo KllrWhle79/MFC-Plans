@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 3 · Week 3 · Nov 5 · Read the Ball Flight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--green);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--green)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-green{border-color:var(--green);color:var(--green)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(94,196,105,.07);border:1px solid rgba(94,196,105,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--green);background:rgba(94,196,105,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--green)}
+.ssg-box{background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:6px;padding:14px 16px}
+.ssg-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--violet);text-transform:uppercase;margin-bottom:8px}
+.ssg-box ul{list-style:none;display:grid;gap:5px}
+.ssg-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.ssg-box ul li::before{content:'→';position:absolute;left:0;color:var(--violet);font-size:14px}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 3 · Week 3 · Day 2</div>
+      <div class="sh-title">Block <span>3</span> · Thu<br>Read the Ball Flight</div>
+      <div class="sh-sub">Thursday, November 5, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players</div><br>
+      <div class="meta-pill mp-wk">Week 3 · Block 3</div><br>
+      <div class="meta-pill">Dog Fight SSG · 4th (Final)</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B3 W3</div>
+    <div class="su-body"><strong>Dog Fight returns for its final scheduled appearance this block.</strong> Minimal coaching today — the format is established; let it run. Tiki-Tak opens with W3's wall-pass-in-triangles pattern. Station A deepens aerial with foot-served balls at height.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug" style="flex:5"><span class="tl-label">Tiki-Tak</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm" style="flex:10"><span class="tl-label">Transition Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech" style="flex:45"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-ssg" style="flex:20"><span class="tl-label">Dog Fight · Final</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock" style="flex:10"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- PHASE 1: TIKI-TAK W3 -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Tiki-Tak Passing — W3 Progression: Wall Pass in Triangles</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Thursday Opening Ritual — Block 3 W3</div>
+        <p>Groups of 3 in a triangle (cones ~6m apart). A plays to B, B plays a one-touch return to A (wall pass), A continues into the space and plays to C. C is the next A. The triangle moves: all three players shift one position after each sequence. Purpose: the pass-and-move habit — no standing after the ball leaves your foot.</p>
+      </div>
+      <ul class="drill-list">
+        <li>Nobody stands still after passing. Move immediately — even one step is enough to signal intent.</li>
+        <li>The wall-pass return must be <em>first touch</em>. B does not have time to control and pass.</li>
+        <li>If the group achieves 5 clean sequences in a row (wall pass + continuation + pass to C), they set a personal sequence record</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 2: WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Transition Gates — React &amp; Sprint</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Returning warm-up format from W1 S2. Players dribble freely in a large grid. Six cone gates scattered across the space. On "Switch!" call: player must leave their ball, sprint to a new gate, and pick up a different ball. No standing, no slow jogs — sprint to the new gate.</p>
+      <ul class="drill-list">
+        <li>Dribble freely between calls. Change direction, change pace — keep the head up to track other players</li>
+        <li>On "Switch!": immediate sprint to a new gate — no hesitation, no looking back at your old ball</li>
+        <li>Progress after 4 minutes: two "Switch!" calls in quick succession — players must sprint to gate 1, then immediately sprint to another gate before slowing down</li>
+      </ul>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> The double-switch tests transition off the ball — can they switch tasks twice in a row without a reset breath? That's the cognitive demand we're building toward in the Dog Fight today. No intervention needed; just call the switches and watch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TECHNICAL STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Aerial Deepened · Full-Sprint Reactive · Pressing Review</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Station A deepens aerial with foot-served balls and height decisions. Station B adds a reactive/coach-calls-the-gate element to sprint dribbling. Station C reviews all three pressing cues established over the block.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Aerial: Foot Serve + Height Decision</div>
+          <p>Server uses their foot — a gentle chip or lofted pass from 8m. Player must read the flight and decide: high ball = open chest to trap. Low ball = sole trap. Call out "CHEST" or "FOOT" before the ball arrives. No heading at any point. <strong>Coach calls: "Read it. Call it. Then trap it."</strong> <strong style="color:#B8942E">⊘ No heading.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach Brent · Station B — Full-Sprint Dribbling: Reactive Gate</div>
+          <p>Three numbered cone gates set in a fan, ~12m from start. Player starts dribbling. Coach calls a gate number ("TWO!") at any moment during the first 5m. Player must redirect and hit that gate at full sprint. The decision happens in motion. Rotate through all three players, 3 reps each. <strong style="color:#5ec469">Cue: "Head up. Listen. Don't stop to decide — redirect."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach David · Station C — Pressing Patience: All 3 Cues Review</div>
+          <p>3v3 pressing format. Coach calls which cue to demonstrate before each rep: "Close only" (one player closes, two hold shape), "Cover and channel" (channel the ball sideways), or "Full press" (coordinated 3-man wave). Players rotate between press and attack roles. Three reps each cue. <strong style="color:#2DBFAD">Cue: "Which shape are we? Say it before we press."</strong></p>
+        </div>
+      </div>
+
+      <!-- diagrams -->
+      <div class="three-col" style="margin-top:8px">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Foot Serve + Height Decision</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Aerial control with foot serve and height decision drill</title>
+            <desc>Server chips the ball with their foot from eight metres. The player reads the flight, calls chest for a high ball or foot for a low ball before the ball arrives, then traps it accordingly. No heading at any point.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="fs1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- server -->
+            <circle cx="22" cy="130" r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="22" cy="130" r="3.5" fill="#B8942E"/>
+            <text x="22" y="147" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">FOOT</text>
+            <text x="22" y="158" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">SERVE</text>
+            <!-- HIGH ball arc -->
+            <path d="M32 124 Q100 20 160 80" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="6 3" opacity=".7" marker-end="url(#fs1)"/>
+            <!-- ball at peak -->
+            <circle cx="100" cy="28" r="5" fill="white" opacity=".7"/>
+            <!-- LOW ball arc (dashed different color) -->
+            <path d="M32 128 Q90 80 160 108" fill="none" stroke="#F59E0B" stroke-width="1.2" stroke-dasharray="4 4" opacity=".5" marker-end="url(#fs1)"/>
+            <!-- receiver -->
+            <circle cx="160" cy="90" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="160" cy="90" r="3.5" fill="#2DBFAD"/>
+            <!-- decision labels -->
+            <text x="130" y="55" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">HIGH →</text>
+            <text x="130" y="66" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">CHEST</text>
+            <text x="130" y="130" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">LOW →</text>
+            <text x="130" y="141" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">SOLE</text>
+            <!-- no heading -->
+            <text x="172" y="20" text-anchor="middle" font-size="18" fill="#E8607A" opacity=".6">⊘</text>
+            <text x="172" y="32" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">no heading</text>
+          </svg>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · Reactive Gate Drill</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Reactive gate drill — coach calls a gate number and the player redirects mid-dribble</title>
+            <desc>Three numbered cone gates set in a fan twelve metres from the start. The player dribbles and the coach calls a gate number during the first five metres. The player must redirect and hit that gate at full sprint.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3d14" opacity=".85"/>
+            <defs>
+              <marker id="rg1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="2" stroke-linecap="round"/></marker>
+              <marker id="rg2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="3 2"/></marker>
+            </defs>
+            <!-- player start -->
+            <circle cx="100" cy="148" r="10" fill="none" stroke="#5ec469" stroke-width="1.5"/><circle cx="100" cy="148" r="3.5" fill="#5ec469"/>
+            <!-- first 5m dribble up -->
+            <line x1="100" y1="137" x2="100" y2="105" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="4 3" opacity=".6"/>
+            <!-- call moment -->
+            <circle cx="100" cy="100" r="6" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="115" y="103" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">CALL!</text>
+            <!-- gate 1 (left) -->
+            <polygon points="42,48 37,58 47,58" fill="#F59E0B" opacity=".8"/>
+            <polygon points="58,48 53,58 63,58" fill="#F59E0B" opacity=".8"/>
+            <text x="50" y="70" text-anchor="middle" font-size="12" fill="#F59E0B" font-family="IBM Plex Mono,monospace" font-weight="600">①</text>
+            <!-- gate 2 (centre) -->
+            <polygon points="92,32 87,42 97,42" fill="#F59E0B" opacity=".8"/>
+            <polygon points="108,32 103,42 113,42" fill="#F59E0B" opacity=".8"/>
+            <text x="100" y="20" text-anchor="middle" font-size="12" fill="#5ec469" font-family="IBM Plex Mono,monospace" font-weight="600">②</text>
+            <!-- gate 3 (right) -->
+            <polygon points="142,48 137,58 147,58" fill="#F59E0B" opacity=".8"/>
+            <polygon points="158,48 153,58 163,58" fill="#F59E0B" opacity=".8"/>
+            <text x="150" y="70" text-anchor="middle" font-size="12" fill="#F59E0B" font-family="IBM Plex Mono,monospace" font-weight="600">③</text>
+            <!-- redirect path to gate 2 (highlighted) -->
+            <path d="M100 94 Q100 65 100 43" fill="none" stroke="#5ec469" stroke-width="2.5" opacity=".9" marker-end="url(#rg1)"/>
+            <!-- faded paths to other gates -->
+            <path d="M96 94 Q70 75 50 60" fill="none" stroke="#5ec469" stroke-width="1" stroke-dasharray="4 4" opacity=".35" marker-end="url(#rg1)"/>
+            <path d="M104 94 Q130 75 148 60" fill="none" stroke="#5ec469" stroke-width="1" stroke-dasharray="4 4" opacity=".35" marker-end="url(#rg1)"/>
+          </svg>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Pressing 3-Cue Review</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Pressing patience three-cue review — three different press shapes shown as labels</title>
+            <desc>Three verses of the pressing pattern reviewed. First cue is close only with one player closing and two holding shape. Second is cover and channel forcing the ball sideways. Third is full press with a coordinated three-man wave.</desc>
+            <rect width="200" height="160" rx="4" fill="#1e3045" opacity=".9"/>
+            <defs>
+              <marker id="pc1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- CUE 1: Close only -->
+            <text x="100" y="20" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace" font-weight="600">CUE 1: CLOSE ONLY</text>
+            <circle cx="62" cy="42" r="8" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="62" y="46" text-anchor="middle" font-size="8" fill="#E8607A">D1</text>
+            <circle cx="100" cy="50" r="8" fill="#1e3045" stroke="#E8607A" stroke-width="1" stroke-dasharray="3 2" opacity=".4"/><text x="100" y="54" text-anchor="middle" font-size="8" fill="#E8607A" opacity=".4">D2</text>
+            <circle cx="138" cy="42" r="8" fill="#1e3045" stroke="#E8607A" stroke-width="1" stroke-dasharray="3 2" opacity=".4"/><text x="138" y="46" text-anchor="middle" font-size="8" fill="#E8607A" opacity=".4">D3</text>
+            <line x1="70" y1="42" x2="90" y2="42" stroke="#E8607A" stroke-width="1.5" opacity=".8" marker-end="url(#pc1)"/>
+            <circle cx="100" cy="38" r="5" fill="#2DBFAD" opacity=".8"/><text x="100" y="36" text-anchor="middle" font-size="8" fill="#2DBFAD">ball</text>
+            <!-- divider -->
+            <line x1="20" y1="70" x2="180" y2="70" stroke="#3D5166" stroke-width="1" opacity=".5"/>
+            <!-- CUE 2: Channel -->
+            <text x="100" y="82" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace" font-weight="600">CUE 2: CHANNEL</text>
+            <circle cx="50" cy="100" r="8" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="50" y="104" text-anchor="middle" font-size="8" fill="#E8607A">D1</text>
+            <circle cx="88" cy="106" r="8" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5" opacity=".6"/><text x="88" y="110" text-anchor="middle" font-size="8" fill="#E8607A">D2</text>
+            <path d="M58 96 Q72 85 90 90" fill="none" stroke="#E8607A" stroke-width="1.3" stroke-dasharray="4 3" opacity=".5" marker-end="url(#pc1)"/>
+            <text x="145" y="100" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">→ WIDE</text>
+            <!-- divider -->
+            <line x1="20" y1="122" x2="180" y2="122" stroke="#3D5166" stroke-width="1" opacity=".5"/>
+            <!-- CUE 3: Full press -->
+            <text x="100" y="134" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace" font-weight="600">CUE 3: FULL PRESS</text>
+            <circle cx="50" cy="152" r="8" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="50" y="156" text-anchor="middle" font-size="8" fill="#E8607A">D1</text>
+            <circle cx="100" cy="148" r="8" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="100" y="152" text-anchor="middle" font-size="8" fill="#E8607A">D2</text>
+            <circle cx="150" cy="152" r="8" fill="#7B1A28" stroke="#E8607A" stroke-width="1.5"/><text x="150" y="156" text-anchor="middle" font-size="8" fill="#E8607A">D3</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: DOG FIGHT (FINAL) -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: Dog Fight — Final Appearance · Minimal Coaching</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Fourth and final Dog Fight of Block 3. Format is embedded — no re-introduction, no coaching cues unless play completely stops. Set it up and let it run. Coaches observe and note individual reads.</p>
+      <div class="ssg-box">
+        <h5>Setup — Same as Previous</h5>
+        <ul>
+          <li>Wide &amp; short field. 3 pug goals each end. Whole team together. 2 balls in play.</li>
+          <li>All restarts apply. GKs play outfield. Restart immediately when a ball goes dead.</li>
+          <li>Coaches: stand back. No verbal coaching prompts. Watch only. Note 2–3 individuals to give feedback on after Knockout.</li>
+        </ul>
+      </div>
+      <div class="coach-tip">
+        <div class="ct-icon">👁</div>
+        <div class="ct-body"><strong>Observation focus:</strong> Who reads the transition first? Who is still looking at the ball when it changes hands — vs. who has already started moving? These are the players who have internalized the block's theme. Note their names — recognise them at the end of the session.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Game + Block 3 Notes</div>
+        <p>Standard knockout. After the game ends, gather the group for 2 minutes max. Name 2–3 players by name for specific reads you observed during Dog Fight. Keep it specific: "I saw you start moving before the ball even changed hands — that's what we've been building." Then send them home. No overview of the block, no summary — that's for next Tuesday (W4 opener).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 3 · Week 3 · Thu Nov 5</div>
+    <div class="sf-right">B3 W3 S2 · Read the Ball Flight</div>
+  </div>
+
+</div>
+</body>
+</html>
