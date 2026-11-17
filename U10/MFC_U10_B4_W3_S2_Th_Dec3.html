@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 4 · Week 3 · Dec 3 · Build-Out Day + Shield Live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--rose);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--rose);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--rose)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-rose{border-color:var(--rose);color:var(--rose)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.meta-pill.mp-build{border-color:var(--gold);color:var(--gold)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-build{background:#2d3a28;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-build{background:var(--green)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.build-box{background:rgba(45,191,173,.05);border:1px solid rgba(45,191,173,.2);border-radius:6px;padding:14px 16px}
+.build-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.build-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.build-box ul{list-style:none;display:grid;gap:5px}
+.build-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.build-box ul li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:14px}
+.two-team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.team-gold{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:12px 14px}
+.team-blue{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.2);border-radius:6px;padding:12px 14px}
+.team-gold h6{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.team-blue h6{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.team-gold p,.team-blue p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.two-team-grid{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 4 · Week 3 · Session 5</div>
+      <div class="sh-title">Block <span>4</span> · Thu<br>Build-Out + Shield Live</div>
+      <div class="sh-sub">Thursday, December 3, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players · 3 Coaches</div><br>
+      <div class="meta-pill mp-wk">Week 3 · Session 5</div><br>
+      <div class="meta-pill mp-build">Build-Out Day · W3</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B4 W3</div>
+    <div class="su-body"><strong>Build-Out continues to mature:</strong> Gold adds a third press option (drop if outnumbered). Blue adds the winger's decision — does she go outside or inside? Shield drill goes live (1v1 contested). Station C reviews Throw-ins from Tuesday. Fast Dribbling slot goes to Brent.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Rondos</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-build"><span class="tl-label">Build-Out · Gold vs Blue</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Thursday Ritual</div>
+        <p>Personal bests as they arrive. Quick framing: "In build-out tonight, Gold is going to pick their press — high or hold or drop back. Blue is going to decide: go outside or push inside. Trust your reads."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Rondos</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">4v2 and 5v2 rondos to get bodies warm and sharp. Focus on quick one-touch passes, scanning before receiving, and communicating. Progress to 3-touch limit at 7 min. Good transition into the shield live drill later.</p>
+    </div>
+  </div>
+
+  <!-- STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Back Foot W3 · Fast Dribbling · Shield Live 1v1 · Throw-ins Review</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Shield goes live for the first time. Throw-ins reviewed before the build-out. Fast Dribbling switches to Brent (this week's owner).</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Back Foot W3 Review + Throw-ins</div>
+          <p>First half (7 min): Back Foot W3 gate drill from Tuesday — reinforce with reps. Second half (8 min): Switch to throw-in defending. Reset positions from scratch: receiver checks over shoulder, defender goes to goal-side shoulder, then hold when ball is thrown. <strong style="color:#B8942E">Cue: "Goal-side. Hold. Don't jump to it."</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach Brent · Station B — Fast Dribbling T-Shape</div>
+          <p>T-shape agility with ball (from Tuesday). Same pattern: straight up, left, right, left back to center, sprint through gate. Second round: coach calls a gate number after the first straight run to change the direction. <strong style="color:#5ec469">Cue: "Quick feet on the sides. Big burst at the end."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach David · Station C — Shield Live (1v1 Contested)</div>
+          <p>W3 progression: attacker now has the ball at their feet, defender must get to the hand-on-back position and stay goal-side while the attacker dribbles toward goal. No tackling — only shadowing and turning them outside. If attacker gets turned to face goal in a shooting lane, reset. This is the hardest progression: patience over pressure. <strong style="color:#2DBFAD">Cue: "Get side-on. Hand on. Turn them out."</strong></p>
+        </div>
+      </div>
+
+      <div class="three-col" style="margin-top:8px">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Throw-in Defending</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Throw-in defending — goal-side shoulder position</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="ti1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- goal -->
+            <rect x="75" y="135" width="50" height="14" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+            <text x="100" y="156" text-anchor="middle" font-size="10" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">GOAL</text>
+            <!-- throw-in line (side) -->
+            <line x1="10" y1="10" x2="10" y2="130" stroke="#3D5166" stroke-width="2" stroke-dasharray="5 3"/>
+            <text x="6" y="8" font-size="9" fill="#3D5166" font-family="IBM Plex Mono,monospace" transform="rotate(-90,6,8)">TOUCHLINE</text>
+            <!-- thrower -->
+            <circle cx="10" cy="60" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="10" cy="60" r="4" fill="#B8942E"/>
+            <text x="22" y="56" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">thrower</text>
+            <!-- receiver -->
+            <circle cx="80" cy="80" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="80" cy="80" r="4" fill="#2DBFAD"/>
+            <!-- defender - goal side -->
+            <circle cx="92" cy="96" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="92" cy="96" r="4" fill="#E8607A"/>
+            <text x="106" y="94" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">goal-side</text>
+            <!-- throw arc -->
+            <path d="M17 58 Q50 50 73 76" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#ti1)"/>
+            <text x="80" y="65" text-anchor="middle" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">scan first</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · T-Shape Dribbling</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>T-shape fast dribbling with coach-called direction change</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="ts3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-linecap="round"/></marker>
+            </defs>
+            <circle cx="100" cy="148" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="148" r="4" fill="#2DBFAD"/>
+            <path d="M100 137 L100 95" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-dasharray="4 3" opacity=".8" marker-end="url(#ts3)"/>
+            <path d="M99 95 L55 95" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-dasharray="4 3" opacity=".8" marker-end="url(#ts3)"/>
+            <path d="M55 93 L145 93" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-dasharray="4 3" opacity=".8" marker-end="url(#ts3)"/>
+            <path d="M145 91 L102 91" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-dasharray="4 3" opacity=".6" marker-end="url(#ts3)"/>
+            <path d="M100 89 L100 50" fill="none" stroke="#5ec469" stroke-width="2.5" opacity=".9" marker-end="url(#ts3)"/>
+            <line x1="80" y1="40" x2="80" y2="52" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="120" y1="40" x2="120" y2="52" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <text x="100" y="35" text-anchor="middle" font-size="10" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">SPRINT THROUGH</text>
+            <!-- coach calls -->
+            <circle cx="165" cy="110" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/>
+            <text x="165" y="114" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">C</text>
+            <text x="130" y="118" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">coach calls</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Shield Live — 1v1</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Shield live 1v1 — defender stays goal-side while attacker dribbles toward goal</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="sl1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- goal -->
+            <rect x="75" y="136" width="50" height="14" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+            <!-- attacker with ball, moving toward goal -->
+            <circle cx="80" cy="60" r="12" fill="none" stroke="#2DBFAD" stroke-width="1.8"/><circle cx="80" cy="60" r="5" fill="#2DBFAD"/>
+            <circle cx="80" cy="74" r="5" fill="white" opacity=".6"/>
+            <path d="M82 72 L88 108" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#sl1)"/>
+            <!-- defender tracking goal-side -->
+            <circle cx="94" cy="82" r="11" fill="none" stroke="#E8607A" stroke-width="1.8"/><circle cx="94" cy="82" r="4" fill="#E8607A"/>
+            <text x="112" y="80" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">goal-side</text>
+            <!-- hand on back line -->
+            <line x1="84" y1="70" x2="92" y2="78" stroke="#B8942E" stroke-width="2" stroke-linecap="round"/>
+            <text x="20" y="30" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">no tackle</text>
+            <text x="20" y="42" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">shadow only</text>
+            <text x="80" y="150" text-anchor="middle" font-size="10" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">turn outside</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILD-OUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-build"></div>
+      <span class="pc-name">Build-Out: Gold (Read Press) · Blue (Winger Decides Outside/Inside)</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Split-field. Gold on left half, Blue on right. W3 build-out adds Gold's third press shape (drop back and compact) and Blue's winger decision — go outside or cut inside based on defender's position.</p>
+
+      <div class="two-team-grid">
+        <div class="team-gold">
+          <h6>Gold (Press Side) · Coach Pete</h6>
+          <p><strong style="color:var(--gold)">3 Press Shapes:</strong></p>
+          <p>1. High Press — GK rolls quickly, forwards sprint onto the ball immediately.</p>
+          <p>2. Hold Shape — GK rolls, forwards hold their line and wait for the ball to move.</p>
+          <p>3. Drop &amp; Compact — if outnumbered or ball is played quickly through, entire team drops and sets a defensive block rather than pressing high.</p>
+          <p style="margin-top:6px"><strong style="color:var(--gold)">GK calls the shape before every roll.</strong> Players must react without further instruction.</p>
+        </div>
+        <div class="team-blue">
+          <h6>Blue (Build Side) · Coach David</h6>
+          <p><strong style="color:var(--teal)">Full W3 Sequence:</strong> GK roll → CB back-foot receive → CB to outside back → winger receives.</p>
+          <p><strong style="color:var(--teal)">New (W3) — Winger's Decision:</strong> Winger looks at the nearest defender before receiving. If defender is tight and in front → go outside (run behind). If defender is off and goal-side → cut inside to the CM.</p>
+          <p style="margin-top:6px"><strong style="color:var(--teal)">Cue: "Look before you get it. Outside or inside?"</strong></p>
+        </div>
+      </div>
+
+      <div class="diagram-wrap" style="margin-top:12px">
+        <div class="diagram-label">Build-Out · Full Field · Gold Left · Blue Right</div>
+        <svg viewBox="0 0 560 220" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>Build-out split field: Gold reads press on left, Blue runs winger decision sequence on right</title>
+          <rect width="560" height="220" rx="6" fill="#141E2A"/>
+          <!-- field -->
+          <rect x="20" y="15" width="520" height="190" rx="4" fill="none" stroke="#243241" stroke-width="2"/>
+          <!-- center line -->
+          <line x1="280" y1="15" x2="280" y2="205" stroke="#243241" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <!-- goals -->
+          <rect x="20" y="88" width="14" height="44" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+          <rect x="526" y="88" width="14" height="44" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+          <!-- GOLD SIDE LABEL -->
+          <text x="80" y="34" text-anchor="middle" font-size="13" fill="#B8942E" font-family="IBM Plex Mono,monospace" letter-spacing=".1em">GOLD — PRESS SIDE</text>
+          <!-- BLUE SIDE LABEL -->
+          <text x="430" y="34" text-anchor="middle" font-size="13" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" letter-spacing=".1em">BLUE — BUILD SIDE</text>
+
+          <!-- GOLD SIDE -->
+          <!-- GK -->
+          <circle cx="45" cy="110" r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/>
+          <text x="45" y="114" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">GK</text>
+          <!-- call box -->
+          <rect x="58" y="98" width="68" height="20" rx="3" fill="rgba(184,148,46,.12)" stroke="rgba(184,148,46,.3)" stroke-width="1"/>
+          <text x="92" y="112" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">HIGH/HOLD/DROP</text>
+          <!-- Gold forwards -->
+          <circle cx="160" cy="75" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/>
+          <text x="160" y="79" text-anchor="middle" font-size="8" fill="#B8942E" font-family="IBM Plex Mono,monospace">F</text>
+          <circle cx="200" cy="140" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/>
+          <text x="200" y="144" text-anchor="middle" font-size="8" fill="#B8942E" font-family="IBM Plex Mono,monospace">F</text>
+          <!-- BLUE SIDE -->
+          <!-- GK -->
+          <circle cx="515" cy="110" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/>
+          <text x="515" y="114" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">GK</text>
+          <!-- roll arrow -->
+          <defs>
+            <marker id="bo3g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+          </defs>
+          <!-- CB -->
+          <circle cx="460" cy="110" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/>
+          <text x="460" y="114" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">CB</text>
+          <line x1="504" y1="110" x2="471" y2="110" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#bo3g)"/>
+          <!-- outside back -->
+          <circle cx="430" cy="75" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/>
+          <text x="430" y="79" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">OB</text>
+          <line x1="455" y1="103" x2="438" y2="84" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#bo3g)"/>
+          <!-- winger -->
+          <circle cx="360" cy="65" r="9" fill="none" stroke="#E8607A" stroke-width="1.5"/>
+          <text x="360" y="69" text-anchor="middle" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">W</text>
+          <line x1="421" y1="72" x2="371" y2="66" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#bo3g)"/>
+          <!-- winger decision label -->
+          <text x="340" y="50" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">outside or inside?</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Game</div>
+        <p>Standard knockout. Celebrate any player who executed a clean winger decision in build-out ("he looked, he decided, he went — that's what we want").</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 4 · Week 3 · Thu Dec 3</div>
+    <div class="sf-right">B4 W3 S2 · Build-Out + Shield Live</div>
+  </div>
+
+</div>
+</body>
+</html>

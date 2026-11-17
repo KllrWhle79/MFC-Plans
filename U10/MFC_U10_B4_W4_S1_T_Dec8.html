@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 4 · Week 4 · Dec 8 · Corners + Back Foot 2v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--rose);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--rose);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--rose)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-rose{border-color:var(--rose);color:var(--rose)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.ssg-box{background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:6px;padding:14px 16px}
+.ssg-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--violet);text-transform:uppercase;margin-bottom:8px}
+.ssg-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.ssg-box ul{list-style:none;display:grid;gap:5px}
+.ssg-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.ssg-box ul li::before{content:'→';position:absolute;left:0;color:var(--violet);font-size:14px}
+.constraint-box{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.cb-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.cb-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.cb-body strong{color:var(--rose);font-weight:600}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 4 · Week 4 · Session 6</div>
+      <div class="sh-title">Block <span>4</span> · Tue<br>Corners + Back Foot 2v1</div>
+      <div class="sh-sub">Tuesday, December 8, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players · 3 Coaches</div><br>
+      <div class="meta-pill mp-wk">Week 4 · Session 6</div><br>
+      <div class="meta-pill mp-rose">SSG: Defensive Third Rule</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B4 W4</div>
+    <div class="su-body"><strong>Week 4 deepens both set pieces and the back-foot thread:</strong> Corner defending moves to contested positions (W4). Back Foot reaches W4 — a live 2v1 where the receiver must back-foot receive under pressure. SSG uses the defensive-third passage rule. Pete runs Fast Dribbling this week.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up Gates</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-ssg"><span class="tl-label">SSG · Defensive Third</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Tuesday Ritual</div>
+        <p>Personal bests as they arrive. Quick framing: "Corners tonight — when the ball comes in from the corner, every defender must be on the goal-side of their attacker. Same idea as throw-ins. Watch for it."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Transition Gates (Pressure)</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Return to Transition Gates with two defenders closing gates. Players must scan and communicate to find open gates. Good scanning mindset before the Back Foot 2v1 station.</p>
+    </div>
+  </div>
+
+  <!-- STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Corners W4 · Fast Dribbling · Back Foot W4 (2v1)</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Set pieces deepen: corner drill adds live contested positioning. Back Foot reaches its most advanced level (2v1 live). Pete takes Fast Dribbling this week.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Fast Dribbling W4 · Lateral Burst</div>
+          <p>New pattern: player starts at a central cone, dribbles 5m to the right, cuts sharply back through center, continues 5m left, cuts back, then sprints through the final gate straight ahead. Focus on clean directional cuts — toe down, weight shifted, ball stays close. Coach calls "GATE" when to sprint. <strong style="color:#B8942E">Cue: "Cut clean. Don't loop it."</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach Brent · Station B — Corners W4 · Contested Positions</div>
+          <p>W4 progression: corner is taken, 2 attackers vs 2 defenders. Defenders must beat the attacker to the goal-side position and hold it as the ball comes in. If defender is in front when the ball arrives, the attacker gets a free header. This is about positioning before the ball is in flight — not jumping at the last second. <strong style="color:#5ec469">Cue: "Get there early. Hold the position. Don't watch the kicker."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach David · Station C — Back Foot W4 · 2v1 Live</div>
+          <p>W4 progression: receiver faces a live pressing defender as the ball comes in. Passer plays to the receiver who is being closed down. Receiver must scan before the pass arrives, receive on the back foot, turn, and play out to the third player. No time to pause — the defender arrives 1–2 seconds after the ball. <strong style="color:#2DBFAD">Cue: "Scan early. Receive. Commit to the turn."</strong></p>
+        </div>
+      </div>
+
+      <div class="three-col" style="margin-top:8px">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Lateral Burst Pattern</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Lateral burst fast dribbling — right, back, left, back, sprint through gate</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="lb1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.8" stroke-linecap="round"/></marker>
+              <marker id="lb2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="2.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- center start -->
+            <circle cx="100" cy="140" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="140" r="4" fill="#2DBFAD"/>
+            <!-- right -->
+            <path d="M110 136 L150 115" fill="none" stroke="#B8942E" stroke-width="1.8" stroke-dasharray="4 3" opacity=".8" marker-end="url(#lb1)"/>
+            <!-- cut back left -->
+            <path d="M150 112 L100 100" fill="none" stroke="#B8942E" stroke-width="1.8" stroke-dasharray="4 3" opacity=".8" marker-end="url(#lb1)"/>
+            <!-- left -->
+            <path d="M99 98 L55 115" fill="none" stroke="#B8942E" stroke-width="1.8" stroke-dasharray="4 3" opacity=".8" marker-end="url(#lb1)"/>
+            <!-- cut back center -->
+            <path d="M55 112 L98 102" fill="none" stroke="#B8942E" stroke-width="1.8" stroke-dasharray="4 3" opacity=".6" marker-end="url(#lb1)"/>
+            <!-- sprint gate -->
+            <path d="M100 99 L100 55" fill="none" stroke="#B8942E" stroke-width="2.5" opacity=".9" marker-end="url(#lb2)"/>
+            <line x1="80" y1="45" x2="80" y2="57" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="120" y1="45" x2="120" y2="57" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <text x="100" y="38" text-anchor="middle" font-size="10" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">SPRINT</text>
+            <text x="155" y="110" font-size="9" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">R</text>
+            <text x="42" y="110" font-size="9" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">L</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · Corner · Contested Positions</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Corner defending — 2 defenders must beat attackers to goal-side position before the ball comes in</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="co1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- goal -->
+            <rect x="55" y="130" width="90" height="14" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+            <!-- corner spot -->
+            <circle cx="10" cy="20" r="5" fill="#5ec469"/>
+            <text x="16" y="18" font-size="8" fill="#5ec469" font-family="IBM Plex Mono,monospace">CORNER</text>
+            <!-- ball arc -->
+            <path d="M12 22 Q60 10 120 60" fill="none" stroke="#5ec469" stroke-width="1.2" stroke-dasharray="5 3" opacity=".6" marker-end="url(#co1)"/>
+            <!-- attacker 1 -->
+            <circle cx="100" cy="90" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="90" r="4" fill="#2DBFAD"/>
+            <!-- defender 1 (goal-side) -->
+            <circle cx="100" cy="108" r="10" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="100" cy="108" r="4" fill="#E8607A"/>
+            <!-- attacker 2 -->
+            <circle cx="130" cy="88" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="130" cy="88" r="4" fill="#2DBFAD"/>
+            <!-- defender 2 -->
+            <circle cx="130" cy="106" r="10" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="130" cy="106" r="4" fill="#E8607A"/>
+            <text x="20" y="90" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">get there</text>
+            <text x="20" y="102" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">early!</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Back Foot W4 — 2v1</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Back foot W4 — receiver under pressure from live defender must turn and play out to third player</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="bf1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="bf2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="bf3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- A passes -->
+            <circle cx="20" cy="80" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="20" cy="80" r="4" fill="#B8942E"/>
+            <text x="20" y="97" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">A</text>
+            <path d="M30 78 L82 78" fill="none" stroke="#B8942E" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#bf1)"/>
+            <!-- receiver B -->
+            <circle cx="100" cy="80" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="80" r="4" fill="#2DBFAD"/>
+            <!-- defender closing -->
+            <circle cx="130" cy="60" r="9" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="130" cy="60" r="4" fill="#E8607A"/>
+            <path d="M125 66 L110 74" fill="none" stroke="#E8607A" stroke-width="1.2" stroke-dasharray="4 3" opacity=".7" marker-end="url(#bf3)"/>
+            <text x="140" y="55" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">pressing</text>
+            <!-- turn and play to C -->
+            <path d="M105 88 Q120 115 155 125" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bf2)"/>
+            <!-- C -->
+            <circle cx="165" cy="128" r="9" fill="none" stroke="#5ec469" stroke-width="1.5"/><circle cx="165" cy="128" r="4" fill="#5ec469"/>
+            <text x="165" y="145" text-anchor="middle" font-size="9" fill="#5ec469" font-family="IBM Plex Mono,monospace">C</text>
+            <text x="100" y="58" text-anchor="middle" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">scan early</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SSG -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: Play Through the Defensive Third</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Standard SSG format (2 goals, field-switch rule). W4 constraint: attacking team must play the ball into the defensive third and receive it back out before they can score.</p>
+      <div class="ssg-box">
+        <h5>SSG Rules + W4 Constraint</h5>
+        <ul>
+          <li>2 goals, standard kickoffs, full-field switch rule each attacking cycle before scoring.</li>
+          <li><strong>W4 Constraint — Play Through:</strong> Before scoring, the attacking team must play at least one pass into the defensive third of the opponent and receive it back out. The ball does not need to stay there — just touch that zone.</li>
+          <li>Forces build-out shape: teams must commit players forward rather than holding possession in midfield.</li>
+          <li>Coaches call "Through! Then shoot!" when a team approaches the box to reinforce the rule.</li>
+        </ul>
+      </div>
+      <div class="constraint-box">
+        <div class="cb-icon">⚡</div>
+        <div class="cb-body"><strong>W4 Constraint — Defensive Third Touch:</strong> Ball must enter the opponent's defensive third and come back out before a goal counts. Defenders: press high to prevent the ball entering. Attackers: use build-out shape to earn the zone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Game</div>
+        <p>Standard knockout. Celebrate any player who correctly called out a corners or throw-in positioning call during the SSG ("goal-side!"). Note names for the bloc 4 close-out.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 4 · Week 4 · Tue Dec 8</div>
+    <div class="sf-right">B4 W4 S1 · Corners + Back Foot 2v1</div>
+  </div>
+
+</div>
+</body>
+</html>

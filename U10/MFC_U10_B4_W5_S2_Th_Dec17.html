@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 4 · Week 5 · Dec 17 · Block 4 Finale · Parents vs Kids + Sock Exchange</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:3px solid var(--gold);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--gold)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-gold{border-color:var(--gold);color:var(--gold)}
+.meta-pill.mp-finale{border-color:var(--violet);color:var(--violet)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-game{background:#1a2a3a;flex:30;background:linear-gradient(135deg,rgba(184,148,46,.2),rgba(45,191,173,.15))}
+.tl-sock{background:#2a1a2a;flex:10;background:rgba(139,92,246,.25)}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.phase-card.finale{border-color:rgba(184,148,46,.4)}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-game{background:var(--gold)}.dot-sock{background:var(--violet)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.finale-banner{background:linear-gradient(135deg,rgba(184,148,46,.12),rgba(45,191,173,.08));border:1px solid rgba(184,148,46,.4);border-radius:8px;padding:20px 20px;text-align:center;margin-bottom:28px}
+.fb-title{font-family:var(--font-head);font-size:38px;color:var(--gold);letter-spacing:.04em;line-height:1}
+.fb-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.fb-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.fb-tag{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;padding:4px 10px;border-radius:4px;text-transform:uppercase}
+.fb-tag-gold{background:rgba(184,148,46,.15);border:1px solid rgba(184,148,46,.4);color:var(--gold)}
+.fb-tag-teal{background:rgba(45,191,173,.12);border:1px solid rgba(45,191,173,.3);color:var(--teal)}
+.fb-tag-violet{background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:var(--violet)}
+.game-box{background:linear-gradient(135deg,rgba(184,148,46,.1),rgba(45,191,173,.07));border:1px solid rgba(184,148,46,.35);border-radius:8px;padding:18px 20px}
+.game-box h5{font-family:var(--font-mono);font-size:14px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.game-box p{font-size:15.5px;color:var(--muted);line-height:1.7;margin-bottom:10px}
+.game-box ul{list-style:none;display:grid;gap:6px;margin-top:8px}
+.game-box ul li{font-size:15.5px;color:var(--text);padding-left:20px;position:relative;line-height:1.6}
+.game-box ul li::before{content:'⚽';position:absolute;left:0;font-size:14px}
+.sock-box{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:18px 20px}
+.sock-box h5{font-family:var(--font-mono);font-size:14px;letter-spacing:.12em;color:var(--violet);text-transform:uppercase;margin-bottom:12px}
+.sock-box p{font-size:15.5px;color:var(--muted);line-height:1.7;margin-bottom:10px}
+.sock-box ul{list-style:none;display:grid;gap:6px;margin-top:8px}
+.sock-box ul li{font-size:15.5px;color:var(--text);padding-left:20px;position:relative;line-height:1.6}
+.sock-box ul li::before{content:'🧦';position:absolute;left:0;font-size:14px}
+.block-close{background:rgba(45,191,173,.06);border:1px solid rgba(45,191,173,.2);border-radius:8px;padding:18px 20px;text-align:center}
+.bc-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+.bc-text{font-size:17px;color:var(--muted);line-height:1.7;font-style:italic}
+.bc-text strong{color:var(--text);font-style:normal}
+.coach-note{background:rgba(184,148,46,.07);border:1px solid rgba(184,148,46,.2);border-radius:6px;padding:14px 16px}
+.cn-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.cn-text{font-size:15.5px;color:var(--muted);line-height:1.7}
+.cn-text strong{color:var(--gold)}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}.fb-tags{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 4 · Week 5 · Session 9 · Block Finale</div>
+      <div class="sh-title">Block <span>4</span> · Thu<br>Finale</div>
+      <div class="sh-sub">Thursday, December 17, 2026 · 90 minutes · All Coaches · Parents Welcome</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players + Parents</div><br>
+      <div class="meta-pill mp-finale">Block 4 Close · Session 9 of 9</div><br>
+      <div class="meta-pill mp-gold">Parents vs Kids</div>
+    </div>
+  </div>
+
+  <div class="finale-banner">
+    <div class="fb-title">Block 4 Finale</div>
+    <div class="fb-sub">No technical stations · No structured drills · Just soccer, family, and celebration</div>
+    <div class="fb-tags">
+      <span class="fb-tag fb-tag-gold">Parents vs Kids</span>
+      <span class="fb-tag fb-tag-teal">Block 4 Close</span>
+      <span class="fb-tag fb-tag-violet">Sock Exchange</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up Game</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-game"><span class="tl-label">Parents vs Kids</span><span class="tl-time">15–80</span></div>
+    <div class="tl-seg tl-sock"><span class="tl-label">Sock Exchange + Close</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Final Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Block 4 · Final Juggling Session</div>
+        <p>Personal bests as everyone arrives — players and parents. Parents can try too. Record each player's highest number for the block. Celebrate any player who improved their personal best from Week 1 to Week 5. Brief framing: "This is our last session of Block 4. You've come a long way. Let's make it a great one."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Light Touch Game</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Keep it fun and easy. Can use a tag game, Shark Attack, or a simple 2-team keep-away with parents joining in. No coaching. High energy and laughter. The goal is everyone loose and smiling before the big game.</p>
+      <div class="coach-note">
+        <div class="cn-label">Setup Note</div>
+        <div class="cn-text">Get the Parents vs Kids field set up during warm-up. <strong>Full-ish field, 2 real goals or large pugs.</strong> Parents team can include coaches. Coaches help balance teams if the parent turnout is very high or very low — a coach on the kids' team is usually a fun twist. Have the sock exchange bags ready at the edge of the field.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARENTS VS KIDS GAME -->
+  <div class="phase-card finale">
+    <div class="pc-head">
+      <span class="pc-time">15 – 80</span>
+      <div class="pc-dot dot-game"></div>
+      <span class="pc-name">Parents vs Kids Game</span>
+      <span class="pc-dur">65 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="game-box">
+        <h5>The Big Game</h5>
+        <p>Parents vs Kids, full game format. No formal kickoff ceremony needed — just get a ball out and go. Run halves if you like (25–30 min each with a water break), or just play continuously. Coaches call basic restarts but don't officiate heavily — this is a game, not a session.</p>
+        <ul>
+          <li>Parents must pass to a kid before shooting. If not enough parents, coaches fill in on the parents' team.</li>
+          <li>Kids: no restrictions. Play freely. This is what all the training has been for.</li>
+          <li>Encourage set pieces when they come up — throw-ins and corners are a moment for the kids to show what they learned. Don't narrate it — just let it happen.</li>
+          <li>Celebrate big moments for both sides. Parents scoring is fine and fun. Kids will work harder for it.</li>
+          <li>Coaches on the sideline can quietly point out good reads: "Did you see that back-foot receive?" — to other coaches, not to players mid-game.</li>
+        </ul>
+      </div>
+      <div class="coach-note">
+        <div class="cn-label">Coach Note · End of Game</div>
+        <div class="cn-text">At around 75 minutes, start wrapping the game to end by 80. <strong>Quick gather</strong> — don't let it drag on. The sock exchange and close are the emotional peak of the session. Keep the energy high as you transition off the field.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCK EXCHANGE + BLOCK CLOSE -->
+  <div class="phase-card finale">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-sock"></div>
+      <span class="pc-name">Sock Exchange + Block 4 Close</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="sock-box">
+        <h5>Sock Exchange</h5>
+        <ul>
+          <li>Everyone gathers in a circle — players, parents, coaches all together.</li>
+          <li>Each player gives one sock to the player on their left and receives one from the player on their right.</li>
+          <li>Short moment of acknowledgment: each player can say one thing they're proud of from Block 4, or coaches can name one specific moment they remember from each player this block. Keep it short — one sentence each is enough.</li>
+          <li>Socks can be fun soccer socks, holiday socks, whatever players brought from home.</li>
+        </ul>
+      </div>
+      <div class="block-close">
+        <div class="bc-label">Block 4 Close · Coaches' Words</div>
+        <div class="bc-text">
+          <strong>"Block 4 is done."</strong> You played 9 sessions. You learned how to build out from the back. You learned how to receive with your back foot. You learned how to defend at corners and throw-ins. You learned how to press and when to hold. You got faster with the ball. You played as a team.
+          <br><br>
+          <strong>"Every single one of you got better this block. We'll see you next season."</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 4 · Week 5 · Thu Dec 17 · Session 9 of 9</div>
+    <div class="sf-right">Block 4 Finale · Parents vs Kids + Sock Exchange</div>
+  </div>
+
+</div>
+</body>
+</html>

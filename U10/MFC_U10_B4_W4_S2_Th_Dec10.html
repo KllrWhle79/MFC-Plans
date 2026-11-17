@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 4 · Week 4 · Dec 10 · Build-Out + Agility Circuit #2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--rose);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--rose);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--rose)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-rose{border-color:var(--rose);color:var(--rose)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.meta-pill.mp-build{border-color:var(--gold);color:var(--gold)}
+.meta-pill.mp-agility{border-color:var(--heat);color:var(--heat)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-build{background:#2d3a28;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-build{background:var(--green)}.dot-knock{background:var(--gold)}.dot-agility{background:var(--heat)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.agility-banner{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.ab-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.ab-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ab-body strong{color:var(--heat);font-weight:600}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.build-box{background:rgba(45,191,173,.05);border:1px solid rgba(45,191,173,.2);border-radius:6px;padding:14px 16px}
+.build-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.build-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.build-box ul{list-style:none;display:grid;gap:5px}
+.build-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.build-box ul li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:14px}
+.two-team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.team-gold{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:12px 14px}
+.team-blue{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.2);border-radius:6px;padding:12px 14px}
+.team-gold h6{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.team-blue h6{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.team-gold p,.team-blue p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.two-team-grid{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 4 · Week 4 · Session 7</div>
+      <div class="sh-title">Block <span>4</span> · Thu<br>Build-Out + Agility #2</div>
+      <div class="sh-sub">Thursday, December 10, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players · 3 Coaches</div><br>
+      <div class="meta-pill mp-wk">Week 4 · Session 7</div><br>
+      <div class="meta-pill mp-build">Build-Out Day · W4</div><br>
+      <div class="meta-pill mp-agility">Agility Circuit #2 of 2</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B4 W4</div>
+    <div class="su-body"><strong>Both capstone events of Block 4 appear tonight:</strong> Second (and final) Agility Circuit at Station A, and W4 Build-Out where Gold autonomously calls press and Blue runs the full sequence with winger reading. David runs Fast Dribbling W4 at Station B. Corners review at Station C.</div>
+  </div>
+
+  <div class="agility-banner">
+    <div class="ab-icon">⚡</div>
+    <div class="ab-body"><strong>Agility Circuit #2 of 2 — Station A (Pete):</strong> This is the second and final scheduled agility circuit for Block 4. The circuit combines the ladder work with ball from W1, the T-shape lateral pattern, and a pressure finish — a live defender pressures the last cone gate. After this week the fitness emphasis returns to game-integrated dribbling speed.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Rondos</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-build"><span class="tl-label">Build-Out · Gold vs Blue</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Thursday Ritual</div>
+        <p>Personal bests as they arrive. Framing for the session: "Build-out tonight — Gold, you're calling your own press. Blue, your winger decides. Trust what you see." Then: "One station tonight is the agility circuit — it's a challenge, see if you can beat your time from earlier in the block."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Rondos</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">4v2 rondos. Keep it loose and sharp — save legs for the agility circuit. Progress to 2-touch at 8 min. Good scanning mindset before the full build-out sequence.</p>
+    </div>
+  </div>
+
+  <!-- STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Agility #2 · Fast Dribbling W4 · Corners Review</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Agility circuit is at Station A with Pete. David owns Fast Dribbling this week. Station C (Brent) reviews corners set-piece positioning.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Agility Circuit #2</div>
+          <p><strong style="color:#B8942E">3-station circuit, repeat twice through:</strong><br>
+          1. Agility ladder (ball at feet, quick steps through every rung, 10m).<br>
+          2. T-shape lateral dribble (5m right, back, 5m left, back — keep ball close on the touches).<br>
+          3. Pressure gate finish — sprint 10m with ball, live defender steps in at the final gate. Defender can only side-step (not full pressure). Player must cut to get through.<br>
+          <strong style="color:#B8942E">Time each rep. Challenge players to beat their own first circuit time.</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach David · Station B — Fast Dribbling W4 · Lateral Burst</div>
+          <p>Same lateral burst pattern from Dec 8 (Tue) — right cut, back, left cut, back, sprint through gate. Second round: coach sets up a gate on the right AND one on the left at random, only reveals which one to sprint through after the lateral sequence. Forces real-time decision. <strong style="color:#5ec469">Cue: "Quick feet. Wait for the call. Then explode."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach Brent · Station C — Corners Review · Pressure Scenario</div>
+          <p>Return to corners: corner is taken, 2 attackers vs 2 defenders. Defenders race to goal-side before ball arrives. Add a goalkeeper (a coach or nominated player) calling which side to defend — near post or far post. Defenders adjust their position based on the GK call. 10 reps. <strong style="color:#2DBFAD">Cue: "Listen to the GK. Near or far — get there before the ball."</strong></p>
+        </div>
+      </div>
+
+      <div class="three-col" style="margin-top:8px">
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Agility Circuit #2</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Agility circuit #2 — ladder then T-shape then pressure gate finish with live defender</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="ag1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- Ladder section -->
+            <text x="10" y="18" font-size="9" fill="#F59E0B" font-family="IBM Plex Mono,monospace">1. LADDER</text>
+            <rect x="10" y="22" width="30" height="8" rx="1" fill="none" stroke="#F59E0B" stroke-width="1" opacity=".6"/>
+            <rect x="10" y="32" width="30" height="8" rx="1" fill="none" stroke="#F59E0B" stroke-width="1" opacity=".6"/>
+            <rect x="10" y="42" width="30" height="8" rx="1" fill="none" stroke="#F59E0B" stroke-width="1" opacity=".6"/>
+            <rect x="10" y="52" width="30" height="8" rx="1" fill="none" stroke="#F59E0B" stroke-width="1" opacity=".6"/>
+            <!-- T-shape section -->
+            <text x="58" y="18" font-size="9" fill="#F59E0B" font-family="IBM Plex Mono,monospace">2. T-SHAPE</text>
+            <line x1="75" y1="22" x2="75" y2="55" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="3 2" opacity=".6"/>
+            <line x1="55" y1="55" x2="95" y2="55" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="3 2" opacity=".6"/>
+            <!-- Pressure gate section -->
+            <text x="115" y="18" font-size="9" fill="#F59E0B" font-family="IBM Plex Mono,monospace">3. PRESSURE</text>
+            <path d="M150 60 L150 30" fill="none" stroke="#F59E0B" stroke-width="2" opacity=".9" marker-end="url(#ag1)"/>
+            <line x1="140" y1="30" x2="140" y2="22" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="160" y1="30" x2="160" y2="22" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <!-- live defender -->
+            <circle cx="168" cy="40" r="8" fill="none" stroke="#E8607A" stroke-width="1.5"/><circle cx="168" cy="40" r="3" fill="#E8607A"/>
+            <text x="150" y="80" text-anchor="middle" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">defender</text>
+            <text x="150" y="91" text-anchor="middle" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">side-steps only</text>
+            <!-- circuit flow arrow -->
+            <path d="M44 40 Q52 40 58 40" fill="none" stroke="#F59E0B" stroke-width="1.5" opacity=".5" marker-end="url(#ag1)"/>
+            <path d="M95 42 Q105 42 115 42" fill="none" stroke="#F59E0B" stroke-width="1.5" opacity=".5" marker-end="url(#ag1)"/>
+            <text x="100" y="130" text-anchor="middle" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">Time each run</text>
+            <text x="100" y="145" text-anchor="middle" font-size="10" fill="#F59E0B" font-family="IBM Plex Mono,monospace">beat your first time</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · Fast Dribbling — Random Gate</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Lateral burst with random gate call — coach reveals which gate after the lateral sequence</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="rg1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- start -->
+            <circle cx="100" cy="148" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="148" r="4" fill="#2DBFAD"/>
+            <!-- lateral -->
+            <path d="M100 137 L100 100" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#rg1)"/>
+            <path d="M99 100 L55 100" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#rg1)"/>
+            <path d="M55 98 L145 98" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#rg1)"/>
+            <path d="M145 96 L102 96" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5" marker-end="url(#rg1)"/>
+            <!-- two possible gates -->
+            <line x1="35" y1="45" x2="35" y2="60" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 2"/>
+            <line x1="55" y1="45" x2="55" y2="60" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 2"/>
+            <text x="45" y="40" text-anchor="middle" font-size="9" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">L</text>
+            <line x1="145" y1="45" x2="145" y2="60" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 2"/>
+            <line x1="165" y1="45" x2="165" y2="60" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 2"/>
+            <text x="155" y="40" text-anchor="middle" font-size="9" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">R</text>
+            <!-- coach calls -->
+            <circle cx="100" cy="75" r="10" fill="none" stroke="#E8607A" stroke-width="1.5"/>
+            <text x="100" y="79" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">?</text>
+            <text x="100" y="30" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">coach calls L or R</text>
+            <text x="100" y="20" text-anchor="middle" font-size="9" fill="#E8607A" font-family="IBM Plex Mono,monospace">after lateral sequence</text>
+          </svg>
+        </div>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Corners — GK Calls Side</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Corner defending with GK calling near or far post — defenders adjust accordingly</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="co2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- goal -->
+            <rect x="55" y="130" width="90" height="14" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+            <text x="80" y="142" text-anchor="middle" font-size="8" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">NEAR</text>
+            <text x="130" y="142" text-anchor="middle" font-size="8" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">FAR</text>
+            <!-- GK in goal -->
+            <circle cx="100" cy="128" r="8" fill="rgba(45,191,173,.2)" stroke="#2DBFAD" stroke-width="1.5"/>
+            <text x="100" y="132" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">GK</text>
+            <text x="100" y="120" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">calls NEAR/FAR</text>
+            <!-- corner -->
+            <circle cx="10" cy="20" r="5" fill="#5ec469"/>
+            <path d="M12 22 Q60 10 120 60" fill="none" stroke="#5ec469" stroke-width="1.2" stroke-dasharray="5 3" opacity=".6" marker-end="url(#co2)"/>
+            <!-- attackers -->
+            <circle cx="90" cy="85" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="90" cy="85" r="3" fill="#2DBFAD"/>
+            <circle cx="130" cy="88" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="130" cy="88" r="3" fill="#2DBFAD"/>
+            <!-- defenders goal-side -->
+            <circle cx="90" cy="103" r="9" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="90" cy="103" r="3" fill="#E8607A"/>
+            <circle cx="130" cy="106" r="9" fill="none" stroke="#E8607A" stroke-width="2"/><circle cx="130" cy="106" r="3" fill="#E8607A"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILD-OUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-build"></div>
+      <span class="pc-name">Build-Out W4: Gold Full Autonomy · Blue Full Sequence + Winger Decision</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">W4 is the capstone build-out session. Gold calls and executes all three press shapes without coach prompting. Blue runs the full sequence to the winger's decision. No coach scripting — coaches only observe and name what they see.</p>
+
+      <div class="two-team-grid">
+        <div class="team-gold">
+          <h6>Gold (Press Side) · Coach Pete — Observer Only</h6>
+          <p>GK calls the press shape (High, Hold, or Drop) and executes. Forwards react without any coach hint. If a player hesitates, it's a good learning moment to pause and ask "what did GK call?" — not to repeat it. <strong style="color:var(--gold)">Goal: press can run without coach involvement for 5 consecutive sequences.</strong></p>
+        </div>
+        <div class="team-blue">
+          <h6>Blue (Build Side) · Coach David — Observer Only</h6>
+          <p>Full W4 sequence: GK roll → CB back-foot receive → CB to outside back → winger reads defender and decides outside or inside → CM adjusts position based on winger's decision. <strong style="color:var(--teal)">New: CM must move before the winger receives (anticipation, not reaction).</strong></p>
+        </div>
+      </div>
+
+      <div class="diagram-wrap" style="margin-top:12px">
+        <div class="diagram-label">Build-Out W4 · Full Sequence · Gold Left · Blue Right</div>
+        <svg viewBox="0 0 560 220" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>Build-out W4 capstone — Gold autonomous press all shapes, Blue full sequence with CM anticipation</title>
+          <rect width="560" height="220" rx="6" fill="#141E2A"/>
+          <rect x="20" y="15" width="520" height="190" rx="4" fill="none" stroke="#243241" stroke-width="2"/>
+          <line x1="280" y1="15" x2="280" y2="205" stroke="#243241" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <rect x="20" y="88" width="14" height="44" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+          <rect x="526" y="88" width="14" height="44" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+          <text x="80" y="34" text-anchor="middle" font-size="13" fill="#B8942E" font-family="IBM Plex Mono,monospace" letter-spacing=".1em">GOLD — AUTONOMOUS PRESS</text>
+          <text x="420" y="34" text-anchor="middle" font-size="13" fill="#2DBFAD" font-family="IBM Plex Mono,monospace" letter-spacing=".1em">BLUE — FULL SEQUENCE</text>
+          <!-- GOLD -->
+          <circle cx="45" cy="110" r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/>
+          <text x="45" y="114" text-anchor="middle" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">GK</text>
+          <text x="62" y="104" font-size="9" fill="#B8942E" font-family="IBM Plex Mono,monospace">calls shape</text>
+          <circle cx="150" cy="80" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/>
+          <text x="150" y="84" text-anchor="middle" font-size="8" fill="#B8942E" font-family="IBM Plex Mono,monospace">F</text>
+          <circle cx="190" cy="145" r="9" fill="none" stroke="#B8942E" stroke-width="1.5"/>
+          <text x="190" y="149" text-anchor="middle" font-size="8" fill="#B8942E" font-family="IBM Plex Mono,monospace">F</text>
+          <text x="140" y="168" text-anchor="middle" font-size="10" fill="#B8942E" opacity=".7" font-family="IBM Plex Mono,monospace">no coach hint</text>
+          <!-- BLUE full sequence -->
+          <defs>
+            <marker id="bo4g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+          </defs>
+          <circle cx="515" cy="110" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/>
+          <text x="515" y="114" text-anchor="middle" font-size="9" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">GK</text>
+          <circle cx="460" cy="110" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/>
+          <text x="460" y="114" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">CB</text>
+          <line x1="504" y1="110" x2="471" y2="110" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#bo4g)"/>
+          <circle cx="430" cy="75" r="9" fill="none" stroke="#2DBFAD" stroke-width="1.5"/>
+          <text x="430" y="79" text-anchor="middle" font-size="8" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">OB</text>
+          <line x1="455" y1="103" x2="438" y2="84" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#bo4g)"/>
+          <circle cx="360" cy="65" r="9" fill="none" stroke="#E8607A" stroke-width="1.5"/>
+          <text x="360" y="69" text-anchor="middle" font-size="8" fill="#E8607A" font-family="IBM Plex Mono,monospace">W</text>
+          <line x1="421" y1="72" x2="371" y2="66" stroke="#2DBFAD" stroke-width="1.2" stroke-dasharray="4 3" opacity=".6" marker-end="url(#bo4g)"/>
+          <!-- CM moves early -->
+          <circle cx="390" cy="130" r="9" fill="none" stroke="#8B5CF6" stroke-width="1.5"/>
+          <text x="390" y="134" text-anchor="middle" font-size="8" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">CM</text>
+          <text x="390" y="150" text-anchor="middle" font-size="9" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">moves early</text>
+          <text x="390" y="162" text-anchor="middle" font-size="9" fill="#8B5CF6" font-family="IBM Plex Mono,monospace">(anticipation)</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Game</div>
+        <p>Standard knockout. Celebrate: "Agility circuit done for Block 4 — you've earned it." Note anyone who improved their circuit time. Last full technical Thursday before the finale week.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 4 · Week 4 · Thu Dec 10</div>
+    <div class="sf-right">B4 W4 S2 · Build-Out + Agility Circuit #2</div>
+  </div>
+
+</div>
+</body>
+</html>
