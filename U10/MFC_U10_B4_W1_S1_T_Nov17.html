@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MFC U10 · Block 4 · Week 1 · Nov 17 · Back Foot + Shield + Dribbling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--gold:#B8942E;--teal:#2DBFAD;--heat:#F59E0B;--rose:#E8607A;--violet:#8B5CF6;--green:#5ec469;
+  --bg:#0F1923;--surf:#15222F;--surf2:#1C2E3E;--text:#E8E4DB;--muted:#8FA3B4;--faint:#3D5166;--border:#243241;
+  --font-head:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:32px 24px 60px}
+.sess-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:2px solid var(--rose);padding-bottom:18px;margin-bottom:28px}
+.sh-eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;color:var(--rose);text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--font-head);font-size:48px;line-height:.92;letter-spacing:.02em}
+.sh-title span{color:var(--rose)}
+.sh-sub{font-size:16px;color:var(--muted);margin-top:8px;font-style:italic}
+.sh-meta{text-align:right}
+.meta-pill{display:inline-block;background:var(--surf2);border:1px solid var(--faint);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:5px}
+.meta-pill.mp-rose{border-color:var(--rose);color:var(--rose)}
+.meta-pill.mp-wk{border-color:var(--teal);color:var(--teal)}
+.meta-pill.mp-heat{border-color:var(--heat);color:var(--heat)}
+.timeline{display:flex;height:44px;border-radius:6px;overflow:hidden;margin-bottom:32px;gap:2px}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+.tl-seg .tl-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;white-space:nowrap}
+.tl-seg .tl-time{font-size:12px;opacity:.6;margin-top:1px}
+.tl-jug{background:#2a4a35;flex:5}
+.tl-warm{background:#2d3a4d;flex:10}
+.tl-tech{background:#1e3045;flex:45}
+.tl-ssg{background:#1f3035;flex:20}
+.tl-knock{background:#2d1f2a;flex:10}
+.phase-card{background:var(--surf);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.pc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.pc-time{font-family:var(--font-mono);font-size:14px;color:var(--muted);min-width:52px}
+.pc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-jug{background:#4CAF7D}.dot-warm{background:#5B8DD9}.dot-tech{background:var(--teal)}.dot-ssg{background:var(--violet)}.dot-knock{background:var(--gold)}
+.pc-name{font-size:17px;font-weight:500;flex:1}
+.pc-dur{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.pc-body{padding:16px 18px;display:grid;gap:14px}
+.pc-note{font-size:15.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--faint);padding-left:10px}
+.coach-tip{background:rgba(184,148,46,.08);border:1px solid rgba(184,148,46,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px}
+.ct-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.ct-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.ct-body strong{color:var(--gold);font-weight:600}
+.ritual-box{background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.25);border-radius:6px;padding:12px 14px}
+.ritual-box .rb-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#4CAF7D;text-transform:uppercase;margin-bottom:6px}
+.ritual-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.wb-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:14px 16px}
+.wb-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--heat);text-transform:uppercase;margin-bottom:8px}
+.wb-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.wb-box ul{list-style:none;display:grid;gap:5px}
+.wb-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.wb-box ul li::before{content:'→';position:absolute;left:0;color:var(--heat);font-size:14px}
+.drill-list{list-style:none;display:grid;gap:6px}
+.drill-list li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative;line-height:1.5}
+.drill-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grp{border-radius:6px;padding:10px 12px}
+.grp-a{background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.3)}
+.grp-b{background:rgba(94,196,105,.1);border:1px solid rgba(94,196,105,.25)}
+.grp-c{background:rgba(45,191,173,.08);border:1px solid rgba(45,191,173,.2)}
+.grp-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.grp-a .grp-label{color:var(--gold)}.grp-b .grp-label{color:var(--green)}.grp-c .grp-label{color:var(--teal)}
+.grp p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.rotation-box{background:rgba(45,191,173,.07);border:1px solid rgba(45,191,173,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.rot-icon{font-family:var(--font-mono);font-size:13px;color:var(--teal);background:rgba(45,191,173,.15);padding:3px 8px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.rot-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.rot-body strong{color:var(--teal)}
+.step-up{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.2);border-radius:6px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:28px}
+.su-icon{font-family:var(--font-mono);font-size:13px;color:var(--rose);background:rgba(232,96,122,.15);padding:3px 7px;border-radius:3px;flex-shrink:0}
+.su-body{font-size:15px;color:var(--muted);line-height:1.5}
+.su-body strong{color:var(--rose)}
+.ssg-box{background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:6px;padding:14px 16px}
+.ssg-box h5{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--violet);text-transform:uppercase;margin-bottom:8px}
+.ssg-box p{font-size:15.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.ssg-box ul{list-style:none;display:grid;gap:5px}
+.ssg-box ul li{font-size:15.5px;color:var(--text);padding-left:16px;position:relative}
+.ssg-box ul li::before{content:'→';position:absolute;left:0;color:var(--violet);font-size:14px}
+.ko-box{background:rgba(184,148,46,.1);border:1px solid rgba(184,148,46,.3);border-radius:6px;padding:14px 16px}
+.ko-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ko-box p{font-size:15.5px;color:var(--muted);line-height:1.6}
+.diagram-wrap{background:var(--surf2);border-radius:6px;padding:12px;border:1px solid var(--border)}
+.diagram-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+svg{width:100%;height:auto;display:block}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sess-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center}
+.sf-left{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.sf-right{font-family:var(--font-mono);font-size:12px;color:var(--faint);letter-spacing:.08em;text-align:right}
+.constraint-box{background:rgba(232,96,122,.07);border:1px solid rgba(232,96,122,.25);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.cb-icon{font-size:19px;flex-shrink:0;margin-top:1px}
+.cb-body{font-size:15.5px;color:var(--muted);line-height:1.6}
+.cb-body strong{color:var(--rose);font-weight:600}
+@media(max-width:640px){.groups{grid-template-columns:1fr}.three-col{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}.sess-header{grid-template-columns:1fr}.sh-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="sess-header">
+    <div>
+      <div class="sh-eyebrow">MFC U10 Boys · Block 4 · Week 1 · Session 1</div>
+      <div class="sh-title">Block <span>4</span> · Tue<br>Back Foot + Shield + Dribbling</div>
+      <div class="sh-sub">Tuesday, November 17, 2026 · 90 minutes · Coach Pete, Coach Brent, Coach David</div>
+    </div>
+    <div class="sh-meta">
+      <div class="meta-pill">19 Players · 3 Coaches</div><br>
+      <div class="meta-pill mp-wk">Week 1 · Block 4</div><br>
+      <div class="meta-pill mp-rose">Block 4 Opens</div>
+    </div>
+  </div>
+
+  <div class="step-up">
+    <div class="su-icon">B4 W1</div>
+    <div class="su-body"><strong>Block 4 theme: Positional Play &amp; Team Shape.</strong> Three new station threads launch today: Receiving on the Back Foot, Defending the Shield, and Fast Dribbling (Brent). SSG introduces the new 2-goal field with field-switch constraint — smaller, faster, more decisions.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-seg tl-jug"><span class="tl-label">Juggling</span><span class="tl-time">0–5</span></div>
+    <div class="tl-seg tl-warm"><span class="tl-label">Warm-Up</span><span class="tl-time">5–15</span></div>
+    <div class="tl-seg tl-tech"><span class="tl-label">3 Stations · 15 min each</span><span class="tl-time">15–60</span></div>
+    <div class="tl-seg tl-ssg"><span class="tl-label">SSG · 2 Goals</span><span class="tl-time">60–80</span></div>
+    <div class="tl-seg tl-knock"><span class="tl-label">Knockout</span><span class="tl-time">80–90</span></div>
+  </div>
+
+  <!-- JUGGLING -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">0 – 5</span>
+      <div class="pc-dot dot-jug"></div>
+      <span class="pc-name">Juggling — Personal Bests</span>
+      <span class="pc-dur">5 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ritual-box">
+        <div class="rb-label">Block 4 Opening — All Sessions</div>
+        <p>All 19 juggling as they arrive. Count personal bests aloud — players keep their own count and try to beat it each session. Brief intro to Block 4: "This block is about knowing where to be before the ball gets to you. Reading shape. Getting into the right spot." Set the expectation early.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM-UP -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">5 – 15</span>
+      <div class="pc-dot dot-warm"></div>
+      <span class="pc-name">Warm-Up: Transition Gates</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">Returning from Block 3. Set up 8 cone gates across a 30×25m area. Players dribble freely and score by dribbling through any gate. Coach calls "Switch!" — players must change direction and find a new gate. Progress at 7 min: add a defender who can close gates (stand in one) for 10 seconds.</p>
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Coaching tip:</strong> Watch for players with their head down. The gates require scanning — this directly connects to the back-foot receiving station. Cue: "Head up — where's the next gate before you get there."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATIONS -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">15 – 60</span>
+      <div class="pc-dot dot-tech"></div>
+      <span class="pc-name">Technical Stations: Defending Shield · Fast Dribbling · Back Foot Receive</span>
+      <span class="pc-dur">45 min · 15 min per station</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">All three station threads launch today. Each coach demos their drill in 30 seconds max then goes straight into reps. Whistle every 15 minutes.</p>
+
+      <div class="rotation-box">
+        <div class="rot-icon">⟳ ROTATION</div>
+        <div class="rot-body">Whistle every <strong>15 minutes</strong>. Coach stays at station. Groups rotate: <strong>Gold → Green → Blue → Gold</strong>.</div>
+      </div>
+
+      <div class="groups">
+        <div class="grp grp-a">
+          <div class="grp-label">Gold · Coach Pete · Station A — Defending the Shield</div>
+          <p>Intro drill: attacker shields a stationary ball on the edge of a 2m circle. Defender circles slowly and finds the right angle — hand on the attacker's back (legal shoulder contact), eyes on the ball not the player. Rule: defender must be between the attacker and goal at all times. <strong style="color:#B8942E">Cue: "Hand on. Watch the ball. Stay goal-side."</strong></p>
+        </div>
+        <div class="grp grp-b">
+          <div class="grp-label">Green · Coach Brent · Station B — Fast Dribbling</div>
+          <p>Three numbered gates set in a fan 12m apart. Player starts at the base, Brent calls a gate number ("TWO!") at the moment the player takes their first touch. Player must redirect at speed toward that gate and sprint through. Five reps each, one note per player. <strong style="color:#5ec469">Cue: "Head up. Listen. React — don't hesitate."</strong></p>
+        </div>
+        <div class="grp grp-c">
+          <div class="grp-label">Blue · Coach David · Station C — Receiving on the Back Foot</div>
+          <p>W1 — stationary passer. Passer stands 10m away and plays a firm ground pass. Receiver scans before the ball arrives, opens body to receive on the back foot (weight on front foot, back foot receives), turns and plays to a third player who has moved to receive. Everyone follows their pass and cycles. <strong style="color:#2DBFAD">Cue: "Scan. Open up. Back foot — turn."</strong></p>
+        </div>
+      </div>
+
+      <div class="three-col" style="margin-top:8px">
+        <!-- Station A: Shield diagram -->
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station A · Defending the Shield</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Defending the shield — hand on back, goal-side position</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="sa1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- goal at bottom -->
+            <rect x="75" y="140" width="50" height="14" rx="2" fill="none" stroke="#4CAF7D" stroke-width="2"/>
+            <text x="100" y="158" text-anchor="middle" font-size="10" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">GOAL</text>
+            <!-- attacker with ball -->
+            <circle cx="100" cy="80" r="13" fill="none" stroke="#2DBFAD" stroke-width="1.8"/><circle cx="100" cy="80" r="5" fill="#2DBFAD"/>
+            <circle cx="100" cy="97" r="5" fill="white" opacity=".8"/>
+            <text x="100" y="70" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">ATTACKER</text>
+            <!-- circle around attacker -->
+            <circle cx="100" cy="88" r="22" fill="none" stroke="rgba(45,191,173,.2)" stroke-width="1" stroke-dasharray="5 4"/>
+            <!-- defender circling -->
+            <circle cx="82" cy="105" r="11" fill="none" stroke="#E8607A" stroke-width="1.8"/><circle cx="82" cy="105" r="4" fill="#E8607A"/>
+            <text x="62" y="122" text-anchor="middle" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">DEFENDER</text>
+            <!-- hand contact indicator -->
+            <line x1="90" y1="98" x2="82" y2="103" stroke="#B8942E" stroke-width="2" stroke-linecap="round"/>
+            <text x="62" y="96" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">hand on</text>
+            <!-- goal-side arrow -->
+            <path d="M82 116 L92 136" fill="none" stroke="#E8607A" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#sa1)"/>
+            <text x="20" y="45" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">eyes on BALL</text>
+            <text x="20" y="58" font-size="10" fill="#E8607A" font-family="IBM Plex Mono,monospace">stay GOAL-SIDE</text>
+          </svg>
+        </div>
+
+        <!-- Station B: Dribbling diagram -->
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station B · Fast Dribbling — Numbered Gates</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Fast dribbling numbered gate fan — coach calls gate mid-run</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="sb1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5ec469" stroke-width="1.8" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- player start -->
+            <circle cx="100" cy="140" r="11" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="140" r="4" fill="#2DBFAD"/>
+            <!-- Gate 1 left -->
+            <line x1="30" y1="52" x2="30" y2="68" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="48" x2="50" y2="64" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <text x="40" y="44" text-anchor="middle" font-size="11" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">1</text>
+            <!-- Gate 2 centre -->
+            <line x1="88" y1="28" x2="88" y2="44" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="112" y1="28" x2="112" y2="44" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <text x="100" y="24" text-anchor="middle" font-size="11" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">2</text>
+            <!-- Gate 3 right -->
+            <line x1="150" y1="52" x2="150" y2="68" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <line x1="170" y1="48" x2="170" y2="64" stroke="#4CAF7D" stroke-width="3" stroke-linecap="round"/>
+            <text x="160" y="44" text-anchor="middle" font-size="11" fill="#4CAF7D" font-family="IBM Plex Mono,monospace">3</text>
+            <!-- paths to each gate -->
+            <path d="M95 128 L48 72" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5"/>
+            <path d="M100 128 L100 46" fill="none" stroke="#5ec469" stroke-width="2" stroke-dasharray="5 3" opacity=".8" marker-end="url(#sb1)"/>
+            <path d="M105 128 L152 72" fill="none" stroke="#5ec469" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5"/>
+            <!-- coach calls label -->
+            <rect x="128" y="100" width="68" height="28" rx="3" fill="rgba(184,148,46,.15)" stroke="rgba(184,148,46,.4)" stroke-width="1"/>
+            <text x="162" y="113" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">COACH</text>
+            <text x="162" y="124" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">CALLS #</text>
+          </svg>
+        </div>
+
+        <!-- Station C: Back foot diagram -->
+        <div class="diagram-wrap">
+          <div class="diagram-label">Station C · Receiving on the Back Foot</div>
+          <svg viewBox="0 0 200 160" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Back foot receive and turn cycle drill</title>
+            <rect width="200" height="160" rx="4" fill="#1e2a3a" opacity=".95"/>
+            <defs>
+              <marker id="sc1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-linecap="round"/></marker>
+              <marker id="sc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-linecap="round"/></marker>
+            </defs>
+            <!-- Passer A -->
+            <circle cx="30" cy="80" r="10" fill="none" stroke="#B8942E" stroke-width="1.5"/><circle cx="30" cy="80" r="4" fill="#B8942E"/>
+            <text x="30" y="97" text-anchor="middle" font-size="10" fill="#B8942E" font-family="IBM Plex Mono,monospace">A</text>
+            <!-- pass to receiver -->
+            <path d="M41 80 L84 80" fill="none" stroke="#B8942E" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#sc2)"/>
+            <!-- Receiver B -->
+            <circle cx="100" cy="80" r="10" fill="none" stroke="#2DBFAD" stroke-width="1.5"/><circle cx="100" cy="80" r="4" fill="#2DBFAD"/>
+            <text x="100" y="70" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">B receives</text>
+            <text x="100" y="98" text-anchor="middle" font-size="10" fill="#2DBFAD" font-family="IBM Plex Mono,monospace">back foot</text>
+            <!-- turn arrow -->
+            <path d="M110 78 Q128 55 148 65" fill="none" stroke="#2DBFAD" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#sc1)"/>
+            <!-- Player C -->
+            <circle cx="162" cy="60" r="10" fill="none" stroke="#5ec469" stroke-width="1.5"/><circle cx="162" cy="60" r="4" fill="#5ec469"/>
+            <text x="162" y="50" text-anchor="middle" font-size="10" fill="#5ec469" font-family="IBM Plex Mono,monospace">C</text>
+            <!-- follow pass -->
+            <path d="M30 91 L30 130 L100 130 L100 92" fill="none" stroke="#B8942E" stroke-width="1" stroke-dasharray="3 3" opacity=".4" marker-end="url(#sc2)"/>
+            <text x="65" y="145" text-anchor="middle" font-size="10" fill="#B8942E" opacity=".6" font-family="IBM Plex Mono,monospace">A follows pass → becomes B</text>
+            <!-- scan label -->
+            <text x="100" y="20" text-anchor="middle" font-size="10" fill="#8FA3B4" font-family="IBM Plex Mono,monospace">1. SCAN  2. OPEN  3. BACK FOOT</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="coach-tip">
+        <div class="ct-icon">💡</div>
+        <div class="ct-body"><strong>Key coaching note — Back Foot (David):</strong> The most common failure is the receiver facing their own goal when the ball arrives. Remind them: weight is on the front foot, back foot is the receiving foot, so the body is already half-turned before the ball gets there. If they're receiving with their body square, the drill isn't working yet — stop and reset body position first.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SSG -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">60 – 80</span>
+      <div class="pc-dot dot-ssg"></div>
+      <span class="pc-name">SSG: 3v3 + GK + Target — 2 Goals · Field Switch Required</span>
+      <span class="pc-dur">20 min</span>
+    </div>
+    <div class="pc-body">
+      <p class="pc-note">New SSG format for Block 4. Smaller field, 2 goals side by side. Teams must switch the field (play to the opposite side) at least once per attacking cycle before shooting. Builds positional awareness and forces combination play.</p>
+      <div class="ssg-box">
+        <h5>SSG Rules — Block 4 Format</h5>
+        <ul>
+          <li><strong>Field size:</strong> Smaller than Block 3 — roughly 25×20m. Two small goals, one each end.</li>
+          <li><strong>Field switch rule:</strong> Team in possession must play the ball to the other side of the field (switch) at least once before they can score. If they shoot without switching → no goal, GK restarts.</li>
+          <li><strong>Restart:</strong> GK rolls out — no punting.</li>
+          <li><strong>W1 constraint:</strong> A goal scored directly after a back-foot receive = 2 points. Coaches watch and call it.</li>
+          <li>Rotate target player every 4 minutes.</li>
+        </ul>
+      </div>
+      <div class="constraint-box">
+        <div class="cb-icon">⚡</div>
+        <div class="cb-body"><strong>W1 Constraint — Back-Foot Bonus:</strong> Any goal scored with the shooter having received on the back foot on the play counts double. Coach on each field watches for it and calls "Back foot — 2 points!" when it happens. Coaches call it generously early to teach the reward.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KNOCKOUT -->
+  <div class="phase-card">
+    <div class="pc-head">
+      <span class="pc-time">80 – 90</span>
+      <div class="pc-dot dot-knock"></div>
+      <span class="pc-name">Knockout</span>
+      <span class="pc-dur">10 min</span>
+    </div>
+    <div class="pc-body">
+      <div class="ko-box">
+        <div class="ko-label">Closing Game</div>
+        <p>Standard knockout. All 19 in the area, one ball each. Last player in wins. No walking — anyone caught walking is out immediately. Coaches encourage the boys to call out their juggling PBs before the first whistle.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-footer">
+    <div class="sf-left">MFC U10 · Block 4 · Week 1 · Tue Nov 17</div>
+    <div class="sf-right">B4 W1 S1 · Back Foot + Shield + Dribbling</div>
+  </div>
+
+</div>
+</body>
+</html>
